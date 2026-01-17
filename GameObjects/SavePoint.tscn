@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c70t0wy5bxavc"]
+
+[ext_resource type="PackedScene" uid="uid://c1enbtlfcyxey" path="res://GameObjects/EditorOnlySprite.tscn" id="1_dn0lj"]
+[ext_resource type="Texture2D" uid="uid://qp30ichujgjp" path="res://addons/MetroidvaniaSystem/Themes/MF/Symbols/SaveRoom.png" id="2_vt60m"]
+
+[node name="SavePoint" type="Node2D"]
+
+[node name="EditorOnlySprite" parent="." instance=ExtResource("1_dn0lj")]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("2_vt60m")

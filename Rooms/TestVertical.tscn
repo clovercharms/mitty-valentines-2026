@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://bol15oq75xugh"]
+
+[ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_6qfwg"]
+[ext_resource type="PackedScene" uid="uid://b5l673vpe3fjf" path="res://GameObjects/Blockout.tscn" id="2_6qfwg"]
+
+[node name="Map" type="Node2D"]
+
+[node name="RoomInstance" parent="." instance=ExtResource("1_6qfwg")]
+
+[node name="BlockoutVert" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(-2, 893)
+scale = Vector2(2, 100)
+
+[node name="BlockoutVert2" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(1910, 1132)
+scale = Vector2(2, 120)
+
+[node name="BlockouthHoriz" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(980, 2138)
+scale = Vector2(100, 2)
+
+[node name="BlockouthHoriz4" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(1177, 1900)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz5" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(866, 1686)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz6" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(557, 1482)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz7" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(874, 1259)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz8" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(1223, 1051)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz9" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(932, 834)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz10" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(541, 620)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz11" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(300, 424)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz12" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(971.00006, 240)
+scale = Vector2(30, 2)
+
+[node name="BlockouthHoriz2" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(1770, 21)
+scale = Vector2(50, 2)
+
+[node name="BlockouthHoriz3" parent="." instance=ExtResource("2_6qfwg")]
+position = Vector2(209.99988, 21)
+scale = Vector2(50, 2)

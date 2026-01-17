@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg1jh5qvhxcoh"]
+
+[ext_resource type="Script" uid="uid://c1fi0rwyjbnp4" path="res://Scripts/GameBase.gd" id="1_5ajq4"]
+[ext_resource type="PackedScene" uid="uid://42qbdu4ea80j" path="res://GameObjects/MittyPlayer.tscn" id="2_3re7u"]
+
+[node name="GameBase" type="Node"]
+script = ExtResource("1_5ajq4")
+startingMap = "res://Rooms/TestStart.tscn"
+playerScene = ExtResource("2_3re7u")

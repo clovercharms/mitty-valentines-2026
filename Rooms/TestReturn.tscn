@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://b83bm7wq10ln6"]
+
+[ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_wyoyj"]
+[ext_resource type="PackedScene" uid="uid://b5l673vpe3fjf" path="res://GameObjects/Blockout.tscn" id="2_wyoyj"]
+
+[node name="Map" type="Node2D"]
+
+[node name="RoomInstance" parent="." instance=ExtResource("1_wyoyj")]
+
+[node name="BlockoutVert" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(5743, 520)
+scale = Vector2(2, 60)
+
+[node name="BlockoutVert2" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(22, 197.00003)
+scale = Vector2(2, 60)
+
+[node name="BlockouthHoriz" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(2865, 5)
+scale = Vector2(300, 2)
+
+[node name="BlockouthHoriz2" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(2044, 1069)
+scale = Vector2(250, 2)
+
+[node name="BlockouthHoriz3" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(5608, 1067)
+scale = Vector2(50, 2)
+
+[node name="BlockouthHoriz4" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(3607, 870)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz5" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(3172, 713)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz6" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(2793, 536)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz7" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(2414.0002, 678)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz8" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(1989, 860)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz9" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(1564.0001, 718)
+scale = Vector2(10, 2)
+
+[node name="BlockouthHoriz10" parent="." instance=ExtResource("2_wyoyj")]
+position = Vector2(1089, 839)
+scale = Vector2(10, 2)

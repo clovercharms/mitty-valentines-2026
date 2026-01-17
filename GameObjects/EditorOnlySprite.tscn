@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1enbtlfcyxey"]
+
+[ext_resource type="Script" uid="uid://b0dc5o4pusk72" path="res://GameObjects/editor_only_sprite.gd" id="1_pvkxi"]
+
+[node name="EditorOnlySprite" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.5294118)
+script = ExtResource("1_pvkxi")

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Mitty Valentines 2026"
+run/main_scene="uid://m01jl46tes6q"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -18,6 +19,31 @@ config/icon="res://icon.svg"
 
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/resizable=false
+
+[dotnet]
+
+project/assembly_name="Mitty Valentines 2026"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg")
+
+[layer_names]
+
+2d_physics/layer_1="WorldStatic"
+2d_physics/layer_2="WorldDynamic"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="Enemy"
+2d_physics/layer_5="Trigger"
+2d_physics/layer_6="PlayerAttack"
+2d_physics/layer_7="EnemyAttack"
+2d_physics/layer_8="NeutralAttack"
+
+[physics]
+
+2d/default_gravity=2500.0
