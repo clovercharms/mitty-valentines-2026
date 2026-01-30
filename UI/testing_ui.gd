@@ -35,12 +35,11 @@ func _unhandled_input(event: InputEvent):
         if (event.as_text_keycode() == "Shift+Minus" and event.pressed):
             if (player_stats.current_health == 0):
                 return
-            player_stats.current_health -= 1
-            update(player_stats)
+            player_stats.take_damage(1)
         elif (event.as_text_keycode() == "Shift+Equal" and event.pressed):
             if (player_stats.current_health == player_stats.max_health):
                 player_stats.max_health += 4
-            player_stats.current_health += 1
+            player_stats.heal(1)
             update(player_stats)
               
         

@@ -18,7 +18,7 @@ var is_dead = false
 func on_instantiation():
     set_health(max_health)
 
-func set_health(amount):
+func set_health(amount: int):
     var final_health = min(max_health, amount)
     current_health = final_health
     if current_health > 0:
@@ -27,7 +27,7 @@ func set_health(amount):
         is_dead = true
     emit_changed()
 
-func take_damage(amount):
+func take_damage(amount: int):
     var final_damage = max(1, amount - damage_resist)
     current_health -= final_damage
     damage_taken.emit(final_damage)
@@ -38,7 +38,7 @@ func take_damage(amount):
     # visual logic sent to model and UI
     emit_changed()
 
-func heal(amount):
+func heal(amount: int):
     var final_heal = min(max_health - current_health, amount)
     current_health += final_heal
     damage_healed.emit(final_heal)
