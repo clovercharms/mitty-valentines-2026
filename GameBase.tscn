@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg1jh5qvhxcoh"]
+[gd_scene load_steps=4 format=3 uid="uid://cg1jh5qvhxcoh"]
 
 [ext_resource type="Script" uid="uid://c1fi0rwyjbnp4" path="res://Scripts/GameBase.gd" id="1_5ajq4"]
 [ext_resource type="PackedScene" uid="uid://42qbdu4ea80j" path="res://GameObjects/MittyPlayer.tscn" id="2_3re7u"]
+[ext_resource type="PackedScene" uid="uid://ru7hqfjd2jyp" path="res://UI/TestingUI.tscn" id="3_3re7u"]
 
 [node name="GameBase" type="Node"]
 script = ExtResource("1_5ajq4")
 startingMap = "res://Rooms/TestStart.tscn"
 playerScene = ExtResource("2_3re7u")
+
+[node name="UI Layer" type="CanvasLayer" parent="."]
+
+[node name="TestingUI" parent="UI Layer" instance=ExtResource("3_3re7u")]
