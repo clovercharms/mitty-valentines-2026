@@ -1,6 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://42qbdu4ea80j"]
+[gd_scene load_steps=5 format=3 uid="uid://42qbdu4ea80j"]
 
 [ext_resource type="Script" uid="uid://de2pa5swa62wc" path="res://GameObjects/mitty_player.gd" id="1_kur6k"]
+[ext_resource type="Script" uid="uid://cdkyv3der4wr5" path="res://Scripts/stat_block.gd" id="2_lcurd"]
+
+[sub_resource type="Resource" id="Resource_i3sii"]
+script = ExtResource("2_lcurd")
+max_health = 8
+metadata/_custom_type_script = "uid://cdkyv3der4wr5"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kur6k"]
 radius = 20.0
@@ -8,6 +14,7 @@ height = 66.0
 
 [node name="MittyPlayer" type="CharacterBody2D"]
 script = ExtResource("1_kur6k")
+stats = SubResource("Resource_i3sii")
 
 [node name="PlaceholderVisual" type="ColorRect" parent="."]
 anchors_preset = 8

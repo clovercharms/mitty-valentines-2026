@@ -1,10 +1,12 @@
-extends CharacterBody2D
+class_name MittyPlayer extends CharacterBody2D
 
 
 const SPEED = 800.0
 const JUMP_VELOCITY = -1200.0
 const TERMINAL_FALL_VELOCITY = 2000
 @onready var coyote_timer = $CoyoteTimer
+
+@export var stats: StatBlock
 
 # double jump
 @onready var can_double_jump = true
@@ -41,7 +43,7 @@ func _physics_process(delta: float) -> void:
     # As good practice, you should replace UI actions with custom gameplay actions.
     var direction := Input.get_axis("ui_left", "ui_right")
     if direction:
-        velocity.x = direction * SPEED
+        velocity.x = direction * SPEED * stats.speed_modifier
     else:
         velocity.x = move_toward(velocity.x, 0, SPEED)
         
