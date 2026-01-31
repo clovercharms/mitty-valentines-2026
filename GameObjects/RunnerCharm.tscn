@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq4n2ebk7k6qv"]
+
+[ext_resource type="Script" uid="uid://dwfnlfj20iapp" path="res://GameObjects/runner_charm.gd" id="1_dn8sm"]
+[ext_resource type="Texture2D" uid="uid://cayua8e1561bj" path="res://ArtAssets/sprites/runner_placeholder.png" id="2_eruyj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nycgs"]
+radius = 13.0
+height = 35.0
+
+[node name="RunnerCharm" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 167
+script = ExtResource("1_dn8sm")
+
+[node name="MainSprite" type="Sprite2D" parent="."]
+position = Vector2(-1, -8)
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("2_eruyj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_nycgs")

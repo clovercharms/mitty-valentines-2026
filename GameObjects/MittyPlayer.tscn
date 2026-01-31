@@ -7,6 +7,8 @@ radius = 20.0
 height = 66.0
 
 [node name="MittyPlayer" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 219
 script = ExtResource("1_kur6k")
 
 [node name="PlaceholderVisual" type="ColorRect" parent="."]
