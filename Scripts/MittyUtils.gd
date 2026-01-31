@@ -32,20 +32,65 @@ func fastFacingCheck(origin: Vector2, facing: Vector2, target: Vector2, marginOf
 
 # Calculate a ballistic trajectory with a predefined peak height so the trajectory looks nice.
 func getLaunchVelocity(origin: Vector2, target: Vector2, gravity: float, extraHeight: float) -> Vector2:
+	print("launch params: origin: ", origin, " target: ", target, " gravity: ", gravity, " extraHeight: ", extraHeight)
 	const MINIMUM_DISTANCE = 5
 	var travel: Vector2 = target - origin
 	if(travel.length() < MINIMUM_DISTANCE):
 		print("Warning: Trajectory distance was too short. Returning zero launch velocity.")
 		return Vector2(0,0)
 	
-	# Godot uses screen space so Y up is negative and this is definitely going to screw up the ballistic calculations I looked up
+	# Flip Y coordinate so normal ballistics calculations work
+	origin.y = -origin.y
+	target.y = -target.y
+	gravity = abs(gravity)
+	
 	var startHeight: float = origin.y
 	var endHeight: float = target.y
-	var peakHeight: float = min(startHeight, endHeight) - extraHeight
+	var peakHeight: float = max(startHeight, endHeight) + extraHeight
 	var heightDiff: float = startHeight - endHeight
 	var peakGain: float = peakHeight - startHeight;
 	var velocityY: float = sqrt(2 * gravity * (peakGain - heightDiff))
 	var flightTime: float = sqrt(2 * (peakGain - heightDiff) / gravity) + sqrt(2 * peakGain / gravity)
 	var velocityX: float = travel.x / flightTime
 	
-	return Vector2(velocityX,velocityY)
+	# Flip Y velocity back
+	return Vector2(velocityX, -velocityY)
+
+### General utils
+#remaps value from linear range Input to linear range Output
+static func map_range(value: float, InputA: float, InputB: float, OutputA: float, OutputB: float):
+	return(value - InputA) / (InputB - InputA) * (OutputB - OutputA) + OutputA
+
+#remaps value from linear range Input to linear range Output, clamped to the output range
+static func map_range_clamped(value: float, InputA: float, InputB: float, OutputA: float, OutputB: float):
+	return(clamp(value, InputA, InputB) - InputA) / (InputB - InputA) * (OutputB - OutputA) + OutputA
+
+static func spawn_at_location(to_spawn: PackedScene, location: Vector2):
+	var instance = to_spawn.instantiate()
+	instance.position = location
+	GameBase.get_singleton().map.call_deferred("add_child", instance)
+	return instance
+
+static func spawn_child(parent: Node, to_spawn: PackedScene, location: Vector2):
+	var instance = to_spawn.instantiate()
+	instance.position = location
+	parent.call_deferred("add_child", instance)
+	return instance
+
+static func spawn_projectile(projectile: PackedScene, location: Vector2, velocity: Vector2, rotation: float = 0):
+	var projectile_instance = projectile.instantiate()
+	projectile_instance.position = location
+	projectile_instance.apply_impulse(velocity)
+	projectile_instance.rotation = rotation
+	GameBase.get_singleton().map.call_deferred("add_child", projectile_instance)
+	return projectile_instance
+
+static func hit_stop(real_time_duration: float):
+	const time_scale:float = 0.05 #can't actually use 0, but this is so slow it does the job
+	time_slow(time_scale, real_time_duration)
+
+static func time_slow(time_scale: float, real_time_duration: float):
+	Engine.time_scale = time_scale
+	var timer = GameBase.get_singleton().get_tree().create_timer(time_scale * real_time_duration)
+	await timer.timeout
+	Engine.time_scale = 1

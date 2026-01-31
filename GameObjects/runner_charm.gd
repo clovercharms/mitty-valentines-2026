@@ -4,16 +4,18 @@ extends CharacterBody2D
 @export var acceleration: float = 900
 @export var pounceRange: float = 400
 @export var minPounceDistance: float = 100
-@export var pounceFullArcHeight: float = 200
+@export var maxPounceDistance: float = 600
+@export var maxPounceHeight: float = 400
+@export var pounceFullArcHeight: float = 140
 @export var pounceTargetVariation: float = 20
 @export var sensingRange: float = 1000
-@export var minWindupTime: float = 0.8
-@export var maxWindupTime: float = 1.2
+@export var minWindupTime: float = 0.4
+@export var maxWindupTime: float = 0.8
 @export var minAiUpdateTime: float = 0.1
 @export var maxAiUpdateTime: float = 0.3
 @export var speedToFaceplant: float = 500
-@export var minFaceplantTime: float = 0.5
-@export var maxFaceplantTime: float = 1
+@export var minFaceplantTime: float = 1
+@export var maxFaceplantTime: float = 1.5
 
 enum states { IDLE, CHASE, WINDUP, IN_AIR, FACEPLANT }
 var currentState: states = states.IDLE
@@ -51,7 +53,6 @@ func enter_idle():
 
 func update_idle():
 	if(stateTimer.time_left <= 0):
-		print("runner idle ai update")
 		var target: Vector2 = GameBase.get_singleton().player.position
 		if((position - target).length() < sensingRange):
 			#alert sound
@@ -97,7 +98,7 @@ func update_windup():
 	
 	direction = target - position
 	var arcHeight: float = abs(direction.x) / pounceRange * pounceFullArcHeight
-	velocity = MittyUtils.getLaunchVelocity(position, target, get_gravity().x, arcHeight)
+	velocity = MittyUtils.getLaunchVelocity(position, target, get_gravity().y, arcHeight)
 	print("launch velocity: ", velocity)
 	
 	forceFaceplant = true
@@ -121,6 +122,7 @@ func enter_faceplant():
 	currentState = states.FACEPLANT
 	forceFaceplant = false
 	stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
+	velocity = Vector2.ZERO
 	#update animation
 	#faceplant sound
 

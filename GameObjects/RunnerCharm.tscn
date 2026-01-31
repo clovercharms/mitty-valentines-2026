@@ -9,7 +9,7 @@ height = 35.0
 
 [node name="RunnerCharm" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 167
+collision_mask = 163
 script = ExtResource("1_dn8sm")
 
 [node name="MainSprite" type="Sprite2D" parent="."]
