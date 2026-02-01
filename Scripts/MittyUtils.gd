@@ -46,11 +46,15 @@ func getLaunchVelocity(origin: Vector2, target: Vector2, gravity: float, extraHe
 	
 	var startHeight: float = origin.y
 	var endHeight: float = target.y
+	var flooringValue: float = min(startHeight, endHeight)
+	startHeight -= flooringValue
+	endHeight -= flooringValue
 	var peakHeight: float = max(startHeight, endHeight) + extraHeight
 	var heightDiff: float = startHeight - endHeight
-	var peakGain: float = peakHeight - startHeight;
-	var velocityY: float = sqrt(2 * gravity * (peakGain - heightDiff))
-	var flightTime: float = sqrt(2 * (peakGain - heightDiff) / gravity) + sqrt(2 * peakGain / gravity)
+	#var peakGain: float = peakHeight - startHeight;
+	print("peakHeight: ", peakHeight, " heightDiff: ", heightDiff, " peakHeight: ", peakHeight)
+	var velocityY: float = sqrt(2 * gravity * (peakHeight - heightDiff))
+	var flightTime: float = sqrt(2 * (peakHeight - heightDiff) / gravity) + sqrt(2 * peakHeight / gravity)
 	var velocityX: float = travel.x / flightTime
 	
 	# Flip Y velocity back
