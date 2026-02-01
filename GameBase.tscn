@@ -7,3 +7,22 @@
 script = ExtResource("1_5ajq4")
 startingMap = "res://Rooms/TestStart.tscn"
 playerScene = ExtResource("2_3re7u")
+
+[node name="SpaceParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.02, 0.02)
+
+[node name="TextureRect" type="TextureRect" parent="SpaceParallax"]
+z_index = -1000
+offset_left = -868.0
+offset_top = -552.0
+offset_right = 2972.0
+offset_bottom = 1608.0
+
+[node name="PlanetParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="TextureRect" type="TextureRect" parent="PlanetParallax"]
+offset_left = -321.0
+offset_top = 156.0
+offset_right = 1727.0
+offset_bottom = 2204.0
