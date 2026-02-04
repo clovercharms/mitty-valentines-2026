@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctm1sndi1sl3b"]
+[gd_scene load_steps=4 format=3 uid="uid://ctm1sndi1sl3b"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_1x4gj"]
 [ext_resource type="PackedScene" uid="uid://b5l673vpe3fjf" path="res://GameObjects/Blockout.tscn" id="2_1x4gj"]
+[ext_resource type="PackedScene" uid="uid://dq4n2ebk7k6qv" path="res://GameObjects/RunnerCharm.tscn" id="3_allst"]
 
 [node name="Map" type="Node2D"]
 
@@ -62,3 +63,15 @@ scale = Vector2(10, 2)
 [node name="BlockouthHoriz2" parent="." instance=ExtResource("2_1x4gj")]
 position = Vector2(1895, 4)
 scale = Vector2(200, 2)
+
+[node name="RunnerCharm" parent="." instance=ExtResource("3_allst")]
+position = Vector2(2569, 2089)
+
+[node name="RunnerCharm2" parent="." instance=ExtResource("3_allst")]
+position = Vector2(2001, 1853)
+
+[node name="RunnerCharm3" parent="." instance=ExtResource("3_allst")]
+position = Vector2(2447, 1638)
+
+[node name="RunnerCharm4" parent="." instance=ExtResource("3_allst")]
+position = Vector2(2838, 1853)

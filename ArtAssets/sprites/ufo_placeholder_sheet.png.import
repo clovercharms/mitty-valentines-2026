@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnvqaqw2uktdd"
-path="res://.godot/imported/spritesheet_mitty_256x276.png-08cd75e35650b2342e192cea205c081e.ctex"
+uid="uid://d51vlc77xouy"
+path="res://.godot/imported/ufo_placeholder_sheet.png-5294e2dbf0bc5958dbb3bf27ca77aa15.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArtAssets/sprites/spritesheet_mitty_256x276.png"
-dest_files=["res://.godot/imported/spritesheet_mitty_256x276.png-08cd75e35650b2342e192cea205c081e.ctex"]
+source_file="res://ArtAssets/sprites/ufo_placeholder_sheet.png"
+dest_files=["res://.godot/imported/ufo_placeholder_sheet.png-5294e2dbf0bc5958dbb3bf27ca77aa15.ctex"]
 
 [params]
 

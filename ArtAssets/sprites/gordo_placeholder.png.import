@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnvqaqw2uktdd"
-path="res://.godot/imported/spritesheet_mitty_256x276.png-08cd75e35650b2342e192cea205c081e.ctex"
+uid="uid://crnb2pkmwp3dl"
+path="res://.godot/imported/gordo_placeholder.png-ce9d5d08a8c28eac839a1789cb6a628d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArtAssets/sprites/spritesheet_mitty_256x276.png"
-dest_files=["res://.godot/imported/spritesheet_mitty_256x276.png-08cd75e35650b2342e192cea205c081e.ctex"]
+source_file="res://ArtAssets/sprites/gordo_placeholder.png"
+dest_files=["res://.godot/imported/gordo_placeholder.png-ce9d5d08a8c28eac839a1789cb6a628d.ctex"]
 
 [params]
 
