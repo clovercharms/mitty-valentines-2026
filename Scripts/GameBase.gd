@@ -56,7 +56,7 @@ func _ready() -> void:
     load_room(startingMap)
     
     # Find the save point and teleport the player to it, to start at the save point.
-    var start := map.get_node_or_null(^"SavePoint")
+    var start := map.get_node_or_null(^"Triggers/SavePoint")
     player.position = start.position
     
     # Add module for room transitions.

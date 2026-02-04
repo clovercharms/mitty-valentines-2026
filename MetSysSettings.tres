@@ -7,4 +7,4 @@
 script = ExtResource("1_ui0vk")
 theme = ExtResource("2_3kt0x")
 in_game_cell_size = Vector2(1920, 1080)
-_last_scene_folder = "res://WraithTests"
+_last_scene_folder = "res://WraithTests/rooms"

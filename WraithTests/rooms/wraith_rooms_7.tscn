@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqkmww3cbl7nl"]
+
+[ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_qlyr1"]
+
+[node name="WraithRooms-7" type="Node2D"]
+
+[node name="RoomInstance" parent="." instance=ExtResource("1_qlyr1")]

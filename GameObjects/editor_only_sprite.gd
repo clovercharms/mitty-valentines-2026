@@ -3,5 +3,5 @@ extends Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if(!OS.has_feature("editor_hint")):
-		visible = false
+    if(!OS.has_feature("editor_hint")):
+        visible = false

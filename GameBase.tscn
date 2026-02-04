@@ -7,7 +7,7 @@
 
 [node name="GameBase" type="Node"]
 script = ExtResource("1_5ajq4")
-startingMap = "res://Rooms/TestStart.tscn"
+startingMap = "res://WraithTests/rooms/wraith_rooms_1.tscn"
 playerScene = ExtResource("2_3re7u")
 
 [node name="SpaceParallax" type="Parallax2D" parent="."]
