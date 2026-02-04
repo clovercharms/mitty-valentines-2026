@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg1jh5qvhxcoh"]
+[gd_scene load_steps=5 format=3 uid="uid://cg1jh5qvhxcoh"]
 
 [ext_resource type="Script" uid="uid://c1fi0rwyjbnp4" path="res://Scripts/GameBase.gd" id="1_5ajq4"]
 [ext_resource type="PackedScene" uid="uid://42qbdu4ea80j" path="res://GameObjects/MittyPlayer.tscn" id="2_3re7u"]
 [ext_resource type="PackedScene" uid="uid://ru7hqfjd2jyp" path="res://UI/TestingUI.tscn" id="3_3re7u"]
+[ext_resource type="PackedScene" uid="uid://c7vweyfl2bkm2" path="res://WraithTests/space/space.tscn" id="4_8ou7b"]
 
 [node name="GameBase" type="Node"]
 script = ExtResource("1_5ajq4")
@@ -22,11 +23,21 @@ offset_bottom = 1608.0
 [node name="PlanetParallax" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.1, 0.1)
 
-[node name="TextureRect" type="TextureRect" parent="PlanetParallax"]
-offset_left = -321.0
-offset_top = 156.0
-offset_right = 1727.0
-offset_bottom = 2204.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PlanetParallax"]
+offset_left = -1382.0
+offset_top = -850.0
+offset_right = 2714.0
+offset_bottom = 3246.0
+
+[node name="SubViewport" type="SubViewport" parent="PlanetParallax/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(4096, 4096)
+render_target_update_mode = 4
+
+[node name="Space" parent="PlanetParallax/SubViewportContainer/SubViewport" instance=ExtResource("4_8ou7b")]
+
+[node name="Camera3D" type="Camera3D" parent="PlanetParallax/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.011306438, -0.087336905, 0.9961147, -0.026775584, 0.9957947, 0.08761277, -0.9995776, -0.027662138, 0.008920394, 109.96981, 0, 0)
 
 [node name="UI Layer" type="CanvasLayer" parent="."]
 

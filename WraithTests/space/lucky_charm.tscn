@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://duwgxnosivpya"]
+
+[ext_resource type="Script" uid="uid://c684uwpxldl5j" path="res://WraithTests/space/lucky_charm.gd" id="1_tkjqd"]
+[ext_resource type="Texture2D" uid="uid://y63lfjaqi6b5" path="res://WraithTests/space/textures/charms/charm_04_bowtie.PNG" id="2_4mu82"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_snchh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn0pt"]
+transparency = 1
+albedo_texture = ExtResource("2_4mu82")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_t56yg"]
+material = SubResource("StandardMaterial3D_pn0pt")
+size = Vector2(2.5, 2)
+
+[node name="Lucky Charm" type="CharacterBody3D"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
+collision_layer = 2
+script = ExtResource("1_tkjqd")
+
+[node name="Area3D" type="Area3D" parent="."]
+input_ray_pickable = false
+
+[node name="Collider" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0593262, 0)
+shape = SubResource("SphereShape3D_snchh")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0593262, 0)
+shape = SubResource("SphereShape3D_snchh")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_t56yg")
+
+[node name="Navigator" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.360511, 0.767367, 1, 1)
+omni_range = 2.0

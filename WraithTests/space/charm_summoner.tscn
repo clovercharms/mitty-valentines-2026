@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1yjtkbiyq1wo"]
+
+[ext_resource type="Script" uid="uid://drfu82xalfy8c" path="res://WraithTests/space/charm_summoner.gd" id="1_k5bbk"]
+
+[node name="Charm Summoner" type="Node3D"]
+script = ExtResource("1_k5bbk")
+amount = 75
+position_range = 20
+min_distance = 3.0

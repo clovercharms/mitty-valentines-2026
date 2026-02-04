@@ -63,4 +63,3 @@ func _physics_process(delta: float) -> void:
 func on_damaged(amount: int) -> void:
     damage_timer.start()
     animations.play("damage_flicker")
-    
