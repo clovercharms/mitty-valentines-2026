@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq4n2ebk7k6qv"]
+[gd_scene load_steps=7 format=3 uid="uid://c1k2xuslgxrt1"]
 
 [ext_resource type="Script" uid="uid://dwfnlfj20iapp" path="res://GameObjects/runner_charm.gd" id="1_dn8sm"]
 [ext_resource type="Texture2D" uid="uid://cayua8e1561bj" path="res://ArtAssets/sprites/runner_placeholder.png" id="2_eruyj"]
-[ext_resource type="Script" uid="uid://bhuxyxd0hwah6" path="res://Scripts/sprite_flipper.gd" id="3_eruyj"]
+[ext_resource type="Script" uid="uid://cdkyv3der4wr5" path="res://Scripts/stat_block.gd" id="2_nycgs"]
+[ext_resource type="Script" path="res://Scripts/sprite_flipper.gd" id="3_eruyj"]
+
+[sub_resource type="Resource" id="Resource_x0j8e"]
+script = ExtResource("2_nycgs")
+max_health = 8
+metadata/_custom_type_script = "uid://cdkyv3der4wr5"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nycgs"]
 radius = 20.0
@@ -12,6 +18,7 @@ height = 58.0
 collision_layer = 8
 collision_mask = 163
 script = ExtResource("1_dn8sm")
+stats = SubResource("Resource_x0j8e")
 
 [node name="MainSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("velocityReference")]
 position = Vector2(-1, -11.999999)
@@ -22,3 +29,10 @@ velocityReference = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_nycgs")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_nycgs")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
