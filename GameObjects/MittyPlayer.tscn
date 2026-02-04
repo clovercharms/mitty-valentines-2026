@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://42qbdu4ea80j"]
+[gd_scene load_steps=44 format=3 uid="uid://42qbdu4ea80j"]
 
 [ext_resource type="Script" uid="uid://de2pa5swa62wc" path="res://GameObjects/mitty_player.gd" id="1_kur6k"]
 [ext_resource type="Script" uid="uid://cdkyv3der4wr5" path="res://Scripts/stat_block.gd" id="2_lcurd"]
@@ -268,6 +268,43 @@ animations = [{
 radius = 30.0
 height = 100.0
 
+[sub_resource type="Animation" id="Animation_i3sii"]
+resource_name = "damage_flicker"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 1), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 1), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 1), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 1), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ubvsx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8edrj"]
+_data = {
+&"RESET": SubResource("Animation_ubvsx"),
+&"damage_flicker": SubResource("Animation_i3sii")
+}
+
 [node name="MittyPlayer" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 211
@@ -297,6 +334,10 @@ shape = SubResource("CapsuleShape2D_i3sii")
 wait_time = 0.12
 one_shot = true
 
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("velocityReference")]
 position = Vector2(0, -13.000001)
 scale = Vector2(0.775, 0.775)
@@ -309,3 +350,8 @@ velocityReference = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_ubvsx")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8edrj")
+}

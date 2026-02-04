@@ -5,6 +5,8 @@ const SPEED = 800.0
 const JUMP_VELOCITY = -1200.0
 const TERMINAL_FALL_VELOCITY = 2000
 @onready var coyote_timer = $CoyoteTimer
+@onready var damage_timer = $DamageTimer
+@onready var animations = $Animator
 
 @export var stats: StatBlock
 
@@ -15,6 +17,9 @@ var has_double_jumped = false
 
 func on_enter():
     print("player on_enter")
+
+func _ready() -> void:
+    stats.damage_taken.connect(on_damaged)
 
 func _physics_process(delta: float) -> void:
     # Add the gravity.
@@ -54,3 +59,8 @@ func _physics_process(delta: float) -> void:
     
     if was_on_floor && !is_on_floor():
         coyote_timer.start()
+
+func on_damaged(amount: int) -> void:
+    damage_timer.start()
+    animations.play("damage_flicker")
+    
