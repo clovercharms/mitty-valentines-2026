@@ -31,8 +31,8 @@ func fastFacingCheck(origin: Vector2, facing: Vector2, target: Vector2, marginOf
 	return false
 
 # Calculate a ballistic trajectory with a predefined peak height so the trajectory looks nice.
-func getLaunchVelocity(origin: Vector2, target: Vector2, gravity: float, extraHeight: float) -> Vector2:
-	print("launch params: origin: ", origin, " target: ", target, " gravity: ", gravity, " extraHeight: ", extraHeight)
+func getLaunchVelocity(origin: Vector2, target: Vector2, gravity: float, extraHeight: float, debugPrint: bool = false) -> Vector2:
+	if debugPrint: print("launch params: origin: ", origin, " target: ", target, " gravity: ", gravity, " extraHeight: ", extraHeight)
 	const MINIMUM_DISTANCE = 5
 	var travel: Vector2 = target - origin
 	if(travel.length() < MINIMUM_DISTANCE):
@@ -52,7 +52,7 @@ func getLaunchVelocity(origin: Vector2, target: Vector2, gravity: float, extraHe
 	var peakHeight: float = max(startHeight, endHeight) + extraHeight
 	var heightDiff: float = startHeight - endHeight
 	#var peakGain: float = peakHeight - startHeight;
-	print("peakHeight: ", peakHeight, " heightDiff: ", heightDiff, " peakHeight: ", peakHeight)
+	if debugPrint: print("peakHeight: ", peakHeight, " heightDiff: ", heightDiff, " peakHeight: ", peakHeight)
 	var velocityY: float = sqrt(2 * gravity * (peakHeight - heightDiff))
 	var flightTime: float = sqrt(2 * (peakHeight - heightDiff) / gravity) + sqrt(2 * peakHeight / gravity)
 	var velocityX: float = travel.x / flightTime
@@ -95,6 +95,6 @@ static func hit_stop(real_time_duration: float):
 
 static func time_slow(time_scale: float, real_time_duration: float):
 	Engine.time_scale = time_scale
-	var timer = GameBase.get_singleton().get_tree().create_timer(time_scale * real_time_duration)
+	var timer = GameBase.get_singleton().get_tree().create_timer(real_time_duration, true, false, true)
 	await timer.timeout
 	Engine.time_scale = 1

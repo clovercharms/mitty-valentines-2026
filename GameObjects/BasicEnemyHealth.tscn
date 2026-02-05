@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxypdhwuckprp"]
+
+[ext_resource type="Script" uid="uid://d3w8b75t5k1uu" path="res://GameObjects/basic_enemy_health.gd" id="1_ui70p"]
+
+[node name="Health" type="Node"]
+script = ExtResource("1_ui70p")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dca4fwgtuobf2"]
+
+[ext_resource type="Script" uid="uid://bra8m2li2fbba" path="res://GameObjects/simple_hitbox.gd" id="1_5t8df"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nrawo"]
+
+[node name="SimpleHitbox" type="Area2D"]
+collision_layer = 128
+collision_mask = 12
+script = ExtResource("1_5t8df")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nrawo")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -34,6 +34,8 @@ extends CharacterBody2D
 @export var minFaceplantTime: float = 1
 @export var maxFaceplantTime: float = 1.5
 
+const RUNNER_DEBUG: bool = false
+
 enum states { IDLE, CHASE, WINDUP, IN_AIR, FACEPLANT }
 var currentState: states = states.IDLE
 var forceFaceplant: bool = false
@@ -73,7 +75,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func enter_idle():
-	print("runner enter idle")
+	if RUNNER_DEBUG: print("runner enter idle")
 	currentState = states.IDLE
 	stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
 
@@ -87,7 +89,7 @@ func update_idle():
 			stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
 
 func enter_chase():
-	print("runner enter chase")
+	if RUNNER_DEBUG: print("runner enter chase")
 	currentState = states.CHASE
 	currentPounceAttempt = randf_range(minPounceAttempt, maxPounceAttempt)
 	decide_direction()
@@ -110,7 +112,7 @@ func update_chase(delta: float):
 	velocity.x = move_toward(velocity.x, (currentDirection * speed).x, acceleration * delta)
 
 func enter_windup():
-	print("runner enter windup")
+	if RUNNER_DEBUG: print("runner enter windup")
 	currentState = states.WINDUP
 	velocity.x = 0
 	stateTimer = get_tree().create_timer(randf_range(minWindupTime, maxWindupTime))
@@ -131,14 +133,14 @@ func update_windup():
 	var arcHeight: float = abs(direction.x) / maxPounceDistance * maxPounceArcHeight
 	arcHeight -= abs(direction.y)
 	arcHeight = clamp(arcHeight, minPounceArcHeight, maxPounceArcHeight)
-	velocity = MittyUtils.getLaunchVelocity(position, target, get_gravity().y, arcHeight)
-	print("launch velocity: ", velocity)
+	velocity = MittyUtils.getLaunchVelocity(position, target, get_gravity().y, arcHeight, RUNNER_DEBUG)
+	if RUNNER_DEBUG: print("launch velocity: ", velocity)
 	
 	forceFaceplant = true
 	enter_in_air()
 
 func enter_in_air():
-	print("runner enter in air")
+	if RUNNER_DEBUG: print("runner enter in air")
 	currentState = states.IN_AIR
 
 func update_in_air():
@@ -151,7 +153,7 @@ func update_in_air():
 			enter_chase()
 
 func enter_faceplant():
-	print("runner enter faceplant")
+	if RUNNER_DEBUG: print("runner enter faceplant")
 	currentState = states.FACEPLANT
 	forceFaceplant = false
 	stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
