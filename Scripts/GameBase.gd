@@ -32,7 +32,7 @@ func _ready() -> void:
     set_player(createdPlayer)
     
     #TESTING
-    init_test_character(createdPlayer)
+
     
     if FileAccess.file_exists(SAVE_PATH):
         # If save data exists, load it using MetSys SaveManager.
@@ -93,9 +93,3 @@ func init_room():
         
         
 # Testing functions
-func init_test_character(createdPlayer):
-    var testing_ui : TestingUI = ui_layer.get_child(0)
-    testing_ui.player_stats = createdPlayer.stats
-    createdPlayer.stats.on_instantiation()
-    createdPlayer.stats.changed.connect(testing_ui.update.bind(createdPlayer.stats))
-    testing_ui.update(createdPlayer.stats)

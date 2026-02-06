@@ -19,6 +19,8 @@ texture_region_size = Vector2i(64, 64)
 2:2/0 = 0
 4:2/0 = 0
 6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 9.031578, 32, 10.16053, 32, 32, -32, 32)
+6:2/0/custom_data_0 = "reset"
 8:2/0 = 0
 10:2/0 = 0
 0:4/0 = 0
@@ -31,4 +33,6 @@ texture_region_size = Vector2i(64, 64)
 [resource]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 237
+custom_data_layer_0/name = "touch_effect"
+custom_data_layer_0/type = 4
 sources/2 = SubResource("TileSetAtlasSource_co4fi")

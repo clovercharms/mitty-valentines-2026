@@ -6,20 +6,22 @@ const JUMP_VELOCITY = -1200.0
 const TERMINAL_FALL_VELOCITY = 2000
 @onready var coyote_timer = $CoyoteTimer
 @onready var damage_timer = $DamageTimer
-@onready var animations = $Animator
-
-@export var stats: StatBlock
+@onready var detection_area : Area2D = $Detector
 
 # double jump
 @onready var can_double_jump = true
 var has_double_jumped = false
+
+var has_control : bool = true
+
+var reset_position : Marker2D
 
 
 func on_enter():
     print("player on_enter")
 
 func _ready() -> void:
-    stats.damage_taken.connect(on_damaged)
+    pass
 
 func _physics_process(delta: float) -> void:
     # Add the gravity.
@@ -31,13 +33,13 @@ func _physics_process(delta: float) -> void:
             velocity += get_gravity() * delta * 3
             velocity.y = min(velocity.y, TERMINAL_FALL_VELOCITY)
     # Handle jump.
-    if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or !coyote_timer.is_stopped()):
+    if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or !coyote_timer.is_stopped()) and has_control:
         velocity.y = JUMP_VELOCITY
     # enable short jumps by releasing jump early
     if Input.is_action_just_released("ui_accept") and velocity.y < 0:
         velocity.y = JUMP_VELOCITY / 4
     # double jump logic
-    if Input.is_action_just_pressed("ui_accept") and can_double_jump and !has_double_jumped and !is_on_floor():
+    if Input.is_action_just_pressed("ui_accept") and can_double_jump and !has_double_jumped and !is_on_floor() and has_control:
         velocity.y = JUMP_VELOCITY
         has_double_jumped = true
 
@@ -47,8 +49,8 @@ func _physics_process(delta: float) -> void:
     # Get the input direction and handle the movement/deceleration.
     # As good practice, you should replace UI actions with custom gameplay actions.
     var direction := Input.get_axis("ui_left", "ui_right")
-    if direction:
-        velocity.x = direction * SPEED * stats.speed_modifier
+    if direction and has_control:
+        velocity.x = direction * SPEED
     else:
         velocity.x = move_toward(velocity.x, 0, SPEED)
         
@@ -60,6 +62,21 @@ func _physics_process(delta: float) -> void:
     if was_on_floor && !is_on_floor():
         coyote_timer.start()
 
-func on_damaged(amount: int) -> void:
-    damage_timer.start()
-    animations.play("damage_flicker")
+
+func move_to_reset_position() -> void:
+    if reset_position == null:
+        return
+    else:
+        global_position = reset_position.global_position
+        
+func tween_to_reset_position() -> void:
+    if reset_position == null:
+        return
+    else:
+        var tween = create_tween().set_parallel(true)
+        has_control = false
+        tween.tween_property(self, "global_position", reset_position.global_position, 0.5)
+        tween.tween_property(self, "rotation_degrees", 360 * 10, 0.5)
+        await tween.finished
+        has_control = true
+        
