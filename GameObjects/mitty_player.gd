@@ -70,13 +70,15 @@ func update_move(delta: float):
 	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("Move_Left", "Move_Right")
+	
+	var currentAcceleration = acceleration
+	if abs(velocity.x) < accelerationBoostThreshold:
+		currentAcceleration = boostedAcceleration
+	if not is_on_floor():
+		currentAcceleration *= airControl
+	velocity.x = move_toward(velocity.x, direction * speed, currentAcceleration * delta)
+	
 	if direction:
-		var currentAcceleration = acceleration
-		if abs(velocity.x) < accelerationBoostThreshold:
-			currentAcceleration = boostedAcceleration
-		if not is_on_floor():
-			currentAcceleration *= airControl
-		velocity.x = move_toward(velocity.x, direction * speed, currentAcceleration * delta)
 		if direction > 0:
 			lastMoveDirection = 1
 			main_sprite.flip_h = false
@@ -84,7 +86,7 @@ func update_move(delta: float):
 			lastMoveDirection = -1
 			main_sprite.flip_h = true
 	else:
-		velocity.x = move_toward(velocity.x, 0, acceleration * delta)
+		velocity.x = move_toward(velocity.x, 0, currentAcceleration * delta)
 	
 	if is_on_floor() and not jumpedThisFrame:
 		if direction:
