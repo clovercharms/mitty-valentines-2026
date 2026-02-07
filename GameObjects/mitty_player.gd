@@ -74,41 +74,41 @@ func _physics_process(delta: float) -> void:
         pass
 
 func update_move(delta: float):
-	# Handle jump.
-	var jumpedThisFrame = false
-	if Input.is_action_just_pressed("Jump") and canJump():
-		jumpedThisFrame = true
-		setAnimationNoRepeats("ascend")
-		velocity.y = jumpSpeed
-	# enable short jumps by releasing jump early
-	if Input.is_action_just_released("Jump") and velocity.y < 0:
-		velocity.y = jumpSpeed / 4
-	
-	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("Move_Left", "Move_Right")
-	
-	var currentAcceleration = acceleration
-	if abs(velocity.x) < accelerationBoostThreshold:
-		currentAcceleration = boostedAcceleration
-	if not is_on_floor():
-		currentAcceleration *= airControl
-	velocity.x = move_toward(velocity.x, direction * speed, currentAcceleration * delta)
-	
-	if direction:
-		if direction > 0:
-			lastMoveDirection = 1
-			main_sprite.flip_h = false
-		elif direction < 0:
-			lastMoveDirection = -1
-			main_sprite.flip_h = true
-	else:
-		velocity.x = move_toward(velocity.x, 0, currentAcceleration * delta)
-	
-	if is_on_floor() and not jumpedThisFrame:
-		if direction:
-			setAnimationNoRepeats("run")
-		if abs(velocity.x) < 1:
-			setAnimationNoRepeats("idle")
+    # Handle jump.
+    var jumpedThisFrame = false
+    if Input.is_action_just_pressed("Jump") and canJump() and has_control:
+        jumpedThisFrame = true
+        setAnimationNoRepeats("ascend")
+        velocity.y = jumpSpeed
+    # enable short jumps by releasing jump early
+    if Input.is_action_just_released("Jump") and velocity.y < 0:
+        velocity.y = jumpSpeed / 4
+    
+    # Get the input direction and handle the movement/deceleration.
+    var direction := Input.get_axis("Move_Left", "Move_Right")
+    
+    var currentAcceleration = acceleration
+    if abs(velocity.x) < accelerationBoostThreshold:
+        currentAcceleration = boostedAcceleration
+    if not is_on_floor():
+        currentAcceleration *= airControl
+    velocity.x = move_toward(velocity.x, direction * speed, currentAcceleration * delta)
+    
+    if direction:
+        if direction > 0:
+            lastMoveDirection = 1
+            main_sprite.flip_h = false
+        elif direction < 0:
+            lastMoveDirection = -1
+            main_sprite.flip_h = true
+    else:
+        velocity.x = move_toward(velocity.x, 0, currentAcceleration * delta)
+    
+    if is_on_floor() and not jumpedThisFrame:
+        if direction:
+            setAnimationNoRepeats("run")
+        if abs(velocity.x) < 1:
+            setAnimationNoRepeats("idle")
 
 func enter_attack():
     currentState = ControlState.ATTACK
