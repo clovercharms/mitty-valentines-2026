@@ -9,4 +9,4 @@ func _on_area_entered(area: Area2D) -> void:
     print("player touched reset zone")
     
     var player = area.get_parent() as MittyPlayer
-    player.tween_to_reset_position()
+    player.tween_to_reset_marker()
