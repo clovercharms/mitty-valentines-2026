@@ -9,8 +9,7 @@ func spawn_runners(markers : Array) -> void:
             pass
         else:
             print("spawning runner at ", marker.name )
-            var runner = runner_scene.instantiate()
-            marker.add_child(runner)
+            MittyUtils.spawn_at_location(runner_scene, marker.global_position)
             
 func spawner_1_triggered() -> void:
     spawn_runners([$"Markers/Runner Spawn 1", $"Markers/Runner Spawn 2"])
