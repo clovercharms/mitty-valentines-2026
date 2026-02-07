@@ -1,0 +1,38 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://drwolgr7keq1k"]
+
+[ext_resource type="Texture2D" uid="uid://tulik63y2mhx" path="res://WraithTests/terrain.png" id="1_duegs"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_co4fi"]
+texture = ExtResource("1_duegs")
+margins = Vector2i(24, 24)
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+6:0/0/z_index = 2
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+10:0/0 = 0
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 9.031578, 32, 10.16053, 32, 32, -32, 32)
+6:2/0/custom_data_0 = "reset"
+8:2/0 = 0
+10:2/0 = 0
+0:4/0 = 0
+2:4/0 = 0
+6:4/0 = 0
+8:4/0 = 0
+10:4/0 = 0
+4:4/0 = 0
+
+[resource]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 237
+custom_data_layer_0/name = "touch_effect"
+custom_data_layer_0/type = 4
+sources/2 = SubResource("TileSetAtlasSource_co4fi")

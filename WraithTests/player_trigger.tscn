@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://08l7k0fl6w34"]
+
+[ext_resource type="Script" uid="uid://1djoepok5xb5" path="res://WraithTests/player_trigger.gd" id="1_hs0lw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjaus"]
+
+[node name="Player Trigger" type="Area2D"]
+script = ExtResource("1_hs0lw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rjaus")
+debug_color = Color(0.46278954, 0.5929548, 0, 0.41960785)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

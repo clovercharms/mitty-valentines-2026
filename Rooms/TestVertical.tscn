@@ -12,8 +12,12 @@ position = Vector2(-2, 893)
 scale = Vector2(2, 100)
 
 [node name="BlockoutVert2" parent="." instance=ExtResource("2_6qfwg")]
-position = Vector2(1910, 1132)
-scale = Vector2(2, 120)
+position = Vector2(1901, 966.00006)
+scale = Vector2(1.966, 95)
+
+[node name="BlockouthHoriz5" parent="BlockoutVert2" instance=ExtResource("2_6qfwg")]
+position = Vector2(976, 1448)
+scale = Vector2(10, 2)
 
 [node name="BlockouthHoriz" parent="." instance=ExtResource("2_6qfwg")]
 position = Vector2(980, 2138)

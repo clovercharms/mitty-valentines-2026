@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8s5krieofdtb"]
+
+[ext_resource type="PackedScene" uid="uid://cs5ea3np81gnt" path="res://assets/models/sakura_tree_1.glb" id="1_dtdj7"]
+
+[node name="sakura_tree_1" instance=ExtResource("1_dtdj7")]

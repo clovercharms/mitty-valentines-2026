@@ -1,0 +1,138 @@
+[gd_scene load_steps=17 format=3 uid="uid://c7vweyfl2bkm2"]
+
+[ext_resource type="Texture2D" uid="uid://e0378qdt7cvu" path="res://WraithTests/space/textures/star.png" id="1_x3i60"]
+[ext_resource type="PackedScene" uid="uid://b8s5krieofdtb" path="res://WraithTests/space/sakura_tree_1.tscn" id="3_8w514"]
+[ext_resource type="PackedScene" uid="uid://cf0kerida4ex4" path="res://WraithTests/space/charm_prison.tscn" id="4_inpb6"]
+[ext_resource type="PackedScene" uid="uid://d1yjtkbiyq1wo" path="res://WraithTests/space/charm_summoner.tscn" id="7_6byia"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jl760"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0.101961, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0.211765, 1)
+
+[sub_resource type="Sky" id="Sky_fy0p3"]
+sky_material = SubResource("ProceduralSkyMaterial_jl760")
+
+[sub_resource type="Environment" id="Environment_uvixq"]
+background_mode = 2
+sky = SubResource("Sky_fy0p3")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.1
+fog_light_color = Color(0, 0, 0, 1)
+fog_height_density = 16.0
+fog_depth_begin = 0.0
+fog_depth_end = 5.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_emission = Color(0.255659, 0.255659, 0.255659, 1)
+
+[sub_resource type="FogMaterial" id="FogMaterial_1sca5"]
+density = 0.005
+albedo = Color(0.989566, 0.816051, 0.866304, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ncmjl"]
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(10, 10, 10)
+emission_shape = 1
+emission_sphere_radius = 75.0
+gravity = Vector3(0, 0, 0)
+scale_min = 100.0
+scale_max = 100.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53xma"]
+transparency = 1
+albedo_texture = ExtResource("1_x3i60")
+
+[sub_resource type="QuadMesh" id="QuadMesh_x50fr"]
+material = SubResource("StandardMaterial3D_53xma")
+size = Vector2(0.01, 0.01)
+
+[sub_resource type="Gradient" id="Gradient_7yqem"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ghct2"]
+gradient = SubResource("Gradient_7yqem")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sqcv5"]
+lifetime_randomness = 0.48
+angle_min = -5.89999
+angle_max = 11.8
+velocity_pivot = Vector3(1, 1, 0)
+spread = 49.361
+initial_velocity_max = 1.0
+angular_velocity_min = -159.34
+angular_velocity_max = 59.02
+gravity = Vector3(0.74, 1, 0)
+color_ramp = SubResource("GradientTexture1D_ghct2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkh6r"]
+transparency = 1
+albedo_color = Color(0.611765, 0.611765, 0.611765, 0.721569)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wyhjn"]
+material = SubResource("StandardMaterial3D_qkh6r")
+
+[node name="Space" type="Node3D"]
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uvixq")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 0)
+shape = 4
+material = SubResource("FogMaterial_1sca5")
+
+[node name="Stars" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.051917613, 0, 0.9986513, 0, 1, 0, -0.9986513, 0, 0.051917613, -1093.8943, 0, 0)
+cast_shadow = 0
+gi_mode = 0
+amount = 1000
+lifetime = 10.0
+explosiveness = 0.25
+randomness = 0.5
+visibility_aabb = AABB(-488.524, -490.506, -486.248, 957.523, 966.392, 979.165)
+process_material = SubResource("ParticleProcessMaterial_ncmjl")
+draw_pass_1 = SubResource("QuadMesh_x50fr")
+
+[node name="Charm Prison" parent="." instance=ExtResource("4_inpb6")]
+
+[node name="Charm Summoner" parent="." instance=ExtResource("7_6byia")]
+
+[node name="Trees" type="Node3D" parent="."]
+transform = Transform3D(0.546637, 0.692779, 0.470367, 0.464202, 0.2168, -0.858786, -0.696925, 0.68779, -0.203078, 0, 0, 0)
+
+[node name="sakura_tree_1" parent="Trees" instance=ExtResource("3_8w514")]
+transform = Transform3D(0.22639334, 0.19659398, 0.009843245, -0.1777092, 0.21058576, -0.11863024, -0.08464944, 0.08369286, 0.2753725, 13.015049, 16.494583, 11.199109)
+
+[node name="sakura_tree_2" parent="Trees" instance=ExtResource("3_8w514")]
+transform = Transform3D(0.28396657, 0.09552186, 0.0154477805, -0.0914083, 0.2805233, -0.05432607, -0.031742677, 0.046715748, 0.2946356, 6.9327984, 21.928741, 9.283304)
+
+[node name="sakura_tree_3" parent="Trees" instance=ExtResource("3_8w514")]
+transform = Transform3D(0.22639337, 0.19659398, 0.009843238, -0.17770924, 0.21058579, -0.118630245, -0.084649466, 0.08369286, 0.27537253, 16.995668, 18.353691, 3.834853)
+
+[node name="sakura_tree_4" parent="Trees" instance=ExtResource("3_8w514")]
+transform = Transform3D(0.29494888, 0.053738274, 0.010835856, -0.052442476, 0.29386416, -0.02989586, -0.01596947, 0.027498271, 0.29831016, 6.604301, 22.78292, -0.6638653)
+
+[node name="sakura_tree_5" parent="Trees" instance=ExtResource("3_8w514")]
+transform = Transform3D(0.29390857, 0.059921995, -0.0052144006, -0.059856243, 0.28881833, -0.054785307, -0.0059228837, 0.05471326, 0.29490936, 13.275116, -0.3845501, 20.252342)
+
+[node name="Small_Decorations" type="Node3D" parent="."]
+transform = Transform3D(0.630619, 0.495924, -0.596974, 0.698309, -0.698225, 0.15763, -0.33865, -0.516276, -0.786622, 0, 0, 0)
+
+[node name="Decorations" type="Node3D" parent="."]
+transform = Transform3D(0.630619, 0.495924, -0.596974, 0.698309, -0.698225, 0.15763, -0.33865, -0.516276, -0.786622, 0, 0, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Decorations"]
+transform = Transform3D(1.00508, 1.49012e-08, -4.76837e-07, 1.49012e-08, 1.00508, -5.06639e-07, 0, 0, 1.00508, 23.8714, -4.45012, -8.38776)
+amount = 50
+lifetime = 3.0
+speed_scale = 0.5
+randomness = 0.52
+process_material = SubResource("ParticleProcessMaterial_sqcv5")
+draw_pass_1 = SubResource("SphereMesh_wyhjn")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+light_color = Color(0.992732, 0.910877, 0.826542, 1)
+light_energy = 1.8
+shadow_enabled = true
