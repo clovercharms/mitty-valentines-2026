@@ -34,7 +34,7 @@ class_name RunnerCharm extends EnemyBase
 @export var minFaceplantTime: float = 1
 @export var maxFaceplantTime: float = 1.5
 
-const RUNNER_DEBUG: bool = false
+const RUNNER_DEBUG: bool = true
 
 enum states { IDLE, CHASE, WINDUP, IN_AIR, FACEPLANT }
 var currentState: states = states.IDLE
@@ -75,30 +75,31 @@ func _physics_process(delta: float) -> void:
     move_and_slide()
 
 func enter_idle():
-	if RUNNER_DEBUG: print("runner enter idle")
-	currentState = states.IDLE
-	stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
+    if RUNNER_DEBUG: print("runner enter idle")
+    currentState = states.IDLE
+    stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
 
 func update_idle():
     if(stateTimer.time_left <= 0):
         var target: Vector2 = GameBase.get_singleton().player.position
-        if((position - target).length() < sensingRange):
+        print("distance to player: ", (global_position - target).length())
+        if((global_position - target).length() < sensingRange):
             #alert sound
             enter_chase()
         else:
             stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
 
 func enter_chase():
-	if RUNNER_DEBUG: print("runner enter chase")
-	currentState = states.CHASE
-	currentPounceAttempt = randf_range(minPounceAttempt, maxPounceAttempt)
-	decide_direction()
-	stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
+    if RUNNER_DEBUG: print("runner enter chase")
+    currentState = states.CHASE
+    currentPounceAttempt = randf_range(minPounceAttempt, maxPounceAttempt)
+    decide_direction()
+    stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
 
 func update_chase(delta: float):
     if(stateTimer.time_left <= 0):
         var target: Vector2 = GameBase.get_singleton().player.position
-        var distanceToTarget: float = (position - target).length()
+        var distanceToTarget: float = (global_position - target).length()
         if(distanceToTarget > sensingRange):
             enter_idle()
             return
@@ -112,36 +113,36 @@ func update_chase(delta: float):
     velocity.x = move_toward(velocity.x, (currentDirection * speed).x, acceleration * delta)
 
 func enter_windup():
-	if RUNNER_DEBUG: print("runner enter windup")
-	currentState = states.WINDUP
-	velocity.x = 0
-	stateTimer = get_tree().create_timer(randf_range(minWindupTime, maxWindupTime))
-	pounceCooldownTimer = get_tree().create_timer(randf_range(minPounceCooldown, maxPounceCooldown))
+    if RUNNER_DEBUG: print("runner enter windup")
+    currentState = states.WINDUP
+    velocity.x = 0
+    stateTimer = get_tree().create_timer(randf_range(minWindupTime, maxWindupTime))
+    pounceCooldownTimer = get_tree().create_timer(randf_range(minPounceCooldown, maxPounceCooldown))
 
 func update_windup():
-	if(stateTimer.time_left > 0):
-		return
-	var target: Vector2 = GameBase.get_singleton().player.position
-	var direction: Vector2 = target - position
-	if(direction.length() < minPounceDistance):
-		direction.y = 0
-		target = position + direction.normalized() * minPounceDistance
-	else:
-		target.x += randf_range(-pounceTargetVariation, pounceTargetVariation)
-	
-	direction = target - position
-	var arcHeight: float = abs(direction.x) / maxPounceDistance * maxPounceArcHeight
-	arcHeight -= abs(direction.y)
-	arcHeight = clamp(arcHeight, minPounceArcHeight, maxPounceArcHeight)
-	velocity = MittyUtils.getLaunchVelocity(position, target, get_gravity().y, arcHeight, RUNNER_DEBUG)
-	if RUNNER_DEBUG: print("launch velocity: ", velocity)
-	
-	forceFaceplant = true
-	enter_in_air()
+    if(stateTimer.time_left > 0):
+        return
+    var target: Vector2 = GameBase.get_singleton().player.position
+    var direction: Vector2 = target - global_position
+    if(direction.length() < minPounceDistance):
+        direction.y = 0
+        target = global_position + direction.normalized() * minPounceDistance
+    else:
+        target.x += randf_range(-pounceTargetVariation, pounceTargetVariation)
+    
+    direction = target - position
+    var arcHeight: float = abs(direction.x) / maxPounceDistance * maxPounceArcHeight
+    arcHeight -= abs(direction.y)
+    arcHeight = clamp(arcHeight, minPounceArcHeight, maxPounceArcHeight)
+    velocity = MittyUtils.getLaunchVelocity(global_position, target, get_gravity().y, arcHeight, RUNNER_DEBUG)
+    if RUNNER_DEBUG: print("launch velocity: ", velocity)
+    
+    forceFaceplant = true
+    enter_in_air()
 
 func enter_in_air():
-	if RUNNER_DEBUG: print("runner enter in air")
-	currentState = states.IN_AIR
+    if RUNNER_DEBUG: print("runner enter in air")
+    currentState = states.IN_AIR
 
 func update_in_air():
     if(velocity.y > speedToFaceplant):
@@ -153,13 +154,13 @@ func update_in_air():
             enter_chase()
 
 func enter_faceplant():
-	if RUNNER_DEBUG: print("runner enter faceplant")
-	currentState = states.FACEPLANT
-	forceFaceplant = false
-	stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
-	velocity = Vector2.ZERO
-	#update animation
-	#faceplant sound
+    if RUNNER_DEBUG: print("runner enter faceplant")
+    currentState = states.FACEPLANT
+    forceFaceplant = false
+    stateTimer = get_tree().create_timer(randf_range(minAiUpdateTime, maxAiUpdateTime))
+    velocity = Vector2.ZERO
+    #update animation
+    #faceplant sound
 
 func update_faceplant():
     if(stateTimer.time_left <= 0):
@@ -167,7 +168,7 @@ func update_faceplant():
 
 func decide_direction():
     var target: Vector2 = GameBase.get_singleton().player.position
-    var toTarget: Vector2 = target - position
+    var toTarget: Vector2 = target - global_position
     if(toTarget.x > 0):
         currentDirection = Vector2(1, 0)
     else:
