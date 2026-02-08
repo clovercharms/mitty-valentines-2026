@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://byv54hvf125b5"]
+
+[ext_resource type="Texture2D" uid="uid://b46mnp606ae6h" path="res://UI/Inventory/vmessages/avatars/01.png" id="1_ik2vj"]
+[ext_resource type="Script" uid="uid://dx4kkq30xop5i" path="res://UI/Inventory/valentines_item.gd" id="2_ik2vj"]
+
+[node name="Button" type="Button"]
+theme_override_constants/h_separation = 8
+theme_override_constants/icon_max_width = 100
+theme_override_font_sizes/font_size = 34
+text = " name here"
+icon = ExtResource("1_ik2vj")
+alignment = 0
+script = ExtResource("2_ik2vj")
