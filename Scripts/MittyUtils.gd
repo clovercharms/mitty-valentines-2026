@@ -62,26 +62,26 @@ func getLaunchVelocity(origin: Vector2, target: Vector2, gravity: float, extraHe
 
 ### General utils
 #remaps value from linear range Input to linear range Output
-static func map_range(value: float, InputA: float, InputB: float, OutputA: float, OutputB: float):
+func map_range(value: float, InputA: float, InputB: float, OutputA: float, OutputB: float):
 	return(value - InputA) / (InputB - InputA) * (OutputB - OutputA) + OutputA
 
 #remaps value from linear range Input to linear range Output, clamped to the output range
-static func map_range_clamped(value: float, InputA: float, InputB: float, OutputA: float, OutputB: float):
+func map_range_clamped(value: float, InputA: float, InputB: float, OutputA: float, OutputB: float):
 	return(clamp(value, InputA, InputB) - InputA) / (InputB - InputA) * (OutputB - OutputA) + OutputA
 
-static func spawn_at_location(to_spawn: PackedScene, location: Vector2):
+func spawn_at_location(to_spawn: PackedScene, location: Vector2):
 	var instance = to_spawn.instantiate()
 	instance.position = location
 	GameBase.get_singleton().map.call_deferred("add_child", instance)
 	return instance
 
-static func spawn_child(parent: Node, to_spawn: PackedScene, location: Vector2):
+func spawn_child(parent: Node, to_spawn: PackedScene, location: Vector2):
 	var instance = to_spawn.instantiate()
 	instance.position = location
 	parent.call_deferred("add_child", instance)
 	return instance
 
-static func spawn_projectile(projectile: PackedScene, location: Vector2, velocity: Vector2, rotation: float = 0):
+func spawn_projectile(projectile: PackedScene, location: Vector2, velocity: Vector2, rotation: float = 0):
 	var projectile_instance = projectile.instantiate()
 	projectile_instance.position = location
 	projectile_instance.apply_impulse(velocity)
@@ -89,11 +89,11 @@ static func spawn_projectile(projectile: PackedScene, location: Vector2, velocit
 	GameBase.get_singleton().map.call_deferred("add_child", projectile_instance)
 	return projectile_instance
 
-static func hit_stop(real_time_duration: float):
+func hit_stop(real_time_duration: float):
 	const time_scale:float = 0.05 #can't actually use 0, but this is so slow it does the job
 	time_slow(time_scale, real_time_duration)
 
-static func time_slow(time_scale: float, real_time_duration: float):
+func time_slow(time_scale: float, real_time_duration: float):
 	Engine.time_scale = time_scale
 	var timer = GameBase.get_singleton().get_tree().create_timer(real_time_duration, true, false, true)
 	await timer.timeout
