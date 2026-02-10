@@ -1,15 +1,20 @@
 extends IHealth
 
-@export var startingHealth: int
+@export var startingHealth: int = 1
 
-var currentHealth: int = startingHealth
+var currentHealth: int = 1
+
+func _ready() -> void:
+	currentHealth = startingHealth
 
 ### Interface implementation
 func damage(amount: int, cause: Node):
-	if(amount <= 0):
+	if(amount <= 0 or currentHealth == 0):
 		return
 	currentHealth -= amount
 	_clampHealth()
+	
+	print(get_parent().name, "took damage! Remaining health: ", currentHealth)
 	
 	if(currentHealth == 0):
 		death.emit(cause)

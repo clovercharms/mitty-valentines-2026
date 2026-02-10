@@ -1,7 +1,10 @@
-[gd_scene load_steps=38 format=3 uid="uid://42qbdu4ea80j"]
+[gd_scene load_steps=42 format=3 uid="uid://42qbdu4ea80j"]
 
 [ext_resource type="Script" uid="uid://de2pa5swa62wc" path="res://GameObjects/mitty_player.gd" id="1_kur6k"]
+[ext_resource type="PackedScene" uid="uid://cp0vivnky16dc" path="res://GameObjects/MittySlash.tscn" id="2_8edrj"]
 [ext_resource type="Texture2D" uid="uid://cnvqaqw2uktdd" path="res://ArtAssets/sprites/spritesheet_mitty_256x276.png" id="2_lcurd"]
+[ext_resource type="PackedScene" uid="uid://dg60pj65dqfua" path="res://GameObjects/MittySlashVertical.tscn" id="3_84tvs"]
+[ext_resource type="PackedScene" uid="uid://1xm6mkvxw8yt" path="res://GameObjects/MittyGhost.tscn" id="4_84tvs"]
 [ext_resource type="PackedScene" uid="uid://cdb3wogg56hpw" path="res://GameObjects/MittyHealth.tscn" id="4_ubvsx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3sii"]
@@ -298,32 +301,9 @@ z_as_relative = false
 collision_layer = 4
 collision_mask = 211
 script = ExtResource("1_kur6k")
-speed = null
-accelerationBoostThreshold = null
-acceleration = null
-boostedAcceleration = null
-airControl = null
-jumpSpeed = null
-terminalFallSpeed = null
-attackMovementSpeed = null
-attackDrag = null
-attackTime = null
-attackCooldownTime = null
-
-[node name="PlaceholderVisual" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -50.0
-offset_right = 30.0
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0.40562862, 0.6403778, 1)
+sideAttackScene = ExtResource("2_8edrj")
+verticalAttackScene = ExtResource("3_84tvs")
+ghostScene = ExtResource("4_84tvs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_i3sii")
@@ -347,15 +327,24 @@ one_shot = true
 position = Vector2(0, -13.000001)
 scale = Vector2(0.775, 0.775)
 sprite_frames = SubResource("SpriteFrames_qe0th")
-animation = &"idle"
+animation = &"dead"
 autoplay = "idle"
 
 [node name="Health" parent="." instance=ExtResource("4_ubvsx")]
+baseHealth = 10
 
-[node name="Detector" type="Area2D" parent="."]
+[node name="SideAttackLocation" type="Marker2D" parent="."]
+position = Vector2(54, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
-shape = SubResource("CapsuleShape2D_i3sii")
+[node name="VerticalAttackLocation" type="Marker2D" parent="."]
+position = Vector2(0, -88)
+
+[node name="FeetLocation" type="Marker2D" parent="."]
+position = Vector2(0, 50)
+
+[node name="GhostLocation" type="Marker2D" parent="."]
+position = Vector2(46, -79)
 
 [connection signal="animation_finished" from="MainSprite" to="." method="_on_main_sprite_animation_finished"]
-[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
+[connection signal="death" from="Health" to="." method="_on_death"]
+[connection signal="hurt" from="Health" to="." method="_on_hurt"]

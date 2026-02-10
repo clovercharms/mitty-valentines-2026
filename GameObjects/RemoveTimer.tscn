@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://m5nvixahxd4o"]
+
+[ext_resource type="Script" uid="uid://8dwt38immxen" path="res://GameObjects/remove_timer.gd" id="1_oiapq"]
+
+[node name="RemoveTimer" type="Timer"]
+one_shot = true
+script = ExtResource("1_oiapq")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

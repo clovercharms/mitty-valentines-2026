@@ -5,13 +5,19 @@ extends Area2D
 
 enum hitType { REPEATED, FIRST, ONCE_PER }
 
-var damageCause: Node = null
+@export var damageCause: Node = null
 var alreadyHit: Array = []
 var canHit: bool = true
+var isEnabled: bool = true
+
+func setEnabled(enabled: bool):
+	isEnabled = enabled
 
 func _on_body_entered(body: Node2D) -> void:
-	if(not canHit):
+	if(not canHit or not isEnabled):
 		return
+	
+	#print(name, " hit ", body.name)
 	
 	var health: IHealth = body.get_node("Health")
 	if(health == null):

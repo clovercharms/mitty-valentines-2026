@@ -24,6 +24,7 @@ offset_bottom = 1608.0
 scroll_scale = Vector2(0.1, 0.1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="PlanetParallax"]
+z_index = -999
 offset_left = -1382.0
 offset_top = -850.0
 offset_right = 2714.0

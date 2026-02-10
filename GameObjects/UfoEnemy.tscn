@@ -1,0 +1,93 @@
+[gd_scene load_steps=15 format=3 uid="uid://cmvwpi3rgyr5f"]
+
+[ext_resource type="Script" uid="uid://c4hv6np2y6iir" path="res://GameObjects/ufo_enemy.gd" id="1_xugej"]
+[ext_resource type="Texture2D" uid="uid://dwf0r30yol1pq" path="res://ArtAssets/sprites/ufo_spritesheet.png" id="2_oxptt"]
+[ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_sfxu5"]
+[ext_resource type="PackedScene" uid="uid://5bq5k0smx6ox" path="res://GameObjects/DebugPoint.tscn" id="3_4pt6f"]
+[ext_resource type="Script" uid="uid://bra8m2li2fbba" path="res://GameObjects/simple_hitbox.gd" id="3_gmi0d"]
+[ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="4_sfxu5"]
+[ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="5_oxptt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pt6f"]
+size = Vector2(50, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1wjq"]
+atlas = ExtResource("2_oxptt")
+region = Rect2(0, 0, 1046, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tftbj"]
+atlas = ExtResource("2_oxptt")
+region = Rect2(0, 670, 1046, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4joss"]
+atlas = ExtResource("2_oxptt")
+region = Rect2(0, 1340, 1046, 670)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfnph"]
+atlas = ExtResource("2_oxptt")
+region = Rect2(0, 670, 1046, 670)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jspo4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1wjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tftbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4joss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfnph")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w84d8"]
+radius = 30.0
+
+[node name="UfoEnemy" type="CharacterBody2D" groups=["triggersPogo"]]
+z_index = 1
+collision_layer = 8
+collision_mask = 32
+script = ExtResource("1_xugej")
+deathEffect = ExtResource("2_sfxu5")
+debugObject = ExtResource("3_4pt6f")
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+rotation = 1.3526301
+shape = SubResource("RectangleShape2D_4pt6f")
+
+[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_jspo4")
+autoplay = "default"
+frame_progress = 0.16261311
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("damageCause")]
+collision_layer = 64
+collision_mask = 4
+script = ExtResource("3_gmi0d")
+hitBehavior = 0
+damageCause = NodePath("..")
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_w84d8")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="Health" parent="." instance=ExtResource("4_sfxu5")]
+startingHealth = 3
+
+[node name="OnHitEffects" parent="." node_paths=PackedStringArray("toModulate") instance=ExtResource("5_oxptt")]
+doHitFlash = true
+toModulate = NodePath("..")
+
+[connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_body_entered"]
+[connection signal="death" from="Health" to="." method="_on_death"]
+[connection signal="hurt" from="Health" to="." method="_on_hurt"]
+[connection signal="hurt" from="Health" to="OnHitEffects" method="_on_health_hurt"]

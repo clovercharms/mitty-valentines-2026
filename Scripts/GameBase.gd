@@ -10,8 +10,10 @@ const CURRENT_ROOM = "current_room"
 
 @onready var ui_layer : CanvasLayer = $"UI Layer"
 
+@export_group("Game Settings")
 @export var startingMap: String
 @export var playerScene: PackedScene
+@export var deathResetWait: float = 5
 
 # Saved data. Just let other classes access it directly for this project.
 var questState: Dictionary
@@ -30,7 +32,7 @@ func _ready() -> void:
 	# CreatePlayer
 	var createdPlayer : MittyPlayer = spawn_object_at_location(playerScene, Vector2i())
 	set_player(createdPlayer)
-	
+	createdPlayer.find_child("Health").connect("death", on_player_death)
 	#TESTING
 
 	
@@ -93,3 +95,8 @@ func init_room():
 		
 		
 # Testing functions
+
+func on_player_death(_cause: Node):
+	var resetTimer = get_tree().create_timer(deathResetWait, true, false, true)
+	await resetTimer.timeout
+	get_tree().reload_current_scene()

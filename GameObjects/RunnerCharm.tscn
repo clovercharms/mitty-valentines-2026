@@ -1,42 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq4n2ebk7k6qv"]
+[gd_scene load_steps=9 format=3 uid="uid://dq4n2ebk7k6qv"]
 
 [ext_resource type="Script" uid="uid://dwfnlfj20iapp" path="res://GameObjects/runner_charm.gd" id="1_dn8sm"]
+[ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_6q6k2"]
 [ext_resource type="Texture2D" uid="uid://cayua8e1561bj" path="res://ArtAssets/sprites/runner_placeholder.png" id="2_eruyj"]
 [ext_resource type="Script" uid="uid://bhuxyxd0hwah6" path="res://Scripts/sprite_flipper.gd" id="3_eruyj"]
 [ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="4_nycgs"]
 [ext_resource type="PackedScene" uid="uid://dca4fwgtuobf2" path="res://GameObjects/SimpleHitbox.tscn" id="5_x0j8e"]
+[ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="7_uym0x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nycgs"]
 radius = 20.0
 height = 58.0
 
-[node name="RunnerCharm" type="CharacterBody2D"]
+[node name="RunnerCharm" type="CharacterBody2D" groups=["triggersPogo"]]
 collision_layer = 8
 collision_mask = 163
 script = ExtResource("1_dn8sm")
-speed = null
-speedVariation = null
-acceleration = null
-minTurnaroundTime = null
-maxTurnaroundTime = null
-minPounceCooldown = null
-maxPounceCooldown = null
-minPounceAttempt = null
-maxPounceAttempt = null
-minPounceDistance = null
-maxPounceDistance = null
-maxPounceHeight = null
-minPounceArcHeight = null
-maxPounceArcHeight = null
-pounceTargetVariation = null
-sensingRange = null
-minWindupTime = null
-maxWindupTime = null
-minAiUpdateTime = null
-maxAiUpdateTime = null
-speedToFaceplant = null
-minFaceplantTime = null
-maxFaceplantTime = null
+deathEffect = ExtResource("2_6q6k2")
 
 [node name="MainSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("velocityReference")]
 position = Vector2(-1, -11.999999)
@@ -48,9 +28,19 @@ velocityReference = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_nycgs")
 
-[node name="BasicEnemyHealth" parent="." instance=ExtResource("4_nycgs")]
+[node name="Health" parent="." instance=ExtResource("4_nycgs")]
+startingHealth = 2
 
-[node name="SimpleHitbox" parent="." instance=ExtResource("5_x0j8e")]
+[node name="SimpleHitbox" parent="." node_paths=PackedStringArray("damageCause") groups=["triggersPogo"] instance=ExtResource("5_x0j8e")]
 collision_layer = 64
 collision_mask = 4
 hitBehavior = 0
+damageCause = NodePath("..")
+
+[node name="OnHitEffects" parent="." node_paths=PackedStringArray("toModulate") instance=ExtResource("7_uym0x")]
+doHitFlash = true
+toModulate = NodePath("..")
+
+[connection signal="death" from="Health" to="." method="_on_death"]
+[connection signal="hurt" from="Health" to="." method="_on_hurt"]
+[connection signal="hurt" from="Health" to="OnHitEffects" method="_on_health_hurt"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://ngm24eylpj7y"]
+[gd_scene load_steps=5 format=4 uid="uid://ngm24eylpj7y"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_0mldc"]
 [ext_resource type="TileSet" uid="uid://drwolgr7keq1k" path="res://WraithTests/testing_tileset.tres" id="2_s7myc"]
-[ext_resource type="PackedScene" uid="uid://c1k2xuslgxrt1" path="res://GameObjects/RunnerCharm.tscn" id="3_3fx3h"]
+[ext_resource type="PackedScene" uid="uid://dq4n2ebk7k6qv" path="res://GameObjects/RunnerCharm.tscn" id="3_3fx3h"]
+[ext_resource type="PackedScene" uid="uid://cmvwpi3rgyr5f" path="res://GameObjects/UfoEnemy.tscn" id="4_3fx3h"]
 
 [node name="WraithRooms-2" type="Node2D"]
 
@@ -16,3 +17,6 @@ tile_set = ExtResource("2_s7myc")
 
 [node name="RunnerCharm" parent="Enemies" instance=ExtResource("3_3fx3h")]
 position = Vector2(1002, 990)
+
+[node name="UfoEnemy" parent="Enemies" instance=ExtResource("4_3fx3h")]
+position = Vector2(1204, 359)

@@ -9,7 +9,7 @@ var hardInvulnerability: bool = false
 
 ### Interface implementation
 func damage(amount: int, cause: Node):
-	if(isInvulnerable() or amount <= 0):
+	if(isInvulnerable() or amount <= 0 or currentHealth == 0):
 		return
 	currentHealth -= amount
 	_clampHealth()

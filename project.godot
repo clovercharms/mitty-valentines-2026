@@ -34,6 +34,10 @@ project/assembly_name="Mitty Valentines 2026"
 
 enabled=PackedStringArray("res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg")
 
+[global_group]
+
+triggersPogo="If the player can pogo off this object when they down attack it."
+
 [input]
 
 ui_accept={

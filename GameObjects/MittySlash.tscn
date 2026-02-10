@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp0vivnky16dc"]
+
+[ext_resource type="Script" uid="uid://bra8m2li2fbba" path="res://GameObjects/simple_hitbox.gd" id="1_xykrb"]
+[ext_resource type="Texture2D" uid="uid://cwply4xsg5tk7" path="res://ArtAssets/sprites/twirl_03.png" id="2_sgsxb"]
+[ext_resource type="PackedScene" uid="uid://m5nvixahxd4o" path="res://GameObjects/RemoveTimer.tscn" id="3_sgsxb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lott8"]
+radius = 60.0
+height = 180.0
+
+[node name="MittySlash" type="Area2D"]
+collision_layer = 32
+collision_mask = 8
+collision_priority = 2.0
+script = ExtResource("1_xykrb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_lott8")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-36, -1.0000005)
+scale = Vector2(0.57910156, 0.26049805)
+texture = ExtResource("2_sgsxb")
+
+[node name="RemoveTimer" parent="." instance=ExtResource("3_sgsxb")]
+wait_time = 0.3
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
