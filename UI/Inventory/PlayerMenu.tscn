@@ -1,0 +1,207 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2xug0oi3ys7f"]
+
+[ext_resource type="Theme" uid="uid://dqyfmukeegnp5" path="res://UI/Inventory/MenuTheme.tres" id="1_iung7"]
+[ext_resource type="Script" uid="uid://c0g2xes4wvkww" path="res://UI/Inventory/player_menu.gd" id="1_uigyn"]
+[ext_resource type="Texture2D" uid="uid://cjepsto2upesc" path="res://icon.svg" id="2_7ah48"]
+[ext_resource type="Texture2D" uid="uid://b02raijewgh27" path="res://ArtAssets/UI/arrowLeftNidus.svg" id="3_6hv7u"]
+[ext_resource type="Texture2D" uid="uid://dh4pxs5ei1lun" path="res://ArtAssets/UI/arrowRightNidus.svg" id="4_fc81y"]
+[ext_resource type="Texture2D" uid="uid://chnf1tounseof" path="res://ArtAssets/TempMenuBG.jpg" id="5_fc81y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j42gd"]
+font_size = 32
+
+[node name="PlayerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_iung7")
+script = ExtResource("1_uigyn")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainLayout" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeaderMargin" type="MarginContainer" parent="Panel/MainLayout"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="Header" type="HBoxContainer" parent="Panel/MainLayout/HeaderMargin"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="NavPrevious" type="HBoxContainer" parent="Panel/MainLayout/HeaderMargin/Header"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MainLayout/HeaderMargin/Header/NavPrevious"]
+layout_mode = 2
+texture = ExtResource("3_6hv7u")
+expand_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MainLayout/HeaderMargin/Header/NavPrevious"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MainLayout/HeaderMargin/Header/NavPrevious/MarginContainer"]
+layout_mode = 2
+text = "LB/Q"
+
+[node name="HeaderLabel" type="Label" parent="Panel/MainLayout/HeaderMargin/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Messages"
+label_settings = SubResource("LabelSettings_j42gd")
+horizontal_alignment = 1
+
+[node name="NavNext" type="HBoxContainer" parent="Panel/MainLayout/HeaderMargin/Header"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MainLayout/HeaderMargin/Header/NavNext"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MainLayout/HeaderMargin/Header/NavNext/MarginContainer"]
+layout_mode = 2
+text = "RB/E"
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MainLayout/HeaderMargin/Header/NavNext"]
+layout_mode = 2
+texture = ExtResource("4_fc81y")
+expand_mode = 3
+
+[node name="ContentSwitcher" type="TabContainer" parent="Panel/MainLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+tabs_visible = false
+
+[node name="ItemMenu" type="HBoxContainer" parent="Panel/MainLayout/ContentSwitcher"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MainLayout/ContentSwitcher/ItemMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.15
+
+[node name="ItemListSection" type="ScrollContainer" parent="Panel/MainLayout/ContentSwitcher/ItemMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+follow_focus = true
+
+[node name="VDayItemContainer" type="VBoxContainer" parent="Panel/MainLayout/ContentSwitcher/ItemMenu/MarginContainer/ItemListSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
+theme_override_constants/separation = 11
+
+[node name="VMessageContainer" type="HBoxContainer" parent="Panel/MainLayout/ContentSwitcher/ItemMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MainLayout/ContentSwitcher/ItemMenu/VMessageContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MainLayout/ContentSwitcher/ItemMenu/VMessageContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MainLayout/ContentSwitcher/ItemMenu/VMessageContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+text = "test text woooooooooooooooooooooooooooooooooooooooooooooooow
+
+"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/MainLayout/ContentSwitcher/ItemMenu/VMessageContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PreviewImage" type="TextureRect" parent="Panel/MainLayout/ContentSwitcher/ItemMenu/VMessageContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_7ah48")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="FullScreenOverlay" type="Control" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Panel/FullScreenOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/FullScreenOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="FullSizeImage" type="TextureRect" parent="Panel/FullScreenOverlay/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("5_fc81y")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Close Hint" type="Label" parent="Panel/FullScreenOverlay"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1920.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 22
+text = "Press Space or <Upper Button Right> button to close"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true

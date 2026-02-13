@@ -57,7 +57,6 @@ var hitBox: Node
 
 # Messages
 @export var holds_message : bool = true
-@export var message_data : MessageData
 @onready var message_star : Sprite2D = $MessageStar
 var message_collected : bool = false
 
@@ -264,6 +263,7 @@ func _on_death(_cause: Node) -> void:
         var message_id = gb.uniqueEnemies[get_path()]
         if not gb.collectedMessages.has(message_id):
             gb.collectedMessages.append(message_id)
+			MessageDatabase.discover_message(message_id)
             print(gb.collectedMessages)
     MittyUtils.hit_stop(0.05)
     mainSprite.stop()
