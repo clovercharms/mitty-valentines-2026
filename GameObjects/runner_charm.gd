@@ -143,6 +143,10 @@ func update_windup():
 		return
 	var target: Vector2 = GameBase.get_singleton().player.position
 	var direction: Vector2 = target - global_position
+	if direction.x > 0:
+		mainSprite.flip_h = false
+	else:
+		mainSprite.flip_h = true
 	if(direction.length() < minPounceDistance):
 		direction.y = 0
 		target = global_position + direction.normalized() * minPounceDistance
