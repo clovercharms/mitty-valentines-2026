@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://c7cydp5mm37oe"]
+[gd_scene load_steps=10 format=4 uid="uid://c7cydp5mm37oe"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_2uhfu"]
 [ext_resource type="TileSet" uid="uid://drwolgr7keq1k" path="res://WraithTests/testing_tileset.tres" id="2_f82uj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://pop8k7sflfmi" path="res://Resources/boss_key.tres" id="4_n7mlg"]
 [ext_resource type="PackedScene" uid="uid://q5vppl4vapmg" path="res://GameObjects/Enemies/GordoCharm.tscn" id="4_uu2ep"]
 [ext_resource type="PackedScene" uid="uid://cj3wggtmybyg2" path="res://GameObjects/Enemies/PremiereTrap.tscn" id="5_eddpl"]
+[ext_resource type="PackedScene" uid="uid://c70t0wy5bxavc" path="res://GameObjects/SavePoint.tscn" id="8_eddpl"]
 
 [node name="WraithRooms-9" type="Node2D"]
 
@@ -79,6 +80,12 @@ position = Vector2(4035, 1636)
 [node name="RunnerCharm18" parent="Enemies" instance=ExtResource("3_85tmd")]
 position = Vector2(2061, 1820)
 
+[node name="RunnerCharm19" parent="Enemies" instance=ExtResource("3_85tmd")]
+position = Vector2(709, 2074)
+
+[node name="RunnerCharm20" parent="Enemies" instance=ExtResource("3_85tmd")]
+position = Vector2(5274, 1155)
+
 [node name="PremiereTrap" parent="Enemies" instance=ExtResource("5_eddpl")]
 position = Vector2(1527, 2081)
 
@@ -127,6 +134,9 @@ scale = Vector2(46.080006, 19)
 [node name="Boss Exit Trigger" parent="Triggers" instance=ExtResource("4_2agl1")]
 position = Vector2(305, 2016)
 scale = Vector2(29.76, 10.11999)
+
+[node name="SavePoint" parent="Triggers" instance=ExtResource("8_eddpl")]
+position = Vector2(4830, 2068)
 
 [connection signal="player_entered" from="Triggers/PR Door Trigger" to="Doors/Platformer Room Door" method="open"]
 [connection signal="player_exited" from="Triggers/PR Door Trigger" to="Doors/Platformer Room Door" method="close"]

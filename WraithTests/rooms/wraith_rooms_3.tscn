@@ -18,7 +18,7 @@ tile_set = ExtResource("2_6v84d")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="UfoEnemy" parent="Enemies" instance=ExtResource("3_pxp5t")]
-position = Vector2(4025, 1521)
+position = Vector2(4673, 1084)
 
 [node name="GordoCharm" parent="Enemies" instance=ExtResource("4_3k60b")]
 position = Vector2(2271, 250)
@@ -31,6 +31,21 @@ position = Vector2(2803, 523)
 
 [node name="RunnerCharm3" parent="Enemies" instance=ExtResource("5_omsr8")]
 position = Vector2(4256, 1689)
+
+[node name="RunnerCharm5" parent="Enemies" instance=ExtResource("5_omsr8")]
+position = Vector2(5616, 709)
+
+[node name="RunnerCharm4" parent="Enemies" instance=ExtResource("5_omsr8")]
+position = Vector2(3322, 2080)
+
+[node name="RunnerCharm6" parent="Enemies" instance=ExtResource("5_omsr8")]
+position = Vector2(923, 983)
+
+[node name="RunnerCharm7" parent="Enemies" instance=ExtResource("5_omsr8")]
+position = Vector2(3425, 516)
+
+[node name="RunnerCharm8" parent="Enemies" instance=ExtResource("5_omsr8")]
+position = Vector2(728, 282)
 
 [node name="PremiereTrap" parent="." instance=ExtResource("6_3k60b")]
 position = Vector2(993, 479)

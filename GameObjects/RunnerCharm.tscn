@@ -112,7 +112,7 @@ message_data = SubResource("Resource_gwu5a")
 position = Vector2(-2, -23)
 scale = Vector2(0.22, 0.22)
 sprite_frames = SubResource("SpriteFrames_baqsf")
-animation = &"faceplant"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_nycgs")

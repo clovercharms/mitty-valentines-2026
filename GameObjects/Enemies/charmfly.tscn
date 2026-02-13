@@ -1,0 +1,137 @@
+[gd_scene load_steps=17 format=3 uid="uid://cakutfyrbepda"]
+
+[ext_resource type="Script" uid="uid://dw80qcnocvy8e" path="res://GameObjects/Enemies/charmfly.gd" id="1_65ed8"]
+[ext_resource type="PackedScene" uid="uid://dca4fwgtuobf2" path="res://GameObjects/SimpleHitbox.tscn" id="1_a5425"]
+[ext_resource type="Texture2D" uid="uid://bexft15fh08aq" path="res://ArtAssets/sprites/charmfly_spritesheet.png" id="1_v45jh"]
+[ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="2_v45jh"]
+[ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="5_dmguu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v45jh"]
+atlas = ExtResource("1_v45jh")
+region = Rect2(2205, 0, 735, 770)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65ed8"]
+atlas = ExtResource("1_v45jh")
+region = Rect2(2205, 770, 735, 770)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7evmx"]
+atlas = ExtResource("1_v45jh")
+region = Rect2(0, 770, 735, 770)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw3cv"]
+atlas = ExtResource("1_v45jh")
+region = Rect2(735, 770, 735, 770)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rmv2"]
+atlas = ExtResource("1_v45jh")
+region = Rect2(1470, 770, 735, 770)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmguu"]
+atlas = ExtResource("1_v45jh")
+region = Rect2(0, 0, 735, 770)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc14c"]
+atlas = ExtResource("1_v45jh")
+region = Rect2(735, 0, 735, 770)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bk4ij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v45jh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65ed8")
+}],
+"loop": true,
+"name": &"bounce",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7evmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw3cv")
+}],
+"loop": true,
+"name": &"charge",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rmv2")
+}],
+"loop": true,
+"name": &"enter",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmguu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jc14c")
+}],
+"loop": true,
+"name": &"hover",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dmguu"]
+radius = 250.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65ed8"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jc14c"]
+radius = 300.0
+
+[node name="Charmfly" type="CharacterBody2D"]
+scale = Vector2(1e-05, 1e-05)
+collision_layer = 8
+collision_mask = 160
+script = ExtResource("1_65ed8")
+
+[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bk4ij")
+animation = &"hover"
+frame_progress = 0.11777251
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-24, 106)
+shape = SubResource("CircleShape2D_dmguu")
+
+[node name="Damage Hitbox" parent="." node_paths=PackedStringArray("damageCause") groups=["triggersPogo"] instance=ExtResource("1_a5425")]
+position = Vector2(-22, 101)
+collision_layer = 64
+collision_mask = 4
+hitBehavior = 0
+damageCause = NodePath("..")
+
+[node name="CollisionShape2D" parent="Damage Hitbox" index="0"]
+shape = SubResource("CircleShape2D_65ed8")
+
+[node name="Receiving Hitbox" parent="." node_paths=PackedStringArray("damageCause") groups=["triggersPogo"] instance=ExtResource("1_a5425")]
+position = Vector2(-22, 101)
+collision_layer = 136
+collision_mask = 0
+damage = 0
+hitBehavior = 1
+damageCause = NodePath("..")
+
+[node name="CollisionShape2D" parent="Receiving Hitbox" index="0"]
+shape = SubResource("CircleShape2D_jc14c")
+
+[node name="Health" parent="." instance=ExtResource("2_v45jh")]
+startingHealth = 12
+
+[node name="OnHitEffects" parent="." node_paths=PackedStringArray("toModulate") instance=ExtResource("5_dmguu")]
+doHitFlash = true
+toModulate = NodePath("..")
+
+[connection signal="death" from="Health" to="." method="_on_death"]
+[connection signal="hurt" from="Health" to="OnHitEffects" method="_on_health_hurt"]
+
+[editable path="Damage Hitbox"]
+[editable path="Receiving Hitbox"]

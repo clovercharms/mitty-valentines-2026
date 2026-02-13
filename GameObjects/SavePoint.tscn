@@ -7,5 +7,6 @@
 
 [node name="EditorOnlySprite" parent="." instance=ExtResource("1_dn0lj")]
 texture_filter = 1
+position = Vector2(1, 0)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vt60m")

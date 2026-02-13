@@ -42,7 +42,6 @@ class_name RunnerCharm extends CharacterBody2D
 @export var deathEffect: PackedScene
 
 @onready var mainSprite: AnimatedSprite2D = $MainSprite
-@onready var messageStar: Sprite2D = $MessageStar
 
 const RUNNER_DEBUG: bool = false
 
