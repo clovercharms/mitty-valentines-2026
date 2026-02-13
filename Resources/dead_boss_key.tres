@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DoorKey" load_steps=2 format=3 uid="uid://b5h42xk8ow1jf"]
+
+[ext_resource type="Script" uid="uid://3jmna13rs57f" path="res://key.gd" id="1_c3jpd"]
+
+[resource]
+script = ExtResource("1_c3jpd")
+key_id = 1
+key_name = "boss_defeated"
+metadata/_custom_type_script = "uid://3jmna13rs57f"

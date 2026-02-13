@@ -1,6 +1,7 @@
 class_name PlayerTrigger extends Area2D
 
 signal player_entered
+signal player_exited
 
 @export var one_shot : bool
 
@@ -17,3 +18,10 @@ func _on_area_entered(area: Area2D) -> void:
     elif not one_shot:
         player_entered.emit()
         
+
+
+func _on_area_exited(area: Area2D) -> void:
+    if area.get_parent() is not MittyPlayer:
+        return
+    print("player exited trigger area: ", self.name)
+    player_exited.emit()

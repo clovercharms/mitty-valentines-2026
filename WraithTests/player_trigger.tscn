@@ -14,3 +14,4 @@ shape = SubResource("RectangleShape2D_rjaus")
 debug_color = Color(0.46278954, 0.5929548, 0, 0.41960785)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
