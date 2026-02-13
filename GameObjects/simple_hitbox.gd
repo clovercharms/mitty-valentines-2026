@@ -22,9 +22,10 @@ func applyDamage(body: Node2D):
 
 func _on_body_entered(body: Node2D) -> void:
 	if(hitBehavior == hitType.OVER_TIME):
-		print("added ", body.name, " to DOT list")
+		#print("added ", body.name, " to DOT list")
 		dotList[body] = damageOverTimeInterval
 		if not isEnabled:
+			# prepare to deal damage as soon as the hitbox is enabled
 			dotList[body] = 0
 	
 	if(not canHit or not isEnabled):
@@ -57,6 +58,6 @@ func _process(delta: float) -> void:
 	for i in dotList:
 		dotList[i] -= delta
 		if dotList[i] <= 0:
-			print("applying DOT to ", i.name)
+			#print("applying DOT to ", i.name)
 			applyDamage(i)
 			dotList[i] = damageOverTimeInterval

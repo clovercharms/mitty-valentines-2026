@@ -1,12 +1,95 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq4n2ebk7k6qv"]
+[gd_scene load_steps=17 format=3 uid="uid://dq4n2ebk7k6qv"]
 
 [ext_resource type="Script" uid="uid://dwfnlfj20iapp" path="res://GameObjects/runner_charm.gd" id="1_dn8sm"]
 [ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_6q6k2"]
-[ext_resource type="Texture2D" uid="uid://cayua8e1561bj" path="res://ArtAssets/sprites/runner_placeholder.png" id="2_eruyj"]
-[ext_resource type="Script" uid="uid://bhuxyxd0hwah6" path="res://Scripts/sprite_flipper.gd" id="3_eruyj"]
+[ext_resource type="Texture2D" uid="uid://cm1kr05e80ks5" path="res://ArtAssets/sprites/runner_spritesheet.png" id="3_6q6k2"]
 [ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="4_nycgs"]
 [ext_resource type="PackedScene" uid="uid://dca4fwgtuobf2" path="res://GameObjects/SimpleHitbox.tscn" id="5_x0j8e"]
 [ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="7_uym0x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uym0x"]
+atlas = ExtResource("3_6q6k2")
+region = Rect2(0, 1070, 597, 535)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77d4d"]
+atlas = ExtResource("3_6q6k2")
+region = Rect2(0, 0, 597, 553)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwu5a"]
+atlas = ExtResource("3_6q6k2")
+region = Rect2(1194, 553, 597, 553)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spywf"]
+atlas = ExtResource("3_6q6k2")
+region = Rect2(0, 0, 597, 553)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u64ek"]
+atlas = ExtResource("3_6q6k2")
+region = Rect2(597, 0, 597, 553)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy3vk"]
+atlas = ExtResource("3_6q6k2")
+region = Rect2(1194, 0, 597, 553)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ipju"]
+atlas = ExtResource("3_6q6k2")
+region = Rect2(0, 544, 597, 544)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4t1n"]
+atlas = ExtResource("3_6q6k2")
+region = Rect2(597, 544, 597, 544)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_baqsf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uym0x")
+}],
+"loop": false,
+"name": &"faceplant",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77d4d")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwu5a")
+}],
+"loop": false,
+"name": &"in_air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spywf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u64ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy3vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ipju")
+}],
+"loop": true,
+"name": &"move",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4t1n")
+}],
+"loop": false,
+"name": &"windup",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nycgs"]
 radius = 20.0
@@ -18,12 +101,11 @@ collision_mask = 163
 script = ExtResource("1_dn8sm")
 deathEffect = ExtResource("2_6q6k2")
 
-[node name="MainSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("velocityReference")]
-position = Vector2(-1, -11.999999)
-scale = Vector2(0.58, 0.58)
-texture = ExtResource("2_eruyj")
-script = ExtResource("3_eruyj")
-velocityReference = NodePath("..")
+[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -23)
+scale = Vector2(0.22, 0.22)
+sprite_frames = SubResource("SpriteFrames_baqsf")
+animation = &"faceplant"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_nycgs")
@@ -32,6 +114,7 @@ shape = SubResource("CapsuleShape2D_nycgs")
 startingHealth = 2
 
 [node name="SimpleHitbox" parent="." node_paths=PackedStringArray("damageCause") groups=["triggersPogo"] instance=ExtResource("5_x0j8e")]
+visible = false
 collision_layer = 64
 collision_mask = 4
 hitBehavior = 0

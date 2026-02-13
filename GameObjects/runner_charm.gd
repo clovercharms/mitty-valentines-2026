@@ -41,7 +41,7 @@ class_name RunnerCharm extends EnemyBase
 
 @export var deathEffect: PackedScene
 
-@onready var mainSprite: Sprite2D = $MainSprite
+@onready var mainSprite: AnimatedSprite2D = $MainSprite
 
 const RUNNER_DEBUG: bool = false
 
@@ -90,6 +90,7 @@ func enter_idle():
 	if RUNNER_DEBUG: print("runner enter idle")
 	currentState = states.IDLE
 	hitBox.setEnabled(true)
+	setAnimationNoRepeats("idle")
 	stateTimer = get_tree().create_timer(randf_range(minSensingUpdateTime, maxSensingUpdateTime))
 
 func update_idle(delta: float):
@@ -107,6 +108,7 @@ func enter_chase():
 	if RUNNER_DEBUG: print("runner enter chase")
 	currentState = states.CHASE
 	hitBox.setEnabled(true)
+	setAnimationNoRepeats("move")
 	currentPounceAttempt = randf_range(minPounceAttempt, maxPounceAttempt)
 	decide_direction()
 	stateTimer = get_tree().create_timer(randf_range(minSensingUpdateTime, maxSensingUpdateTime))
@@ -131,6 +133,7 @@ func enter_windup():
 	if RUNNER_DEBUG: print("runner enter windup")
 	currentState = states.WINDUP
 	hitBox.setEnabled(false)
+	setAnimationNoRepeats("windup")
 	velocity.x = 0
 	stateTimer = get_tree().create_timer(randf_range(minWindupTime, maxWindupTime))
 	pounceCooldownTimer = get_tree().create_timer(randf_range(minPounceCooldown, maxPounceCooldown))
@@ -161,6 +164,7 @@ func enter_in_air():
 	if RUNNER_DEBUG: print("runner enter in air")
 	currentState = states.IN_AIR
 	hitBox.setEnabled(true)
+	setAnimationNoRepeats("in_air")
 
 func update_in_air():
 	if(abs(velocity.y) > speedToFaceplant):
@@ -175,6 +179,7 @@ func enter_faceplant():
 	if RUNNER_DEBUG: print("runner enter faceplant")
 	currentState = states.FACEPLANT
 	hitBox.setEnabled(false)
+	setAnimationNoRepeats("faceplant")
 	forceFaceplant = false
 	stateTimer = get_tree().create_timer(randf_range(minFaceplantTime, maxFaceplantTime))
 	velocity = Vector2.ZERO
@@ -188,6 +193,7 @@ func update_faceplant():
 func enter_flinch(hurtLocation: Vector2):
 	currentState = states.FLINCH
 	hitBox.setEnabled(false)
+	setAnimationNoRepeats("idle")
 	stateTimer = get_tree().create_timer(flinchTime)
 	
 	if not hurtLocation:
@@ -211,9 +217,15 @@ func decide_direction():
 	var toTarget: Vector2 = target - global_position
 	if(toTarget.x > 0):
 		currentDirection = Vector2(1, 0)
+		mainSprite.flip_h = false
 	else:
 		currentDirection = Vector2(-1, 0)
+		mainSprite.flip_h = true
 	turnaroundTimer = get_tree().create_timer(randf_range(minTurnaroundTime, maxTurnaroundTime))
+
+func setAnimationNoRepeats(animation: String):
+	if mainSprite and mainSprite.animation != animation:
+		mainSprite.play(animation)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is not MittyPlayer):
@@ -228,6 +240,7 @@ func _on_hurt(_amount: int, cause: Node) -> void:
 
 func _on_death(_cause: Node) -> void:
 	MittyUtils.hit_stop(0.05)
+	mainSprite.stop()
 	var deathEffectInstance = MittyUtils.spawn_at_location(deathEffect, global_position)
 	deathEffectInstance.takeGraphicalNode(mainSprite)
 	queue_free()
