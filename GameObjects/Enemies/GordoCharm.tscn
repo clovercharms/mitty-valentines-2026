@@ -1,0 +1,170 @@
+[gd_scene load_steps=23 format=3 uid="uid://q5vppl4vapmg"]
+
+[ext_resource type="Texture2D" uid="uid://b84qil2oadx6g" path="res://ArtAssets/sprites/gordo_spritesheet.png" id="1_31g37"]
+[ext_resource type="Script" uid="uid://cnpi4tdwighq" path="res://GameObjects/Enemies/gordo_charm.gd" id="1_snpie"]
+[ext_resource type="Script" uid="uid://bra8m2li2fbba" path="res://GameObjects/simple_hitbox.gd" id="2_3gbo7"]
+[ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_xd1mq"]
+[ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="4_xd1mq"]
+[ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="5_qsm8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vjxq"]
+atlas = ExtResource("1_31g37")
+region = Rect2(0, 0, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snpie"]
+atlas = ExtResource("1_31g37")
+region = Rect2(1091, 0, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xd1mq"]
+atlas = ExtResource("1_31g37")
+region = Rect2(0, 705, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsm8o"]
+atlas = ExtResource("1_31g37")
+region = Rect2(1091, 705, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ippsh"]
+atlas = ExtResource("1_31g37")
+region = Rect2(0, 1410, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rlx3"]
+atlas = ExtResource("1_31g37")
+region = Rect2(0, 0, 1089, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asm4n"]
+atlas = ExtResource("1_31g37")
+region = Rect2(1089, 0, 1089, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3uik"]
+atlas = ExtResource("1_31g37")
+region = Rect2(0, 0, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f1qc"]
+atlas = ExtResource("1_31g37")
+region = Rect2(1091, 0, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpd3l"]
+atlas = ExtResource("1_31g37")
+region = Rect2(0, 705, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncj6f"]
+atlas = ExtResource("1_31g37")
+region = Rect2(1091, 705, 1086, 705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhtl0"]
+atlas = ExtResource("1_31g37")
+region = Rect2(0, 1410, 1086, 705)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f1plv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vjxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snpie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xd1mq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsm8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ippsh")
+}],
+"loop": true,
+"name": &"charge",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rlx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asm4n")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3uik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f1qc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpd3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncj6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhtl0")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5v0xn"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ttxq"]
+radius = 60.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xd1mq"]
+size = Vector2(70, 100)
+
+[node name="GordoCharm" type="CharacterBody2D" groups=["triggersPogo"]]
+collision_layer = 8
+collision_mask = 39
+script = ExtResource("1_snpie")
+stunWallCheckMask = 3
+deathEffect = ExtResource("2_xd1mq")
+
+[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_f1plv")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.038805872
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_5v0xn")
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("damageCause")]
+visible = false
+collision_layer = 64
+collision_mask = 4
+script = ExtResource("2_3gbo7")
+hitBehavior = 0
+damageCause = NodePath("..")
+
+[node name="HitCollider" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_1ttxq")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="Health" parent="." instance=ExtResource("4_xd1mq")]
+startingHealth = 5
+
+[node name="OnHitEffects" parent="." node_paths=PackedStringArray("toModulate") instance=ExtResource("5_qsm8o")]
+doHitFlash = true
+toModulate = NodePath("..")
+flashDuration = 0.3
+
+[node name="CrushShapecast" type="ShapeCast2D" parent="."]
+visible = false
+position = Vector2(85, 0)
+shape = SubResource("RectangleShape2D_xd1mq")
+target_position = Vector2(0, 0)
+max_results = 4
+collision_mask = 3
+
+[connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_body_entered"]
+[connection signal="death" from="Health" to="." method="_on_death"]
+[connection signal="hurt" from="Health" to="OnHitEffects" method="_on_health_hurt"]
