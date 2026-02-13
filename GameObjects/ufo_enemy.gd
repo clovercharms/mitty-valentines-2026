@@ -11,8 +11,6 @@ extends CharacterBody2D
 @export var flinchDrag: float = 10000
 @export var deathEffect: PackedScene
 
-@export var debugObject: PackedScene
-
 @onready var mainSprite: AnimatedSprite2D = $MainSprite
 @onready var hitbox = $Hitbox
 

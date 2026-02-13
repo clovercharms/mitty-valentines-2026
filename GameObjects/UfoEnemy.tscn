@@ -56,7 +56,6 @@ collision_layer = 8
 collision_mask = 32
 script = ExtResource("1_xugej")
 deathEffect = ExtResource("2_sfxu5")
-debugObject = ExtResource("3_4pt6f")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
 rotation = 1.3526301

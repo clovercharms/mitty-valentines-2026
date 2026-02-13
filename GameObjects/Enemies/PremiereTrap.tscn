@@ -1,0 +1,219 @@
+[gd_scene load_steps=28 format=3 uid="uid://cj3wggtmybyg2"]
+
+[ext_resource type="Script" uid="uid://irdi5la3v3db" path="res://GameObjects/Enemies/premiere_trap.gd" id="1_liw3a"]
+[ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_bcev4"]
+[ext_resource type="Texture2D" uid="uid://ci3h33pod1mtw" path="res://ArtAssets/sprites/trapv2_spritesheet.png" id="2_w2elh"]
+[ext_resource type="Script" uid="uid://bra8m2li2fbba" path="res://GameObjects/simple_hitbox.gd" id="3_wsjm4"]
+[ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="5_7xpqv"]
+[ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="6_glpd0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcev4"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(1080, 1080, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xpqv"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(2160, 1080, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glpd0"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(3240, 1080, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjjlw"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(4320, 1080, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymofk"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(0, 2160, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vcu3"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(1080, 2160, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtr7u"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(2160, 2160, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn2du"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(1080, 0, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2lrn"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(3240, 2160, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4ti7"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(4320, 2160, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2g5x"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(1080, 0, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wjyh"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(2160, 0, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmsof"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(3240, 0, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2oq8"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(4320, 0, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s65d"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(0, 1080, 1075, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf4rq"]
+atlas = ExtResource("2_w2elh")
+region = Rect2(0, 0, 1075, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1vcu3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcev4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xpqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glpd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjjlw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymofk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vcu3")
+}],
+"loop": true,
+"name": &"active",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtr7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cn2du")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2lrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4ti7")
+}],
+"loop": false,
+"name": &"close",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2g5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wjyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmsof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2oq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s65d")
+}],
+"loop": false,
+"name": &"open",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf4rq")
+}],
+"loop": true,
+"name": &"wait",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_py0h6"]
+size = Vector2(68, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqxn1"]
+size = Vector2(250, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elc2e"]
+size = Vector2(115, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcev4"]
+size = Vector2(700, 500)
+
+[node name="PremiereTrap" type="StaticBody2D" groups=["triggersPogo"]]
+collision_layer = 8
+collision_mask = 174
+script = ExtResource("1_liw3a")
+deathScene = ExtResource("2_bcev4")
+
+[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_1vcu3")
+animation = &"active"
+autoplay = "wait"
+frame_progress = 0.16154374
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_py0h6")
+
+[node name="ActivateTrigger" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -105)
+collision_layer = 16
+collision_mask = 4
+
+[node name="TriggerCollider" type="CollisionShape2D" parent="ActivateTrigger"]
+shape = SubResource("RectangleShape2D_yqxn1")
+debug_color = Color(0.6277296, 0.53124166, 0, 0.41960785)
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("damageCause")]
+visible = false
+position = Vector2(0, -30)
+collision_layer = 64
+collision_mask = 4
+script = ExtResource("3_wsjm4")
+hitBehavior = 3
+damageCause = NodePath("..")
+
+[node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_elc2e")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="Health" parent="." instance=ExtResource("5_7xpqv")]
+startingHealth = 5
+
+[node name="OnHitEffects" parent="." node_paths=PackedStringArray("toModulate") instance=ExtResource("6_glpd0")]
+doHitFlash = true
+toModulate = NodePath("..")
+
+[node name="DeactivateTrigger" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -83)
+collision_layer = 16
+collision_mask = 4
+
+[node name="TriggerCollider" type="CollisionShape2D" parent="DeactivateTrigger"]
+shape = SubResource("RectangleShape2D_bcev4")
+debug_color = Color(0.627451, 0.5294118, 0, 0.41960785)
+
+[connection signal="body_entered" from="ActivateTrigger" to="." method="_on_activate_trigger_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="Hitbox" method="_on_body_exited"]
+[connection signal="death" from="Health" to="." method="_on_health_death"]
+[connection signal="hurt" from="Health" to="OnHitEffects" method="_on_health_hurt"]
+[connection signal="body_exited" from="DeactivateTrigger" to="." method="_on_deactivate_trigger_body_exited"]
