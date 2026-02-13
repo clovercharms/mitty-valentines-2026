@@ -8,4 +8,4 @@ var has_drawing: bool
 var avatar_texture: Texture2D
 var drawing_texture: Texture2D
 var discovered: bool
-var seen: bool
+var new: bool

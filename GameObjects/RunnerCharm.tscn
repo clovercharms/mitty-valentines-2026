@@ -1,17 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://dq4n2ebk7k6qv"]
+[gd_scene load_steps=19 format=3 uid="uid://dq4n2ebk7k6qv"]
 
 [ext_resource type="Script" uid="uid://dwfnlfj20iapp" path="res://GameObjects/runner_charm.gd" id="1_dn8sm"]
 [ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_6q6k2"]
 [ext_resource type="Texture2D" uid="uid://cm1kr05e80ks5" path="res://ArtAssets/sprites/runner_spritesheet.png" id="3_6q6k2"]
-[ext_resource type="Script" uid="uid://dd3vxnh5nlc6q" path="res://message_data.gd" id="3_77d4d"]
 [ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="4_nycgs"]
 [ext_resource type="PackedScene" uid="uid://dca4fwgtuobf2" path="res://GameObjects/SimpleHitbox.tscn" id="5_x0j8e"]
 [ext_resource type="Texture2D" uid="uid://e0378qdt7cvu" path="res://WraithTests/space/textures/star.png" id="7_77d4d"]
 [ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="7_uym0x"]
 
-[sub_resource type="Resource" id="Resource_gwu5a"]
-script = ExtResource("3_77d4d")
-metadata/_custom_type_script = "uid://dd3vxnh5nlc6q"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uym0x"]
 atlas = ExtResource("3_6q6k2")
@@ -106,7 +102,6 @@ collision_layer = 8
 collision_mask = 163
 script = ExtResource("1_dn8sm")
 deathEffect = ExtResource("2_6q6k2")
-message_data = SubResource("Resource_gwu5a")
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -23)

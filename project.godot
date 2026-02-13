@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 MittyUtils="*res://Scripts/MittyUtils.gd"
+MessageDatabase="*res://UI/Inventory/vmessages/MessageDatabase.gd"
 
 [display]
 

@@ -10,43 +10,59 @@ extends Control
 
 @onready var fullsize_overlay = $Panel/FullScreenOverlay
 @onready var fullsize_image = $Panel/FullScreenOverlay/MarginContainer/FullSizeImage
-@onready var db_node = $ItemDatabase
+@onready var hud = get_parent().get_node("HUD")
 
 var current_focused_item_data = null
+var dirty: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	db_node.discover(1) # TODO: probably smarter to make this a signal
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	MessageDatabase.note_found.connect(_on_note_found)
 	reload_messages()
 
 func _physics_process(_delta):
 	handle_menu_switching_input()
 	handle_fullscreen_input()
 	
-# TODO: call this method when data updates (discovers messages, sits on bench, etc)
 func reload_messages():
-	
 	for child in vday_item_list.get_children():
 		child.queue_free()
 		
 	# Loop through all loaded item objects
-	for item in db_node.vmessage_database.values():
+	for item: MessageData in MessageDatabase.vmessage_database.values():
 		var btn = preload("res://UI/Inventory/ValentinesItem.tscn").instantiate()
 		vday_item_list.add_child(btn)
 		
 		# Setup the button
 		btn.setup(item)
 		btn.item_focused.connect(_update_details_panel)
-	_update_details_panel(db_node.vmessage_database[0])
-		
+	
 
 func handle_menu_switching_input():
-	if Input.is_action_just_pressed("UI_Left"): # L1 or Q
+	if Input.is_action_just_pressed("UI_Left") and visible == true: # L1 or Q
 		# Logic to cycle tabs backwards
 		content_switcher.current_tab -= 1
-	elif Input.is_action_just_pressed("UI_Right"): # R1 or E
+	elif Input.is_action_just_pressed("UI_Right") and visible == true: # R1 or E
 		# Logic to cycle tabs forward
 		content_switcher.current_tab += 1
+	elif Input.is_action_just_pressed("Toggle_Menu"): # R1 or E
+		#if dirty and !visible:
+			#reload_messages()
+			#dirty = false;
+		# Logic to cycle tabs forward
+		if visible:
+			fullsize_overlay.visible = false
+		visible = !visible
+		get_tree().paused = visible
+		hud.visible = !visible
+		# focus last item
+		if visible:
+			if current_focused_item_data != null && vday_item_list.get_child_count() > current_focused_item_data.id:
+				vday_item_list.get_child(current_focused_item_data.id).grab_focus()
+			else:
+				vday_item_list.get_child(0).grab_focus()
+
 
 func _update_details_panel(data: MessageData):
 	current_focused_item_data = data
@@ -58,10 +74,10 @@ func _update_details_panel(data: MessageData):
 		# reads: gofinditbrat
 		vday_active_text.text = "█▀█▀░ █▀█▀█ ░▀░▀█▀░ ░▀░ █▀░ █▀░▀░ ░▀░ █ █▀░▀░▀░ ░▀█▀░ ░▀█ █"
 		vday_active_image_preview.texture = null
-
+		
 func handle_fullscreen_input():
 	# Toggle Full Screen
-	if Input.is_action_just_pressed("UI_Details"):
+	if Input.is_action_just_pressed("UI_Details") and visible == true:
 		if fullsize_overlay.visible:
 			close_fullscreen()
 		else:
@@ -80,3 +96,7 @@ func close_fullscreen():
 	vday_item_list.process_mode = Node.PROCESS_MODE_INHERIT
 	# Important: Return focus to the list so controller doesn't get lost
 	get_viewport().gui_get_focus_owner().grab_focus()
+
+
+func _on_note_found() -> void:
+	reload_messages()

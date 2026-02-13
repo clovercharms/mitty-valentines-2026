@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://byv54hvf125b5"]
 
-[ext_resource type="Texture2D" uid="uid://b46mnp606ae6h" path="res://UI/Inventory/vmessages/avatars/01.png" id="1_ik2vj"]
+[ext_resource type="Texture2D" uid="uid://hd68et1j5n41" path="res://UI/Inventory/vmessages/avatars/01.png" id="1_ik2vj"]
 [ext_resource type="Script" uid="uid://dx4kkq30xop5i" path="res://UI/Inventory/valentines_item.gd" id="2_ik2vj"]
 
 [node name="Button" type="Button"]
@@ -11,3 +11,15 @@ text = " name here"
 icon = ExtResource("1_ik2vj")
 alignment = 0
 script = ExtResource("2_ik2vj")
+
+[node name="NewIndicator" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "NEW! "

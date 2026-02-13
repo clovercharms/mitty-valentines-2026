@@ -1,5 +1,7 @@
 extends Node
 
+signal note_found()
+
 # Dictionary is better here: we can look up items by ID easily
 # Format: { 0: ItemData, 1: ItemData, ... }
 var vmessage_database: Dictionary = {}
@@ -35,22 +37,28 @@ func load_items_from_csv(file_path: String):
 		new_item.has_avatar = line[3].to_lower() == "true"
 		new_item.has_drawing = line[4].to_lower() == "true"
 		new_item.discovered = false
-		new_item.seen = false
+		new_item.new = false
 		
 		# zero pad ids to length 2
 		var filename_string = "%02d" % id_val
 		
 		var icon_path = "res://UI/Inventory/vmessages/avatars/%s.png" % filename_string
-		var image_path = "res://UI/Inventory/vmessages/drawings/%s.png" % filename_string
-		
+		var image_path_png = "res://UI/Inventory/vmessages/drawings/%s.png" % filename_string
+		var image_path_jpg = "res://UI/Inventory/vmessages/drawings/%s.jpg" % filename_string
+		var image_path_jpeg = "res://UI/Inventory/vmessages/drawings/%s.jpeg" % filename_string
+
 		# Load textures if they exist
 		if ResourceLoader.exists(icon_path):
 			new_item.avatar_texture = load(icon_path)
 		elif new_item.has_avatar:
-			printerr("ID " + str(new_item.id) + ": "+ new_item.name + " SHOULD HAVE AN AVATAR!!!")
+			printerr("ID " + str(new_item.id) + ": "+ new_item.name + " SHOULD HAVE A N AVATAR!!!")
 		
-		if ResourceLoader.exists(image_path):
-			new_item.drawing_texture = load(image_path)
+		if ResourceLoader.exists(image_path_png):
+			new_item.drawing_texture = load(image_path_png)
+		elif ResourceLoader.exists(image_path_jpg):
+			new_item.drawing_texture = load(image_path_jpg)
+		elif ResourceLoader.exists(image_path_jpeg):
+			new_item.drawing_texture = load(image_path_jpeg)
 		elif new_item.has_drawing:
 			printerr("ID " + str(new_item.id) + ": "+ new_item.name + " SHOULD HAVE A DRAWING!!!")
 		
@@ -62,5 +70,13 @@ func load_items_from_csv(file_path: String):
 func get_vmessage(id: int) -> MessageData:
 	return vmessage_database.get(id)
 	
-func discover(id: int):
+func discover_message(id: int):
+	if !vmessage_database[id].discovered:
+		vmessage_database[id].new = true
 	vmessage_database[id].discovered = true
+	note_found.emit()
+	
+func message_seen(id: int):
+	vmessage_database[id].new = false
+	# just sets UI state to dirty so it can be refreshed on next lookup
+	note_found.emit()

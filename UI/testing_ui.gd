@@ -1,4 +1,4 @@
-class_name TestingUI extends Control
+class_name HUD extends Control
 
 @onready var heart_container = $HeartContainer
 var testing_heart : PackedScene = preload("res://WraithTests/testing_heart_circle.tscn")
