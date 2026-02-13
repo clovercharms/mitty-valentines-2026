@@ -10,7 +10,7 @@ var movement_tween : Tween
 var is_open : bool = false
 
 func _ready() -> void:
-    if not check_key():
+    if not check_key() or trigger_area == null:
         return
     door.global_position = move_to.global_position
     is_open = true

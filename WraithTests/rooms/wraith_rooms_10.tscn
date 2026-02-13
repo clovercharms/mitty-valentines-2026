@@ -32,7 +32,6 @@ position = Vector2(1571, 1048)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
-enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 1"]
 position = Vector2(-4, -1)
@@ -45,7 +44,6 @@ scale = Vector2(1.24, 1)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
-enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 2"]
 position = Vector2(-4, -1)
@@ -58,7 +56,6 @@ scale = Vector2(0.4920186, 0.3679378)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
-enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 3"]
 position = Vector2(-4, -1)
@@ -71,7 +68,6 @@ scale = Vector2(0.036862556, -17.813026)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
-enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 4"]
 position = Vector2(-4, -1)
@@ -84,7 +80,6 @@ scale = Vector2(4.2120185, 0.3679378)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
-enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 5"]
 position = Vector2(-4, -1)

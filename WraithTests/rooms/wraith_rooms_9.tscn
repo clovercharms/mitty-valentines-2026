@@ -136,7 +136,7 @@ position = Vector2(305, 2016)
 scale = Vector2(29.76, 10.11999)
 
 [node name="SavePoint" parent="Triggers" instance=ExtResource("8_eddpl")]
-position = Vector2(4830, 2068)
+position = Vector2(4899, 2022)
 
 [connection signal="player_entered" from="Triggers/PR Door Trigger" to="Doors/Platformer Room Door" method="open"]
 [connection signal="player_exited" from="Triggers/PR Door Trigger" to="Doors/Platformer Room Door" method="close"]

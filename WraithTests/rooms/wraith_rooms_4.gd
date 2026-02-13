@@ -27,3 +27,12 @@ func spawner_4_triggered() -> void:
 
 func drop_trap_triggered() -> void:
     terrain.erase_cell(Vector2i(1,9))
+
+func _on_mini_boss_death(cause: Node) -> void:
+    $"Objects/Triggered Door".open()
+
+func _on_key_picked_up() -> void:
+    var popup : PopupMessage = preload("res://GameObjects/popup_message.tscn").instantiate()
+    popup.message = "You got the boss key!"
+    add_child(popup)
+    popup.popup()

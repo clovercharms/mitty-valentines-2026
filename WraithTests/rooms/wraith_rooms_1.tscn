@@ -17,4 +17,4 @@ tile_set = ExtResource("2_3lh1q")
 [node name="Triggers" type="Node" parent="."]
 
 [node name="SavePoint" parent="Triggers" instance=ExtResource("3_nsyfx")]
-position = Vector2(1346, 797)
+position = Vector2(1367, 739)

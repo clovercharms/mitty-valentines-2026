@@ -263,7 +263,7 @@ func _on_death(_cause: Node) -> void:
         var message_id = gb.uniqueEnemies[get_path()]
         if not gb.collectedMessages.has(message_id):
             gb.collectedMessages.append(message_id)
-			MessageDatabase.discover_message(message_id)
+            MessageDatabase.discover_message(message_id)
             print(gb.collectedMessages)
     MittyUtils.hit_stop(0.05)
     mainSprite.stop()

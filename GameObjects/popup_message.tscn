@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmkxagxq1uwi"]
+
+[ext_resource type="Script" uid="uid://co5w8gshek1fs" path="res://GameObjects/popup_message.gd" id="1_at1hm"]
+
+[node name="Popup Message" type="PopupPanel"]
+transparent_bg = false
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(500, 300)
+visible = true
+transparent = false
+script = ExtResource("1_at1hm")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 496.0
+offset_bottom = 296.0
+text = "[TEXT]"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="about_to_popup" from="." to="." method="kill_popup"]

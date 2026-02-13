@@ -29,6 +29,8 @@ var keysCollected: Array[Resource] = [preload("res://Resources/boss_key.tres")]
 var uniqueEnemies: Dictionary
 var currentMessageID : int
 
+var pickups : Array[String]
+
 func _ready() -> void:
     # A trick for static object reference
     get_script().set_meta(&"singleton", self)

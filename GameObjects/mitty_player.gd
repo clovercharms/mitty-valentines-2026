@@ -55,6 +55,7 @@ var currentAttackIsUp: bool = false
 # double jump
 @onready var can_double_jump = true
 var has_double_jumped = false
+var has_jumped = false
 
 var has_control : bool = true
 
@@ -114,6 +115,9 @@ func update_move(delta: float):
     var jumpedThisFrame = false
     if Input.is_action_just_pressed("Jump") and canJump() and has_control:
         jumpedThisFrame = true
+        if !is_on_floor() or coyote_timer.is_stopped() and has_jumped:
+            has_double_jumped = true
+        has_jumped = true
         setAnimationNoRepeats("ascend")
         velocity.y = jumpSpeed
     # enable short jumps by releasing jump early
@@ -142,6 +146,8 @@ func update_move(delta: float):
         velocity.x = move_toward(velocity.x, 0, currentAcceleration * delta)
     
     if is_on_floor() and not jumpedThisFrame:
+        has_double_jumped = false
+        has_jumped = false
         if direction:
             setAnimationNoRepeats("run")
         if abs(velocity.x) < 1:
@@ -244,7 +250,13 @@ func update_gravity(delta: float):
             setAnimationNoRepeats("descend")
 
 func canJump() -> bool:
-    return is_on_floor() or !coyote_timer.is_stopped()
+    if is_on_floor():
+        return true
+    if !coyote_timer.is_stopped():
+        return true
+    if can_double_jump and not has_double_jumped:
+        return true
+    return false
 
 func setAnimationNoRepeats(animation: String):
     if main_sprite.animation != animation:

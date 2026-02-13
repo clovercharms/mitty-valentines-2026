@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c1fi0rwyjbnp4" path="res://Scripts/GameBase.gd" id="1_5ajq4"]
 [ext_resource type="PackedScene" uid="uid://42qbdu4ea80j" path="res://GameObjects/MittyPlayer.tscn" id="2_3re7u"]
-[ext_resource type="PackedScene" uid="uid://ru7hqfjd2jyp" path="res://UI/HUD.tscn" id="3_3re7u"]
+[ext_resource type="PackedScene" path="res://UI/HUD.tscn" id="3_3re7u"]
 [ext_resource type="PackedScene" uid="uid://c7vweyfl2bkm2" path="res://WraithTests/space/space.tscn" id="4_8ou7b"]
 [ext_resource type="PackedScene" uid="uid://b2xug0oi3ys7f" path="res://UI/Inventory/PlayerMenu.tscn" id="5_du5sl"]
 
 [node name="GameBase" type="Node"]
 script = ExtResource("1_5ajq4")
-startingMap = "res://WraithTests/rooms/wraith_rooms_9.tscn"
+startingMap = "res://WraithTests/rooms/wraith_rooms_1.tscn"
 playerScene = ExtResource("2_3re7u")
 
 [node name="SpaceParallax" type="Parallax2D" parent="."]
