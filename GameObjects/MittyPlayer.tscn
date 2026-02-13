@@ -305,6 +305,13 @@ sideAttackScene = ExtResource("2_8edrj")
 verticalAttackScene = ExtResource("3_84tvs")
 ghostScene = ExtResource("4_84tvs")
 
+[node name="Trigger Area" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger Area"]
+shape = SubResource("CapsuleShape2D_i3sii")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_i3sii")
 
@@ -327,8 +334,10 @@ one_shot = true
 position = Vector2(0, -13.000001)
 scale = Vector2(0.775, 0.775)
 sprite_frames = SubResource("SpriteFrames_qe0th")
-animation = &"dead"
+animation = &"attack_down"
 autoplay = "idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="Health" parent="." instance=ExtResource("4_ubvsx")]
 baseHealth = 10
