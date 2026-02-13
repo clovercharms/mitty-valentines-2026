@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://be6buohorxuky"]
+[gd_scene load_steps=7 format=4 uid="uid://be6buohorxuky"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_fc6ro"]
 [ext_resource type="TileSet" uid="uid://drwolgr7keq1k" path="res://WraithTests/testing_tileset.tres" id="2_78hku"]
 [ext_resource type="PackedScene" uid="uid://hu13ma5o7iro" path="res://WraithTests/reset_area.tscn" id="3_paxs3"]
 [ext_resource type="Script" uid="uid://cg0yorqvql7hd" path="res://WraithTests/rooms/reset_zone.gd" id="4_kc30n"]
+[ext_resource type="PackedScene" uid="uid://cj3wggtmybyg2" path="res://GameObjects/Enemies/PremiereTrap.tscn" id="5_ypsbi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_paxs3"]
 
@@ -31,6 +32,7 @@ position = Vector2(1571, 1048)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
+enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 1"]
 position = Vector2(-4, -1)
@@ -43,6 +45,7 @@ scale = Vector2(1.24, 1)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
+enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 2"]
 position = Vector2(-4, -1)
@@ -55,6 +58,7 @@ scale = Vector2(0.4920186, 0.3679378)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
+enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 3"]
 position = Vector2(-4, -1)
@@ -67,6 +71,7 @@ scale = Vector2(0.036862556, -17.813026)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
+enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 4"]
 position = Vector2(-4, -1)
@@ -79,11 +84,15 @@ scale = Vector2(4.2120185, 0.3679378)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_kc30n")
+enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Reset Zone 5"]
 position = Vector2(-4, -1)
 scale = Vector2(28.76, 1.0399951)
 shape = SubResource("RectangleShape2D_paxs3")
+
+[node name="PremiereTrap" parent="." instance=ExtResource("5_ypsbi")]
+position = Vector2(3231, 987)
 
 [connection signal="area_entered" from="Triggers/Reset Zone 1" to="Triggers/Reset Zone 1" method="_on_area_entered"]
 [connection signal="area_entered" from="Triggers/Reset Zone 2" to="Triggers/Reset Zone 2" method="_on_area_entered"]

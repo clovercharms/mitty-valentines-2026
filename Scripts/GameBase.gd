@@ -18,13 +18,16 @@ const CURRENT_ROOM = "current_room"
 # Saved data. Just let other classes access it directly for this project.
 var questState: Dictionary
 var playerAbilities: Array[bool]
-var collectedMessages: Array[bool]
+var collectedMessages: Array[int]
 
 # Unsaved global game state
 var enemiesKilledSinceSave: Dictionary #To handle non-respawning enemies
 
 # Keys
 var keysCollected: Array[Resource] = [preload("res://Resources/boss_key.tres")]
+
+var uniqueEnemies: Dictionary
+var currentMessageID : int
 
 func _ready() -> void:
     # A trick for static object reference

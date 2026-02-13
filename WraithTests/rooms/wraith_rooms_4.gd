@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var terrain : TileMapLayer = $Terrain
+
 var runner_scene : PackedScene = preload("res://GameObjects/RunnerCharm.tscn")
 
 func spawn_runners(markers : Array) -> void:
@@ -22,3 +24,6 @@ func spawner_3_triggered() -> void:
     
 func spawner_4_triggered() -> void:
     spawn_runners([$"Markers/Runner Spawn 7", $"Markers/Runner Spawn 8"])
+
+func drop_trap_triggered() -> void:
+    terrain.erase_cell(Vector2i(1,9))

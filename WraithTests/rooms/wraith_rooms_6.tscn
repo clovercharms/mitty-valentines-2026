@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://w4b6rx6a4gfh"]
+[gd_scene load_steps=6 format=4 uid="uid://w4b6rx6a4gfh"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_tvbfm"]
 [ext_resource type="TileSet" uid="uid://drwolgr7keq1k" path="res://WraithTests/testing_tileset.tres" id="2_r00xi"]
 [ext_resource type="PackedScene" uid="uid://gqvladfb8ei8" path="res://WraithTests/moving_platform_test.tscn" id="3_yx23n"]
+[ext_resource type="PackedScene" uid="uid://cmvwpi3rgyr5f" path="res://GameObjects/UfoEnemy.tscn" id="4_yx23n"]
+[ext_resource type="PackedScene" uid="uid://dq4n2ebk7k6qv" path="res://GameObjects/RunnerCharm.tscn" id="5_g4pcp"]
 
 [node name="WraithRooms-6" type="Node2D"]
 
@@ -51,3 +53,34 @@ position = Vector2(100, 300)
 
 [node name="Platform Marker 4" type="Marker2D" parent="Markers"]
 position = Vector2(400, 300)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="UfoEnemy" parent="." instance=ExtResource("4_yx23n")]
+position = Vector2(1794, 319)
+aggro_range = 500.0
+
+[node name="UfoEnemy2" parent="." instance=ExtResource("4_yx23n")]
+position = Vector2(369, 139)
+aggro_range = 500.0
+
+[node name="UfoEnemy3" parent="." instance=ExtResource("4_yx23n")]
+position = Vector2(1606, 1612)
+aggro_range = 500.0
+
+[node name="UfoEnemy4" parent="." instance=ExtResource("4_yx23n")]
+position = Vector2(394, 1595)
+aggro_range = 500.0
+
+[node name="UfoEnemy5" parent="." instance=ExtResource("4_yx23n")]
+position = Vector2(969, 521)
+aggro_range = 500.0
+
+[node name="RunnerCharm" parent="." instance=ExtResource("5_g4pcp")]
+position = Vector2(571, 2704)
+
+[node name="RunnerCharm2" parent="." instance=ExtResource("5_g4pcp")]
+position = Vector2(162, 2075)
+
+[node name="RunnerCharm3" parent="." instance=ExtResource("5_g4pcp")]
+position = Vector2(1830, 2396)

@@ -1,9 +1,9 @@
 extends Area2D
 
-
+@export var enabled : bool = true
 
 func _on_area_entered(area: Area2D) -> void:
-    if area.get_parent() is not MittyPlayer:
+    if area.get_parent() is not MittyPlayer or not enabled:
         return
     
     print("player touched reset zone")

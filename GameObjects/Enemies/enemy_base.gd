@@ -1,11 +1,11 @@
-class_name EnemyBase extends CharacterBody2D
+class_name EnemyBase extends Node2D
 
-@export var stats : StatBlock
+@export var holds_message : bool = true
 
-func damage_player(player: MittyPlayer):
-    if (player == null):
-        return
-    if (!player.damage_timer.is_stopped()):
-        return
+var message_data : MessageData
+
+var message_collected : bool = false
+
+func _ready() -> void:
+    pass
     
-    player.stats.take_damage(stats.base_damage)

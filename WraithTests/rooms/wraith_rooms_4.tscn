@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=4 uid="uid://bmgyepd37eyvi"]
+[gd_scene load_steps=8 format=4 uid="uid://bmgyepd37eyvi"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_dhskd"]
 [ext_resource type="Script" uid="uid://dy67behc78oav" path="res://WraithTests/rooms/wraith_rooms_4.gd" id="1_v80r7"]
 [ext_resource type="TileSet" uid="uid://drwolgr7keq1k" path="res://WraithTests/testing_tileset.tres" id="2_byvv1"]
 [ext_resource type="PackedScene" uid="uid://gqvladfb8ei8" path="res://WraithTests/moving_platform_test.tscn" id="3_p8qia"]
 [ext_resource type="PackedScene" uid="uid://08l7k0fl6w34" path="res://WraithTests/player_trigger.tscn" id="4_r7ofj"]
+[ext_resource type="PackedScene" uid="uid://cj3wggtmybyg2" path="res://GameObjects/Enemies/PremiereTrap.tscn" id="6_wao8x"]
+[ext_resource type="PackedScene" uid="uid://dq4n2ebk7k6qv" path="res://GameObjects/RunnerCharm.tscn" id="7_f88dt"]
 
 [node name="WraithRooms-4" type="Node2D"]
 script = ExtResource("1_v80r7")
@@ -23,7 +25,7 @@ scale = Vector2(78.741455, 0.8407061)
 move_to = NodePath("../../Markers/Platform Destination")
 one_shot = true
 one_way = true
-loop_speed = 120.0
+loop_speed = 10.0
 triggered = true
 
 [node name="Markers" type="Node" parent="."]
@@ -81,8 +83,21 @@ position = Vector2(2190, 2800)
 scale = Vector2(160, 1)
 one_shot = true
 
+[node name="Drop Trap Trigger" parent="Triggers" instance=ExtResource("4_r7ofj")]
+position = Vector2(89, 576.00006)
+scale = Vector2(2.5219915, -1.0923301)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="PremiereTrap" parent="." instance=ExtResource("6_wao8x")]
+position = Vector2(149, 1054)
+
+[node name="RunnerCharm" parent="." instance=ExtResource("7_f88dt")]
+position = Vector2(1306, 1044)
+
 [connection signal="player_entered" from="Triggers/Platform Trigger" to="Objects/Moving Platform" method="trigger"]
 [connection signal="player_entered" from="Triggers/Runner Spawn 1" to="." method="spawner_1_triggered"]
 [connection signal="player_entered" from="Triggers/Runner Spawn 2" to="." method="spawner_2_triggered"]
 [connection signal="player_entered" from="Triggers/Runner Spawn 3" to="." method="spawner_3_triggered"]
 [connection signal="player_entered" from="Triggers/Runner Spawn 4" to="." method="spawner_4_triggered"]
+[connection signal="player_entered" from="Triggers/Drop Trap Trigger" to="." method="drop_trap_triggered"]
