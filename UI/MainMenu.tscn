@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://m01jl46tes6q"]
 
 [ext_resource type="Script" uid="uid://dmdxehw05cbm1" path="res://UI/main_menu.gd" id="1_b37jj"]
-[ext_resource type="Texture2D" uid="uid://chnf1tounseof" path="res://ArtAssets/TempMenuBG.jpg" id="1_uahxu"]
+[ext_resource type="Texture2D" uid="uid://3n8vuxcsidc6" path="res://ArtAssets/title screen.jpg" id="2_b37jj"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -17,18 +17,7 @@ z_index = -1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("1_uahxu")
-
-[node name="Title" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 566.0
-offset_top = 197.00003
-offset_right = 1355.4517
-offset_bottom = 398.6351
-rotation = -0.15084344
-theme_override_constants/outline_size = 15
-theme_override_font_sizes/normal_font_size = 114
-text = "Wow A Game!"
+texture = ExtResource("2_b37jj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -37,33 +26,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 10.0
-offset_right = 200.0
-offset_bottom = 266.0
+offset_left = -180.0
+offset_right = 180.0
+offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1, 0.735)
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../NewGameButton")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 36
 text = "Start Game"
 
 [node name="NewGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../StartButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 36
 text = "New Game"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../NewGameButton")
 focus_neighbor_bottom = NodePath("../StartButton")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 36
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
