@@ -2,6 +2,8 @@ extends StaticBody2D
 
 @export var hitboxActivationDelay: float = 0.25
 @export var deathScene: PackedScene
+@export var extendSound: AudioStream
+@export var retractSound: AudioStream
 
 @onready var mainSprite: AnimatedSprite2D = $MainSprite
 @onready var hitbox: Node = $Hitbox
@@ -22,6 +24,7 @@ func enter_wait():
 func enter_opening():
 	currentState = State.OPENING
 	mainSprite.play("open")
+	MittyUtils.play_sound(extendSound)
 	var hitboxTimer: SceneTreeTimer = get_tree().create_timer(hitboxActivationDelay)
 	await hitboxTimer.timeout
 	if currentState == State.OPENING:
@@ -40,6 +43,7 @@ func enter_closing():
 	currentState = State.CLOSING
 	hitbox.setEnabled(false)
 	mainSprite.play("close")
+	MittyUtils.play_sound(retractSound)
 	await mainSprite.animation_finished
 	if currentState == State.CLOSING:
 		enter_wait()
