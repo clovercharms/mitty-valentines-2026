@@ -30,11 +30,7 @@ var current_direction : Vector2 = Vector2(1, 0)
 var just_bounced : bool = false
 
 func _ready() -> void:
-    sprite.play("enter")
-    var tween = create_tween()
-    tween.tween_property(self, "scale", Vector2(0.75, 0.75), 2)
-    await tween.finished
-    enter_hover()
+    intro_sequence()
     
 func _physics_process(delta: float) -> void:
     # Don't bother while entering
@@ -62,6 +58,24 @@ func _physics_process(delta: float) -> void:
             update_charge()
         states.BOUNCE:
             update_bounce()
+            
+func intro_sequence() -> void:
+    #bgm
+    var gb = GameBase.get_singleton()
+    gb.BossMusic.play()
+    var music_tween = get_tree().create_tween().set_parallel(true)
+    music_tween.tween_property(gb.BGM, "volume_db", -80, 2.5)
+    music_tween.tween_property(gb.BossMusic, "volume_db", -28, 2.5)
+    #intro sounds
+    var sound : AudioStreamPlayer = $Sounds/Intro
+    sound.play()
+    #intro animation
+    sprite.play("enter")
+    var tween = create_tween()
+    tween.tween_property(self, "scale", Vector2(0.75, 0.75), 2.5)
+    await tween.finished
+    gb.BGM.stop()
+    enter_hover()
 
 func decide_direction() -> void:
     var target: Vector2 = GameBase.get_singleton().player.global_position
@@ -140,6 +154,7 @@ func update_charge() -> void:
         sprite.play("charge")
 
 func enter_bounce() -> void:
+    var sound : AudioStreamPlayer = $Sounds/Impact
     print("charmfly bouncing")
     just_bounced = true
     current_state = states.ROTATING
@@ -156,6 +171,7 @@ func enter_bounce() -> void:
     current_tween = create_tween()
     current_tween.tween_property(self, "global_position", target, 0.5)
     await current_tween.finished
+    sound.play()
     print("bounce complete, recovering")
     #recover
     var player_y: float = GameBase.get_singleton().player.global_position.y
@@ -172,6 +188,37 @@ func update_bounce() -> void:
 
 
 func _on_death(cause: Node) -> void:
-    GameBase.get_singleton().keysCollected.append(key_on_death)
+    # change music back
+    var gb = GameBase.get_singleton()
+    gb.BGM.play()
+    var music_tween = get_tree().create_tween().set_parallel(true)
+    music_tween.tween_property(gb.BGM, "volume_db", -28, 1.7)
+    music_tween.tween_property(gb.BossMusic, "volume_db", -80, 1.7)
+    # death
+    await death_animation()
+    gb.BossMusic.stop()
+    # open door
+    gb.pickups.append("boss_exit_key")
+    gb.unlock_player_ability(GameBase.PlayerAbility.DOUBLE_JUMP)
     dead.emit()
+    # remove
     queue_free()
+    
+func death_animation():
+    var sound : AudioStreamPlayer = $Sounds/Death
+    sound.play()
+    var tween = create_tween().set_parallel(true)
+    tween.tween_property(self, "scale", Vector2.ZERO, 1.7)
+    tween.tween_property(self, "rotation_degrees", 360 * 20, 1.7)
+    await tween.finished
+    
+
+
+func _on_health_hurt(amount: int, cause: Node) -> void:
+    var sound : AudioStreamPlayer = $Sounds/Hurt
+    sound.play()
+
+
+func _on_damage_hitbox_body_entered(body: Node2D) -> void:
+    var sound : AudioStreamPlayer = $Sounds/Bite
+    sound.play()

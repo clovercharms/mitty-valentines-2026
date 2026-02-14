@@ -73,267 +73,267 @@ var reset_position : Marker2D
 
 
 func on_enter():
-	var roomInstance = GameBase.get_singleton().map.find_child("RoomInstance")
-	if roomInstance:
-		roomInstance.adjust_camera_limits(camera)
+    var roomInstance = GameBase.get_singleton().map.find_child("RoomInstance")
+    if roomInstance:
+        roomInstance.adjust_camera_limits(camera)
 
 func _ready() -> void:
-	pass
+    pass
 
 func _enter_tree() -> void:
-	attackCooldownTimer = get_tree().create_timer(0, true, true)
+    attackCooldownTimer = get_tree().create_timer(0, true, true)
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("Attack") and attackCooldownTimer.time_left <= 0 and has_control:
-		enter_attack()
-	
-	update_gravity(delta)
-	
-	if currentState == ControlState.DEAD:
-		#being dead takes precendence over all other states
-		update_dead(delta)
-	elif not has_control:
-		pass
-	elif currentState == ControlState.MOVE:
-		update_move(delta)
-	elif currentState == ControlState.ATTACK:
-		update_attack(delta)
-	elif currentState == ControlState.FLINCH:
-		update_flinch()
-	else:
-		print("Warning! Player in unknown ControlState")
-	
-	# Coyote Time logic
-	var was_on_floor = is_on_floor()
-	
-	move_and_slide()
-	
-	if was_on_floor && !is_on_floor():
-		coyote_timer.start()
-	
-	if is_on_floor() and not was_on_floor:
-		if currentAirtime > landSoundAirtimeMin:
-			var landSoundVolume = MittyUtils.map_range_clamped(currentAirtime, landSoundAirtimeMin, landSoundAirtimeMax, landSoundVolumeMin, landSoundVolumeMax)
-			if landSoundEffect: MittyUtils.play_sound(landSoundEffect, landSoundVolume)
-		currentAirtime = 0
+    if Input.is_action_just_pressed("Attack") and attackCooldownTimer.time_left <= 0 and has_control:
+        enter_attack()
+    
+    update_gravity(delta)
+    
+    if currentState == ControlState.DEAD:
+        #being dead takes precendence over all other states
+        update_dead(delta)
+    elif not has_control:
+        pass
+    elif currentState == ControlState.MOVE:
+        update_move(delta)
+    elif currentState == ControlState.ATTACK:
+        update_attack(delta)
+    elif currentState == ControlState.FLINCH:
+        update_flinch()
+    else:
+        print("Warning! Player in unknown ControlState")
+    
+    # Coyote Time logic
+    var was_on_floor = is_on_floor()
+    
+    move_and_slide()
+    
+    if was_on_floor && !is_on_floor():
+        coyote_timer.start()
+    
+    if is_on_floor() and not was_on_floor:
+        if currentAirtime > landSoundAirtimeMin:
+            var landSoundVolume = MittyUtils.map_range_clamped(currentAirtime, landSoundAirtimeMin, landSoundAirtimeMax, landSoundVolumeMin, landSoundVolumeMax)
+            if landSoundEffect: MittyUtils.play_sound(landSoundEffect, landSoundVolume)
+        currentAirtime = 0
 
 func enter_move():
-	if currentState == ControlState.DEAD:
-		return
-	currentState = ControlState.MOVE
+    if currentState == ControlState.DEAD:
+        return
+    currentState = ControlState.MOVE
 
 func update_move(delta: float):
-	# Handle jump.
-	var jumpedThisFrame = false
-	if Input.is_action_just_pressed("Jump") and canJump() and has_control:
-		jumpedThisFrame = true
-		if !is_on_floor() or coyote_timer.is_stopped() and has_jumped:
-			has_double_jumped = true
-		has_jumped = true
-		setAnimationNoRepeats("ascend")
-		if jumpSoundEffect: MittyUtils.play_sound(jumpSoundEffect, 0.45)
-		velocity.y = jumpSpeed
-	# enable short jumps by releasing jump early
-	if Input.is_action_just_released("Jump") and velocity.y < 0:
-		velocity.y = jumpSpeed / 4
-	
-	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("Move_Left", "Move_Right")
-	direction = MittyUtils.map_range_clamped(direction, -controllerTopEnd, controllerTopEnd, -1, 1)
-	
-	var currentAcceleration = acceleration
-	if abs(velocity.x) < accelerationBoostThreshold:
-		currentAcceleration = boostedAcceleration
-	if not is_on_floor():
-		currentAcceleration *= airControl
-	velocity.x = move_toward(velocity.x, direction * speed, currentAcceleration * delta)
-	
-	if direction:
-		if direction > 0:
-			lastMoveDirection = 1
-			main_sprite.flip_h = false
-		elif direction < 0:
-			lastMoveDirection = -1
-			main_sprite.flip_h = true
-	else:
-		velocity.x = move_toward(velocity.x, 0, currentAcceleration * delta)
-	
-	if is_on_floor() and not jumpedThisFrame:
-		has_double_jumped = false
-		has_jumped = false
-		if direction:
-			setAnimationNoRepeats("run")
-		if abs(velocity.x) < 1:
-			setAnimationNoRepeats("idle")
+    # Handle jump.
+    var jumpedThisFrame = false
+    if Input.is_action_just_pressed("Jump") and canJump() and has_control:
+        jumpedThisFrame = true
+        if !is_on_floor() or coyote_timer.is_stopped() and has_jumped:
+            has_double_jumped = true
+        has_jumped = true
+        setAnimationNoRepeats("ascend")
+        if jumpSoundEffect: MittyUtils.play_sound(jumpSoundEffect, 0.45)
+        velocity.y = jumpSpeed
+    # enable short jumps by releasing jump early
+    if Input.is_action_just_released("Jump") and velocity.y < 0:
+        velocity.y = jumpSpeed / 4
+    
+    # Get the input direction and handle the movement/deceleration.
+    var direction := Input.get_axis("Move_Left", "Move_Right")
+    direction = MittyUtils.map_range_clamped(direction, -controllerTopEnd, controllerTopEnd, -1, 1)
+    
+    var currentAcceleration = acceleration
+    if abs(velocity.x) < accelerationBoostThreshold:
+        currentAcceleration = boostedAcceleration
+    if not is_on_floor():
+        currentAcceleration *= airControl
+    velocity.x = move_toward(velocity.x, direction * speed, currentAcceleration * delta)
+    
+    if direction:
+        if direction > 0:
+            lastMoveDirection = 1
+            main_sprite.flip_h = false
+        elif direction < 0:
+            lastMoveDirection = -1
+            main_sprite.flip_h = true
+    else:
+        velocity.x = move_toward(velocity.x, 0, currentAcceleration * delta)
+    
+    if is_on_floor() and not jumpedThisFrame:
+        has_double_jumped = false
+        has_jumped = false
+        if direction:
+            setAnimationNoRepeats("run")
+        if abs(velocity.x) < 1:
+            setAnimationNoRepeats("idle")
 
 func enter_attack():
-	if currentState == ControlState.DEAD:
-		return
-	currentState = ControlState.ATTACK
-	currentAttackIsPogo = false
-	currentAttackIsUp = false
-	var lookDirection = Input.get_axis("Look_Down", "Look_Up")
-	var moveDirection = Input.get_axis("Move_Left", "Move_Right")
-	if lookDirection > 0:
-		if canJump():
-			velocity.y = -attackMovementSpeed
-		setAnimationNoRepeats("attack_up")
-		currentAttackIsUp = true
-		velocity.x *= 0.5
-		
-		MittyUtils.spawn_child(self, verticalAttackScene, verticalAttackLocation.position)
-	elif lookDirection < 0:
-		velocity.y = move_toward(velocity.y, terminalFallSpeed, attackMovementSpeed)
-		setAnimationNoRepeats("attack_down")
-		
-		var currentLoc = verticalAttackLocation.position
-		currentLoc.y *= -1
-		var spawnedAttack = MittyUtils.spawn_child(self, verticalAttackScene, currentLoc)
-		spawnedAttack.scale.y *= -1
-		
-		spawnedAttack.body_entered.connect(on_down_attack_connected)
-	else:
-		var attackDirection = lastMoveDirection
-		if moveDirection > 0:
-			attackDirection = 1
-		if moveDirection < 0:
-			attackDirection = -1
-		velocity.x = attackDirection * attackMovementSpeed
-		if velocity.y > 0:
-			velocity.y = 0
-		elif not is_on_floor():
-			velocity.y = jumpSpeed / 4
-		setAnimationNoRepeats("attack_side")
-		
-		var currentLoc = sideAttackLocation.position
-		currentLoc.x *= attackDirection
-		var spawnedAttack = MittyUtils.spawn_child(self, sideAttackScene, currentLoc)
-		spawnedAttack.scale.x *= attackDirection
-	main_sprite.set_frame(0)
-	main_sprite.play()
-	
-	attackCooldownTimer = get_tree().create_timer(attackCooldownTime, true, true)
-	
-	MittyUtils.play_sound(attackSound)
+    if currentState == ControlState.DEAD:
+        return
+    currentState = ControlState.ATTACK
+    currentAttackIsPogo = false
+    currentAttackIsUp = false
+    var lookDirection = Input.get_axis("Look_Down", "Look_Up")
+    var moveDirection = Input.get_axis("Move_Left", "Move_Right")
+    if lookDirection > 0:
+        if canJump():
+            velocity.y = -attackMovementSpeed
+        setAnimationNoRepeats("attack_up")
+        currentAttackIsUp = true
+        velocity.x *= 0.5
+        
+        MittyUtils.spawn_child(self, verticalAttackScene, verticalAttackLocation.position)
+    elif lookDirection < 0:
+        velocity.y = move_toward(velocity.y, terminalFallSpeed, attackMovementSpeed)
+        setAnimationNoRepeats("attack_down")
+        
+        var currentLoc = verticalAttackLocation.position
+        currentLoc.y *= -1
+        var spawnedAttack = MittyUtils.spawn_child(self, verticalAttackScene, currentLoc)
+        spawnedAttack.scale.y *= -1
+        
+        spawnedAttack.body_entered.connect(on_down_attack_connected)
+    else:
+        var attackDirection = lastMoveDirection
+        if moveDirection > 0:
+            attackDirection = 1
+        if moveDirection < 0:
+            attackDirection = -1
+        velocity.x = attackDirection * attackMovementSpeed
+        if velocity.y > 0:
+            velocity.y = 0
+        elif not is_on_floor():
+            velocity.y = jumpSpeed / 4
+        setAnimationNoRepeats("attack_side")
+        
+        var currentLoc = sideAttackLocation.position
+        currentLoc.x *= attackDirection
+        var spawnedAttack = MittyUtils.spawn_child(self, sideAttackScene, currentLoc)
+        spawnedAttack.scale.x *= attackDirection
+    main_sprite.set_frame(0)
+    main_sprite.play()
+    
+    attackCooldownTimer = get_tree().create_timer(attackCooldownTime, true, true)
+    
+    MittyUtils.play_sound(attackSound)
 
 func update_attack(delta: float):
-	if not currentAttackIsPogo:
-		velocity.x = move_toward(velocity.x, 0, attackDrag * delta)
+    if not currentAttackIsPogo:
+        velocity.x = move_toward(velocity.x, 0, attackDrag * delta)
 
 func enter_flinch(hurtLocation: Vector2):
-	if currentState == ControlState.DEAD:
-		return
-	currentState = ControlState.FLINCH
-	stateTimer = get_tree().create_timer(flinchTime, true, true)
-	setAnimationNoRepeats("hurt")
-	MittyUtils.hit_stop(hitstopTime)
-	if not hurtLocation:
-		#velocity = Vector2.ZERO
-		return
-	var hurtDirection: float = 1
-	var toHurt = hurtLocation - global_position
-	if(toHurt.x < 0):
-		hurtDirection = -1
-	var currentFlinchVel = flinchGroundVelocity
-	if not is_on_floor():
-		currentFlinchVel = flinchAirVelocity
-	currentFlinchVel.x *= hurtDirection
-	velocity = currentFlinchVel
+    if currentState == ControlState.DEAD:
+        return
+    currentState = ControlState.FLINCH
+    stateTimer = get_tree().create_timer(flinchTime, true, true)
+    setAnimationNoRepeats("hurt")
+    MittyUtils.hit_stop(hitstopTime)
+    if not hurtLocation:
+        #velocity = Vector2.ZERO
+        return
+    var hurtDirection: float = 1
+    var toHurt = hurtLocation - global_position
+    if(toHurt.x < 0):
+        hurtDirection = -1
+    var currentFlinchVel = flinchGroundVelocity
+    if not is_on_floor():
+        currentFlinchVel = flinchAirVelocity
+    currentFlinchVel.x *= hurtDirection
+    velocity = currentFlinchVel
 
 func update_flinch():
-	if stateTimer.time_left <= 0:
-		enter_move()
+    if stateTimer.time_left <= 0:
+        enter_move()
 
 func update_dead(delta: float):
-	velocity.x = move_toward(velocity.x, 0, deathDrag * delta)
+    velocity.x = move_toward(velocity.x, 0, deathDrag * delta)
 
 func update_gravity(delta: float):
-	if not is_on_floor():
-		currentAirtime += delta
-		if velocity.y < 0:
-			velocity += get_gravity() * delta
-			if currentState == ControlState.MOVE:
-				setAnimationNoRepeats("ascend")
-		elif velocity.y != terminalFallSpeed:
-			
-			# faster drop down after reaching apex, add terminal fall velocity
-			#velocity += get_gravity() * delta * 3
-			#velocity.y = min(velocity.y, terminalFallSpeed)
-			velocity.y = move_toward(velocity.y, terminalFallSpeed, get_gravity().y * delta * 3)
-		if velocity.y > 0 and currentState == ControlState.MOVE:
-			setAnimationNoRepeats("descend")
+    if not is_on_floor():
+        currentAirtime += delta
+        if velocity.y < 0:
+            velocity += get_gravity() * delta
+            if currentState == ControlState.MOVE:
+                setAnimationNoRepeats("ascend")
+        elif velocity.y != terminalFallSpeed:
+            
+            # faster drop down after reaching apex, add terminal fall velocity
+            #velocity += get_gravity() * delta * 3
+            #velocity.y = min(velocity.y, terminalFallSpeed)
+            velocity.y = move_toward(velocity.y, terminalFallSpeed, get_gravity().y * delta * 3)
+        if velocity.y > 0 and currentState == ControlState.MOVE:
+            setAnimationNoRepeats("descend")
 
 func canJump() -> bool:
-	if is_on_floor():
-		return true
-	if !coyote_timer.is_stopped():
-		return true
-	if canDoubleJump() and not has_double_jumped:
-		return true
-	return false
+    if is_on_floor():
+        return true
+    if !coyote_timer.is_stopped():
+        return true
+    if canDoubleJump() and not has_double_jumped:
+        return true
+    return false
 
 func canDoubleJump() -> bool:
-	return GameBase.get_singleton().player_has_ability(GameBase.PlayerAbility.DOUBLE_JUMP)
+    return GameBase.get_singleton().player_has_ability(GameBase.PlayerAbility.DOUBLE_JUMP)
 
 func setAnimationNoRepeats(animation: String):
-	if main_sprite.animation != animation:
-		main_sprite.play(animation)
+    if main_sprite.animation != animation:
+        main_sprite.play(animation)
 
 func on_down_attack_connected(body: Node2D) -> void:
-	if body.is_in_group("triggersPogo") and not currentAttackIsPogo:
-		print("Pogo!")
-		currentAttackIsPogo = true;
-		velocity.y = pogoSpeed
+    if body.is_in_group("triggersPogo") and not currentAttackIsPogo:
+        print("Pogo!")
+        currentAttackIsPogo = true;
+        velocity.y = pogoSpeed
 
 func _on_main_sprite_animation_finished() -> void:
-	if currentState == ControlState.ATTACK:
-		enter_move()
-		if currentAttackIsUp and velocity.y < 0:
-			velocity.y = jumpSpeed / 4
-			
+    if currentState == ControlState.ATTACK:
+        enter_move()
+        if currentAttackIsUp and velocity.y < 0:
+            velocity.y = jumpSpeed / 4
+            
 func tween_to_reset_marker() -> void:
-	if reset_position == null:
-		return
-	change_player_agency(false)
-	var tween = create_tween().set_parallel(true)
-	tween.tween_property(self, "global_position", reset_position.global_position, 0.5)
-	tween.tween_property(self, "rotation_degrees", 360 * 10, 0.5)
-	await tween.finished
-	rotation_degrees = 0
-	change_player_agency(true)
-	
+    if reset_position == null:
+        return
+    change_player_agency(false)
+    var tween = create_tween().set_parallel(true)
+    tween.tween_property(self, "global_position", reset_position.global_position, 0.5)
+    tween.tween_property(self, "rotation_degrees", 360 * 10, 0.5)
+    await tween.finished
+    rotation_degrees = 0
+    change_player_agency(true)
+    
 func change_player_agency(controllable : bool) -> void:
-	has_control = controllable
-	main_sprite.stop()
-	enter_move()
+    has_control = controllable
+    main_sprite.stop()
+    enter_move()
 
 func _on_hurt(_amount: int, cause: Node) -> void:
-	if cause and "global_position" in cause:
-		print("hurt from ", cause.global_position)
-		if cause.name == "GordoCharm": #hack to oveeride the flinch recoil
-			enter_flinch(Vector2.ZERO)
-		else:
-			enter_flinch(cause.global_position)
-	else:
-		enter_flinch(Vector2.ZERO)
-	if hurtSoundEffect: MittyUtils.play_sound(hurtSoundEffect)
+    if cause and "global_position" in cause:
+        print("hurt from ", cause.global_position)
+        if cause.name == "GordoCharm": #hack to oveeride the flinch recoil
+            enter_flinch(Vector2.ZERO)
+        else:
+            enter_flinch(cause.global_position)
+    else:
+        enter_flinch(Vector2.ZERO)
+    if hurtSoundEffect: MittyUtils.play_sound(hurtSoundEffect)
 
 func _on_death(cause: Node) -> void:
-	setAnimationNoRepeats("dead")
-	if deathSweetener: MittyUtils.play_sound(deathSweetener, 2)
-	currentState = ControlState.DEAD
-	if cause and "global_position" in cause:
-		var hurtDirection: float = 1
-		var toHurt = cause.global_position - global_position
-		if(toHurt.x < 0):
-			hurtDirection = -1
-		var currentLaunchVel = deathLaunchVelocity
-		currentLaunchVel.x *= hurtDirection
-		velocity = currentLaunchVel
-	
-	MittyUtils.time_slow(deathTimeSlowAmount, deathTimeSlowDuration)
-	var ghostTimer = get_tree().create_timer(ghostAnimDelay)
-	await ghostTimer.timeout
-	if deathSoundEffect: MittyUtils.play_sound(deathSoundEffect, 3)
-	MittyUtils.spawn_at_location(ghostScene, ghostLocation.global_position)
-	#play ghost sound effect
+    setAnimationNoRepeats("dead")
+    if deathSweetener: MittyUtils.play_sound(deathSweetener, 2)
+    currentState = ControlState.DEAD
+    if cause and "global_position" in cause:
+        var hurtDirection: float = 1
+        var toHurt = cause.global_position - global_position
+        if(toHurt.x < 0):
+            hurtDirection = -1
+        var currentLaunchVel = deathLaunchVelocity
+        currentLaunchVel.x *= hurtDirection
+        velocity = currentLaunchVel
+    
+    MittyUtils.time_slow(deathTimeSlowAmount, deathTimeSlowDuration)
+    var ghostTimer = get_tree().create_timer(ghostAnimDelay)
+    await ghostTimer.timeout
+    if deathSoundEffect: MittyUtils.play_sound(deathSoundEffect, 3)
+    MittyUtils.spawn_at_location(ghostScene, ghostLocation.global_position)
+    #play ghost sound effect

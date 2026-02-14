@@ -1,7 +1,7 @@
 class_name TriggeredDoor extends Node2D
 
 @export var move_to : Marker2D
-@export var required_key : Resource
+@export var required_key : String
 @export var trigger_area : Area2D
 
 @onready var door : AnimatableBody2D = $Door
@@ -40,10 +40,10 @@ func close() -> void:
     is_open = false
     
 func check_key() -> bool:
-    if required_key == null:
+    if required_key == "":
         print("no key required - open")
         return true
-    elif GameBase.get_singleton().keysCollected.has(required_key):
+    elif GameBase.get_singleton().pickups.has(required_key):
         print("has key - open")
         return true
     else:

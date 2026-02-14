@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://bb76r7wj8o8x7"]
+[gd_scene load_steps=6 format=4 uid="uid://bb76r7wj8o8x7"]
 
 [ext_resource type="Script" uid="uid://c66nl2euniyub" path="res://WraithTests/rooms/wraith_rooms_8.gd" id="1_fwi5g"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_xbdjf"]
 [ext_resource type="TileSet" uid="uid://drwolgr7keq1k" path="res://WraithTests/testing_tileset.tres" id="2_336yw"]
 [ext_resource type="PackedScene" uid="uid://crojmkjeqwm01" path="res://GameObjects/triggered_door.tscn" id="3_nb38n"]
-[ext_resource type="Resource" uid="uid://b5h42xk8ow1jf" path="res://Resources/dead_boss_key.tres" id="4_i17uc"]
 [ext_resource type="PackedScene" uid="uid://08l7k0fl6w34" path="res://WraithTests/player_trigger.tscn" id="4_w7lks"]
 
 [node name="WraithRooms-8" type="Node2D"]
@@ -22,7 +21,7 @@ tile_set = ExtResource("2_336yw")
 position = Vector2(3778, 1920)
 scale = Vector2(1, 4.83999)
 move_to = NodePath("../Door Marker")
-required_key = ExtResource("4_i17uc")
+required_key = "boss_exit_key"
 trigger_area = NodePath("../Dummy Area")
 
 [node name="Door Marker" type="Marker2D" parent="Door Parts"]

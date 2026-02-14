@@ -1,10 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://cakutfyrbepda"]
+[gd_scene load_steps=22 format=3 uid="uid://cakutfyrbepda"]
 
 [ext_resource type="Script" uid="uid://dw80qcnocvy8e" path="res://GameObjects/Enemies/charmfly.gd" id="1_65ed8"]
 [ext_resource type="PackedScene" uid="uid://dca4fwgtuobf2" path="res://GameObjects/SimpleHitbox.tscn" id="1_a5425"]
 [ext_resource type="Texture2D" uid="uid://bexft15fh08aq" path="res://ArtAssets/sprites/charmfly_spritesheet.png" id="1_v45jh"]
 [ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="2_v45jh"]
 [ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="5_dmguu"]
+[ext_resource type="AudioStream" uid="uid://csm66ub2po3oh" path="res://SoundAssets/Effects/beastcharm_bite.wav" id="6_28q2f"]
+[ext_resource type="AudioStream" uid="uid://xbi6fdbjslj1" path="res://SoundAssets/Effects/beastcharm_death.mp3" id="7_p2r2d"]
+[ext_resource type="AudioStream" uid="uid://dfc1ijwjnqb12" path="res://SoundAssets/Effects/beastcharm_hurt.wav" id="8_8t4eo"]
+[ext_resource type="AudioStream" uid="uid://dtvpx1fyqcgrt" path="res://SoundAssets/Effects/beastcharm_intro_cry.mp3" id="9_0er5o"]
+[ext_resource type="AudioStream" uid="uid://b0k6noq5rw2j7" path="res://SoundAssets/Effects/beastcharm_environment_impact.wav" id="10_f7lma"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v45jh"]
 atlas = ExtResource("1_v45jh")
@@ -130,7 +135,26 @@ startingHealth = 12
 doHitFlash = true
 toModulate = NodePath("..")
 
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Bite" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_28q2f")
+
+[node name="Death" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_p2r2d")
+
+[node name="Hurt" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_8t4eo")
+
+[node name="Intro" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_0er5o")
+
+[node name="Impact" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_f7lma")
+
+[connection signal="body_entered" from="Damage Hitbox" to="." method="_on_damage_hitbox_body_entered"]
 [connection signal="death" from="Health" to="." method="_on_death"]
+[connection signal="hurt" from="Health" to="." method="_on_health_hurt"]
 [connection signal="hurt" from="Health" to="OnHitEffects" method="_on_health_hurt"]
 
 [editable path="Damage Hitbox"]

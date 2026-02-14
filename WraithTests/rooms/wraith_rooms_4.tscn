@@ -107,7 +107,7 @@ position = Vector2(468, 2803)
 position = Vector2(3684, 191)
 texture = ExtResource("9_6ndbm")
 texture_scale = Vector2(0.03, 0.03)
-pickup_id = "boss_key"
+pickup_id = "boss_room_key"
 
 [node name="Enemies" type="Node" parent="."]
 
