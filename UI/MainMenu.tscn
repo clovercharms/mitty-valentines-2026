@@ -49,6 +49,14 @@ theme_override_fonts/font = ExtResource("3_8aown")
 theme_override_font_sizes/font_size = 48
 text = "New Game"
 
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+theme_override_fonts/font = ExtResource("3_8aown")
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../NewGameButton")
@@ -59,4 +67,5 @@ text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

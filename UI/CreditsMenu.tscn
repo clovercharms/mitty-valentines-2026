@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://whgqdg8l1yfs"]
+
+[ext_resource type="Theme" uid="uid://dqyfmukeegnp5" path="res://UI/Inventory/MenuTheme.tres" id="1_s6k4m"]
+[ext_resource type="Script" uid="uid://cvrpm8eiau78c" path="res://UI/credits_menu.gd" id="2_h6ykj"]
+
+[node name="CreditsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_s6k4m")
+script = ExtResource("2_h6ykj")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 52.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "@Awysu - Everyone's idol 💋
+Boyong - SFX of Mitty
+Dwraith23 - Programming
+EndorHaiku - Concept art
+Gerardo23 - Concept art & Design
+iSneeze - Programming
+Maedara - SFX & BGM Composer
+Matze - Communication, Organization (more or less) & Oddjobs
+Nilok - VA
+NufP - VA
+The mysterious Artist - Design & art for Mitty (Thanks! 💚)
+WCTB - Programming
+
+Special thanks to:
+Mitty - for being such a great Oshi 💙
+Bingo - for being the best kamioshi the lucky charms can ask for 🦩"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 48
+
+[node name="Button" type="Button" parent="Panel/CenterContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Go Back"
+
+[connection signal="pressed" from="Panel/CenterContainer/VBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2xug0oi3ys7f"]
+[gd_scene load_steps=7 format=3 uid="uid://b2xug0oi3ys7f"]
 
 [ext_resource type="Theme" uid="uid://dqyfmukeegnp5" path="res://UI/Inventory/MenuTheme.tres" id="1_iung7"]
 [ext_resource type="Script" uid="uid://c0g2xes4wvkww" path="res://UI/Inventory/player_menu.gd" id="1_uigyn"]
-[ext_resource type="Texture2D" uid="uid://cjepsto2upesc" path="res://icon.svg" id="2_7ah48"]
 [ext_resource type="Texture2D" uid="uid://b02raijewgh27" path="res://ArtAssets/UI/arrowLeftNidus.svg" id="3_6hv7u"]
 [ext_resource type="Texture2D" uid="uid://dh4pxs5ei1lun" path="res://ArtAssets/UI/arrowRightNidus.svg" id="4_fc81y"]
 [ext_resource type="Texture2D" uid="uid://chnf1tounseof" path="res://ArtAssets/TempMenuBG.jpg" id="5_fc81y"]
@@ -139,7 +138,7 @@ theme_override_font_sizes/bold_font_size = 24
 theme_override_font_sizes/bold_italics_font_size = 24
 theme_override_font_sizes/italics_font_size = 24
 theme_override_font_sizes/mono_font_size = 24
-text = "test text woooooooooooooooooooooooooooooooooooooooooooooooow
+text = "A bit empty here.... go find some messages!
 
 "
 
@@ -150,7 +149,6 @@ size_flags_horizontal = 3
 [node name="PreviewImage" type="TextureRect" parent="Panel/MainLayout/ContentSwitcher/ItemMenu/VMessageContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7ah48")
 expand_mode = 5
 stretch_mode = 5
 

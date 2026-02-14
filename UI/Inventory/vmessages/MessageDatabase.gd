@@ -60,7 +60,7 @@ func load_items_from_csv(file_path: String):
 		elif ResourceLoader.exists(image_path_jpeg):
 			new_item.drawing_texture = load(image_path_jpeg)
 		elif new_item.has_drawing:
-			printerr("ID " + str(new_item.id) + ": "+ new_item.name + " SHOULD HAVE A DRAWING!!!")
+			printerr("ID " + str(new_item.id) + ": " + new_item.name + " SHOULD HAVE A DRAWING!!!")
 		
 		# Add to dictionary using the ID as the Key
 		vmessage_database[id_val] = new_item
