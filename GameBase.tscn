@@ -75,3 +75,5 @@ bus = &"Music"
 parameters/looping = false
 
 [connection signal="game_saved" from="." to="UI Layer/GameSaveNotif" method="_on_game_base_game_saved"]
+[connection signal="finished" from="BGMPlayer" to="." method="_on_bgm_player_finished"]
+[connection signal="finished" from="BossMusicPlayer" to="." method="_on_boss_music_player_finished"]

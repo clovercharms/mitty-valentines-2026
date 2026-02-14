@@ -131,3 +131,13 @@ func on_player_death(_cause: Node):
     await resetTimer.timeout
     get_tree().reload_current_scene()
     BGM.play()
+
+
+func _on_bgm_player_finished() -> void:
+    if not BossMusic.playing:
+        BGM.play()
+
+
+func _on_boss_music_player_finished() -> void:
+    if not BGM.playing:
+        BossMusic.play()
