@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://df5sdmgmmu0cy"]
+
+[ext_resource type="AudioStream" uid="uid://dfm7fw5ivuqup" path="res://SoundAssets/Effects/charm_huh.wav" id="1_238a5"]
+
+[resource]
+random_pitch = 1.2
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("1_238a5")

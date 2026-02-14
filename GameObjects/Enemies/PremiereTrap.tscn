@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cj3wggtmybyg2"]
+[gd_scene load_steps=33 format=3 uid="uid://cj3wggtmybyg2"]
 
 [ext_resource type="Script" uid="uid://irdi5la3v3db" path="res://GameObjects/Enemies/premiere_trap.gd" id="1_liw3a"]
 [ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_bcev4"]
@@ -8,7 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://luw1oyn603rk" path="res://SoundAssets/Effects/tentacle_retract.wav" id="4_1vcu3"]
 [ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="5_7xpqv"]
 [ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="6_glpd0"]
-[ext_resource type="AudioStream" uid="uid://bd8v5ubp01n8c" path="res://SoundAssets/Effects/tentacle_hit.wav" id="7_glpd0"]
+[ext_resource type="AudioStream" uid="uid://bfja1w8rmpe71" path="res://SoundAssets/Effects/tentacle_attack_hit.mp3" id="7_1vcu3"]
+[ext_resource type="AudioStream" uid="uid://bd8v5ubp01n8c" path="res://SoundAssets/Effects/tentacle_damaged.wav" id="7_glpd0"]
 [ext_resource type="AudioStream" uid="uid://sxr0d02sby6o" path="res://SoundAssets/Effects/tentacle_die.wav" id="8_rjjlw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bcev4"]
@@ -194,6 +195,7 @@ collision_layer = 64
 collision_mask = 4
 script = ExtResource("3_wsjm4")
 hitBehavior = 3
+hitSound = ExtResource("7_1vcu3")
 damageCause = NodePath("..")
 
 [node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]

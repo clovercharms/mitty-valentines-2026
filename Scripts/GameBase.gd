@@ -11,11 +11,13 @@ const PICKUPS = "pickups"
 const CURRENT_ROOM = "current_room"
 
 @onready var ui_layer : CanvasLayer = $"UI Layer"
+@onready var BGM: AudioStreamPlayer = $BGMPlayer
+@onready var BossMusic: AudioStreamPlayer = $BossMusicPlayer
 
 @export_group("Game Settings")
 @export var startingMap: String
 @export var playerScene: PackedScene
-@export var deathResetWait: float = 5
+@export var deathResetWait: float = 7
 
 signal game_saved
 
@@ -129,6 +131,9 @@ func player_has_ability(ability: PlayerAbility) -> bool:
 	return playerAbilities[ability]
 
 func on_player_death(_cause: Node):
+	BGM.stop()
+	BossMusic.stop()
 	var resetTimer = get_tree().create_timer(deathResetWait, true, false, true)
 	await resetTimer.timeout
 	get_tree().reload_current_scene()
+	BGM.play()

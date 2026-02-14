@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://bcl6ah81gm7n6"]
+
+[ext_resource type="AudioStream" uid="uid://owobku74a7rv" path="res://SoundAssets/Effects/big_plap1.wav" id="1_66ipw"]
+[ext_resource type="AudioStream" uid="uid://c6yp1mf8wbmwa" path="res://SoundAssets/Effects/big_plap2.wav" id="2_a16ns"]
+[ext_resource type="AudioStream" uid="uid://bggytnb3dpifa" path="res://SoundAssets/Effects/big_plap3.wav" id="3_6fkfq"]
+
+[resource]
+random_pitch = 1.1
+random_volume_offset_db = 3.0
+streams_count = 3
+stream_0/stream = ExtResource("1_66ipw")
+stream_1/stream = ExtResource("2_a16ns")
+stream_2/stream = ExtResource("3_6fkfq")

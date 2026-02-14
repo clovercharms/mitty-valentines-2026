@@ -40,6 +40,7 @@ class_name MittyPlayer extends CharacterBody2D
 @export var deathDrag: float = 1200
 @export var deathTimeSlowAmount: float = 0.2
 @export var deathTimeSlowDuration: float = 1
+@export var deathSweetener: AudioStream
 @export var deathSoundEffect: AudioStream
 
 @onready var coyote_timer: Timer = $CoyoteTimer
@@ -319,7 +320,7 @@ func _on_hurt(_amount: int, cause: Node) -> void:
 
 func _on_death(cause: Node) -> void:
 	setAnimationNoRepeats("dead")
-	if deathSoundEffect: MittyUtils.play_sound(deathSoundEffect, 1)
+	if deathSweetener: MittyUtils.play_sound(deathSweetener, 2)
 	currentState = ControlState.DEAD
 	if cause and "global_position" in cause:
 		var hurtDirection: float = 1
@@ -333,5 +334,6 @@ func _on_death(cause: Node) -> void:
 	MittyUtils.time_slow(deathTimeSlowAmount, deathTimeSlowDuration)
 	var ghostTimer = get_tree().create_timer(ghostAnimDelay)
 	await ghostTimer.timeout
+	if deathSoundEffect: MittyUtils.play_sound(deathSoundEffect, 3)
 	MittyUtils.spawn_at_location(ghostScene, ghostLocation.global_position)
 	#play ghost sound effect

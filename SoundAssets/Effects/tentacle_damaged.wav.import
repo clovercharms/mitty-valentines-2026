@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bd8v5ubp01n8c"
-path="res://.godot/imported/tentacle_hit.wav-118899f8c72927fd206f06180fce3ff8.sample"
+path="res://.godot/imported/tentacle_damaged.wav-379090bbe04c337fed8342334bf8feae.sample"
 
 [deps]
 
-source_file="res://SoundAssets/Effects/tentacle_hit.wav"
-dest_files=["res://.godot/imported/tentacle_hit.wav-118899f8c72927fd206f06180fce3ff8.sample"]
+source_file="res://SoundAssets/Effects/tentacle_damaged.wav"
+dest_files=["res://.godot/imported/tentacle_damaged.wav-379090bbe04c337fed8342334bf8feae.sample"]
 
 [params]
 

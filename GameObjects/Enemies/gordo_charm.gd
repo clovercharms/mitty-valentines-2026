@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var wanderAcceleration: float = 500
 @export var wanderDirectionTimeMin: float = 1
 @export var wanderDirectionTimeMax: float = 3
+@export var aggroSound: AudioStream
 @export_group("Charge")
 @export var chargeYThreshold: float = 100
 @export var chargeXAbort: float = -400
@@ -17,6 +18,7 @@ extends CharacterBody2D
 @export var chargeCooldownMin: float = 1.5
 @export var chargeCooldownMax: float = 3
 @export var chargeMercyHits: int = 2
+@export var chargeCry: AudioStream
 @export_group("Stun")
 @export var stunTime: float = 0.5
 @export var stunLaunch: Vector2 = Vector2(-500, -500)
@@ -90,6 +92,7 @@ func update_idle(delta: float):
 		var target: Vector2 = GameBase.get_singleton().player.global_position
 		if((global_position - target).length() < sensingRange):
 			#alert sound
+			if aggroSound: MittyUtils.play_sound_at_2d(aggroSound, global_position, 1)
 			enter_wander()
 
 func enter_wander():
@@ -122,6 +125,7 @@ func enter_windup():
 	velocity.x = 0
 	setStateTimer(windupTime)
 	setAnimationNoRepeats("charge")
+	if chargeCry: MittyUtils.play_sound_at_2d(chargeCry, global_position, 1)
 
 func update_windup():
 	var toPlayer: Vector2 = GameBase.get_singleton().player.global_position - global_position

@@ -1,12 +1,17 @@
-[gd_scene load_steps=18 format=3 uid="uid://dq4n2ebk7k6qv"]
+[gd_scene load_steps=23 format=3 uid="uid://dq4n2ebk7k6qv"]
 
 [ext_resource type="Script" uid="uid://dwfnlfj20iapp" path="res://GameObjects/runner_charm.gd" id="1_dn8sm"]
 [ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_6q6k2"]
+[ext_resource type="AudioStream" uid="uid://df5sdmgmmu0cy" path="res://SoundAssets/Effects/charm_huh_rand.tres" id="2_yy3vk"]
+[ext_resource type="AudioStream" uid="uid://b7h5ieccrqyfy" path="res://SoundAssets/Effects/charm_attack_rand.tres" id="3_5ipju"]
 [ext_resource type="Texture2D" uid="uid://cm1kr05e80ks5" path="res://ArtAssets/sprites/runner_spritesheet.png" id="3_6q6k2"]
 [ext_resource type="PackedScene" uid="uid://dxypdhwuckprp" path="res://GameObjects/BasicEnemyHealth.tscn" id="4_nycgs"]
+[ext_resource type="AudioStream" uid="uid://cefrkqk0yxhvu" path="res://SoundAssets/Effects/charm_faceplant_rand.tres" id="4_x4t1n"]
 [ext_resource type="PackedScene" uid="uid://dca4fwgtuobf2" path="res://GameObjects/SimpleHitbox.tscn" id="5_x0j8e"]
 [ext_resource type="Texture2D" uid="uid://e0378qdt7cvu" path="res://WraithTests/space/textures/star.png" id="7_77d4d"]
 [ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="7_uym0x"]
+[ext_resource type="AudioStream" uid="uid://bwatsaknj0g8a" path="res://SoundAssets/Effects/charm_damaged_rand.tres" id="8_gwu5a"]
+[ext_resource type="AudioStream" uid="uid://dmlix83dr7w8j" path="res://SoundAssets/Effects/plap.tres" id="9_yy3vk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uym0x"]
 atlas = ExtResource("3_6q6k2")
@@ -100,6 +105,9 @@ height = 58.0
 collision_layer = 8
 collision_mask = 163
 script = ExtResource("1_dn8sm")
+aggroSound = ExtResource("2_yy3vk")
+windupVoice = ExtResource("3_5ipju")
+faceplantSound = ExtResource("4_x4t1n")
 deathEffect = ExtResource("2_6q6k2")
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
@@ -119,21 +127,22 @@ visible = false
 collision_layer = 64
 collision_mask = 4
 hitBehavior = 0
+hitSound = ExtResource("9_yy3vk")
+hitSoundVolume = 2.5
 damageCause = NodePath("..")
 
 [node name="OnHitEffects" parent="." node_paths=PackedStringArray("toModulate") instance=ExtResource("7_uym0x")]
 doHitFlash = true
 toModulate = NodePath("..")
+doSoundEffect = true
+soundEffect = ExtResource("8_gwu5a")
+doDeathSound = true
+deathSound = ExtResource("8_gwu5a")
 
 [node name="MessageStar" type="Sprite2D" parent="."]
 position = Vector2(-5.9604645e-08, -59)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("7_77d4d")
-
-[node name="MovingVoice" type="AudioStreamPlayer2D" parent="."]
-volume_db = -5.0
-autoplay = true
-max_polyphony = 2
 
 [connection signal="death" from="Health" to="." method="_on_death"]
 [connection signal="death" from="Health" to="OnHitEffects" method="_on_health_death"]
