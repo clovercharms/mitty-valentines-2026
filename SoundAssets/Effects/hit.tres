@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://caa5uykiwir6v"]
+
+[ext_resource type="AudioStream" uid="uid://qr6l51k5pjln" path="res://SoundAssets/Effects/hit1.wav" id="1_0fqyc"]
+[ext_resource type="AudioStream" uid="uid://qwhd0qq51t82" path="res://SoundAssets/Effects/hit2.wav" id="2_iotim"]
+[ext_resource type="AudioStream" uid="uid://cbl3qiaf64kv0" path="res://SoundAssets/Effects/hit3.wav" id="3_3k3ep"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_0fqyc")
+stream_1/stream = ExtResource("2_iotim")
+stream_2/stream = ExtResource("3_3k3ep")

@@ -9,6 +9,12 @@ class_name MittyPlayer extends CharacterBody2D
 @export var jumpSpeed: float = -1200.0
 @export var terminalFallSpeed: float = 2000
 @export var controllerTopEnd: float = 0.7
+@export var jumpSoundEffect: AudioStream
+@export var landSoundEffect: AudioStream
+@export var landSoundAirtimeMin: float = 0.2
+@export var landSoundAirtimeMax: float = 0.8
+@export var landSoundVolumeMin: float = 0.2
+@export var landSoundVolumeMax: float = 0.5
 
 @export_group("Attack")
 @export var attackMovementSpeed: float = 1200
@@ -18,12 +24,14 @@ class_name MittyPlayer extends CharacterBody2D
 @export var sideAttackScene: PackedScene
 @export var verticalAttackScene: PackedScene
 @export var pogoSpeed: float = -1000
+@export var attackSound: AudioStream
 
 @export_group("Flinch")
 @export var flinchGroundVelocity: Vector2 = Vector2(-500, -150)
 @export var flinchAirVelocity: Vector2 = Vector2(-500, 0)
 @export var flinchTime: float = 0.3
 @export var hitstopTime: float = 0.2
+@export var hurtSoundEffect: AudioStream
 
 @export_group("Death")
 @export var ghostAnimDelay: float = 1.5
@@ -32,6 +40,7 @@ class_name MittyPlayer extends CharacterBody2D
 @export var deathDrag: float = 1200
 @export var deathTimeSlowAmount: float = 0.2
 @export var deathTimeSlowDuration: float = 1
+@export var deathSoundEffect: AudioStream
 
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var main_sprite: AnimatedSprite2D = $MainSprite
@@ -46,6 +55,7 @@ enum ControlState { MOVE, ATTACK, FLINCH, DEAD }
 var currentState: ControlState = ControlState.MOVE
 var stateTimer: SceneTreeTimer
 var lastMoveDirection: float = 1
+var currentAirtime: float = 0
 
 var attackCooldownTimer: SceneTreeTimer
 var currentAttackIsPogo: bool = false
@@ -100,9 +110,11 @@ func _physics_process(delta: float) -> void:
 	if was_on_floor && !is_on_floor():
 		coyote_timer.start()
 	
-	if is_on_floor and not was_on_floor:
-		#play landing effects
-		pass
+	if is_on_floor() and not was_on_floor:
+		if currentAirtime > landSoundAirtimeMin:
+			var landSoundVolume = MittyUtils.map_range_clamped(currentAirtime, landSoundAirtimeMin, landSoundAirtimeMax, landSoundVolumeMin, landSoundVolumeMax)
+			if landSoundEffect: MittyUtils.play_sound(landSoundEffect, landSoundVolume)
+		currentAirtime = 0
 
 func enter_move():
 	if currentState == ControlState.DEAD:
@@ -118,6 +130,7 @@ func update_move(delta: float):
 			has_double_jumped = true
 		has_jumped = true
 		setAnimationNoRepeats("ascend")
+		if jumpSoundEffect: MittyUtils.play_sound(jumpSoundEffect, 0.45)
 		velocity.y = jumpSpeed
 	# enable short jumps by releasing jump early
 	if Input.is_action_just_released("Jump") and velocity.y < 0:
@@ -200,7 +213,7 @@ func enter_attack():
 	
 	attackCooldownTimer = get_tree().create_timer(attackCooldownTime, true, true)
 	
-	# play audio cue
+	MittyUtils.play_sound(attackSound)
 
 func update_attack(delta: float):
 	if not currentAttackIsPogo:
@@ -235,6 +248,7 @@ func update_dead(delta: float):
 
 func update_gravity(delta: float):
 	if not is_on_floor():
+		currentAirtime += delta
 		if velocity.y < 0:
 			velocity += get_gravity() * delta
 			if currentState == ControlState.MOVE:
@@ -301,9 +315,11 @@ func _on_hurt(_amount: int, cause: Node) -> void:
 			enter_flinch(cause.global_position)
 	else:
 		enter_flinch(Vector2.ZERO)
+	if hurtSoundEffect: MittyUtils.play_sound(hurtSoundEffect)
 
 func _on_death(cause: Node) -> void:
 	setAnimationNoRepeats("dead")
+	if deathSoundEffect: MittyUtils.play_sound(deathSoundEffect, 1)
 	currentState = ControlState.DEAD
 	if cause and "global_position" in cause:
 		var hurtDirection: float = 1

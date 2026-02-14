@@ -1,11 +1,16 @@
-[gd_scene load_steps=42 format=3 uid="uid://42qbdu4ea80j"]
+[gd_scene load_steps=47 format=3 uid="uid://42qbdu4ea80j"]
 
 [ext_resource type="Script" uid="uid://de2pa5swa62wc" path="res://GameObjects/mitty_player.gd" id="1_kur6k"]
 [ext_resource type="PackedScene" uid="uid://cp0vivnky16dc" path="res://GameObjects/MittySlash.tscn" id="2_8edrj"]
 [ext_resource type="Texture2D" uid="uid://cnvqaqw2uktdd" path="res://ArtAssets/sprites/spritesheet_mitty_256x276.png" id="2_lcurd"]
+[ext_resource type="AudioStream" uid="uid://8tftaqkhay6f" path="res://SoundAssets/Effects/Mitty/jump.wav" id="2_mkntf"]
 [ext_resource type="PackedScene" uid="uid://dg60pj65dqfua" path="res://GameObjects/MittySlashVertical.tscn" id="3_84tvs"]
+[ext_resource type="AudioStream" uid="uid://d0kef7etf3eah" path="res://SoundAssets/Effects/land.wav" id="3_t8flt"]
 [ext_resource type="PackedScene" uid="uid://1xm6mkvxw8yt" path="res://GameObjects/MittyGhost.tscn" id="4_84tvs"]
 [ext_resource type="PackedScene" uid="uid://cdb3wogg56hpw" path="res://GameObjects/MittyHealth.tscn" id="4_ubvsx"]
+[ext_resource type="AudioStream" uid="uid://cc6b71sbyii7y" path="res://SoundAssets/Effects/Mitty/mitty_attack.tres" id="4_w67w8"]
+[ext_resource type="AudioStream" uid="uid://xyab68e3qiq5" path="res://SoundAssets/Effects/Mitty/mitty_hit.tres" id="5_u46cc"]
+[ext_resource type="AudioStream" uid="uid://b2chwkmlv6rx4" path="res://SoundAssets/Effects/Mitty/mitty_death.tres" id="7_6hi4p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3sii"]
 radius = 30.0
@@ -301,9 +306,14 @@ z_as_relative = false
 collision_layer = 4
 collision_mask = 211
 script = ExtResource("1_kur6k")
+jumpSoundEffect = ExtResource("2_mkntf")
+landSoundEffect = ExtResource("3_t8flt")
 sideAttackScene = ExtResource("2_8edrj")
 verticalAttackScene = ExtResource("3_84tvs")
+attackSound = ExtResource("4_w67w8")
+hurtSoundEffect = ExtResource("5_u46cc")
 ghostScene = ExtResource("4_84tvs")
+deathSoundEffect = ExtResource("7_6hi4p")
 
 [node name="Trigger Area" type="Area2D" parent="."]
 collision_layer = 20
@@ -321,6 +331,9 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.05
 drag_right_margin = 0.05
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
+current = true
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.12

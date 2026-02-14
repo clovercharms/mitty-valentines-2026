@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dq4n2ebk7k6qv"]
+[gd_scene load_steps=18 format=3 uid="uid://dq4n2ebk7k6qv"]
 
 [ext_resource type="Script" uid="uid://dwfnlfj20iapp" path="res://GameObjects/runner_charm.gd" id="1_dn8sm"]
 [ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_6q6k2"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dca4fwgtuobf2" path="res://GameObjects/SimpleHitbox.tscn" id="5_x0j8e"]
 [ext_resource type="Texture2D" uid="uid://e0378qdt7cvu" path="res://WraithTests/space/textures/star.png" id="7_77d4d"]
 [ext_resource type="PackedScene" uid="uid://c6uwbo0gqalq" path="res://GameObjects/OnHitEffects.tscn" id="7_uym0x"]
-
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uym0x"]
 atlas = ExtResource("3_6q6k2")
@@ -131,6 +130,12 @@ position = Vector2(-5.9604645e-08, -59)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("7_77d4d")
 
+[node name="MovingVoice" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
+autoplay = true
+max_polyphony = 2
+
 [connection signal="death" from="Health" to="." method="_on_death"]
+[connection signal="death" from="Health" to="OnHitEffects" method="_on_health_death"]
 [connection signal="hurt" from="Health" to="." method="_on_hurt"]
 [connection signal="hurt" from="Health" to="OnHitEffects" method="_on_health_hurt"]

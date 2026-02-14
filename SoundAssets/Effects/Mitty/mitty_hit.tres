@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://xyab68e3qiq5"]
+
+[ext_resource type="AudioStream" uid="uid://dceo1ki0tsjth" path="res://SoundAssets/Effects/Mitty/mitty_hit1.mp3" id="1_ben1c"]
+[ext_resource type="AudioStream" uid="uid://d1rhkcvvavniy" path="res://SoundAssets/Effects/Mitty/mitty_hit2.mp3" id="2_uiuqi"]
+[ext_resource type="AudioStream" uid="uid://1mvo0y6qcp4o" path="res://SoundAssets/Effects/Mitty/mitty_hit3.mp3" id="3_lcaa0"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_ben1c")
+stream_1/stream = ExtResource("2_uiuqi")
+stream_2/stream = ExtResource("3_lcaa0")

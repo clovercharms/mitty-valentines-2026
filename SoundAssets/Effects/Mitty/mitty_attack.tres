@@ -1,0 +1,23 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=10 format=3 uid="uid://cc6b71sbyii7y"]
+
+[ext_resource type="AudioStream" uid="uid://cyliqfreqw67g" path="res://SoundAssets/Effects/Mitty/swish-1.wav" id="1_3bmfe"]
+[ext_resource type="AudioStream" uid="uid://don4qkfwifi2j" path="res://SoundAssets/Effects/Mitty/swish-2.wav" id="2_lq0vm"]
+[ext_resource type="AudioStream" uid="uid://bm3vd1wpcg0pa" path="res://SoundAssets/Effects/Mitty/swish-3.wav" id="3_3oqav"]
+[ext_resource type="AudioStream" uid="uid://bgfmjik4juobv" path="res://SoundAssets/Effects/Mitty/swish-4.wav" id="4_5tjnt"]
+[ext_resource type="AudioStream" uid="uid://bgn7ifj2a2tjj" path="res://SoundAssets/Effects/Mitty/swish-5.wav" id="5_36k7j"]
+[ext_resource type="AudioStream" uid="uid://cvhr3opfyuc2n" path="res://SoundAssets/Effects/Mitty/swish-6.wav" id="6_oq886"]
+[ext_resource type="AudioStream" uid="uid://b2l5t1614ulp5" path="res://SoundAssets/Effects/Mitty/swish-7.wav" id="7_8bmbm"]
+[ext_resource type="AudioStream" uid="uid://8jj2l5clxj40" path="res://SoundAssets/Effects/Mitty/swish-8.wav" id="8_dumes"]
+[ext_resource type="AudioStream" uid="uid://serlm2hm35dv" path="res://SoundAssets/Effects/Mitty/swish-9.wav" id="9_ubnkd"]
+
+[resource]
+streams_count = 9
+stream_0/stream = ExtResource("1_3bmfe")
+stream_1/stream = ExtResource("2_lq0vm")
+stream_2/stream = ExtResource("3_3oqav")
+stream_3/stream = ExtResource("4_5tjnt")
+stream_4/stream = ExtResource("5_36k7j")
+stream_5/stream = ExtResource("6_oq886")
+stream_6/stream = ExtResource("7_8bmbm")
+stream_7/stream = ExtResource("8_dumes")
+stream_8/stream = ExtResource("9_ubnkd")

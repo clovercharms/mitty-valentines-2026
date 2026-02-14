@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://m01jl46tes6q"]
+[gd_scene load_steps=4 format=3 uid="uid://m01jl46tes6q"]
 
 [ext_resource type="Script" uid="uid://dmdxehw05cbm1" path="res://UI/main_menu.gd" id="1_b37jj"]
 [ext_resource type="Texture2D" uid="uid://3n8vuxcsidc6" path="res://ArtAssets/title screen.jpg" id="2_b37jj"]
+[ext_resource type="FontFile" uid="uid://cstgvtq87srg4" path="res://UI/fonts/Perpetua Regular.otf" id="3_8aown"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -36,21 +37,24 @@ grow_vertical = 2
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../NewGameButton")
-theme_override_font_sizes/font_size = 36
+theme_override_fonts/font = ExtResource("3_8aown")
+theme_override_font_sizes/font_size = 48
 text = "Start Game"
 
 [node name="NewGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../StartButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
-theme_override_font_sizes/font_size = 36
+theme_override_fonts/font = ExtResource("3_8aown")
+theme_override_font_sizes/font_size = 48
 text = "New Game"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../NewGameButton")
 focus_neighbor_bottom = NodePath("../StartButton")
-theme_override_font_sizes/font_size = 36
+theme_override_fonts/font = ExtResource("3_8aown")
+theme_override_font_sizes/font_size = 48
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

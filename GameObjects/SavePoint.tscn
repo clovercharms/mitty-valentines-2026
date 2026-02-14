@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c70t0wy5bxavc"]
+[gd_scene load_steps=10 format=3 uid="uid://c70t0wy5bxavc"]
 
 [ext_resource type="PackedScene" uid="uid://c1enbtlfcyxey" path="res://GameObjects/EditorOnlySprite.tscn" id="1_dn0lj"]
 [ext_resource type="Script" uid="uid://bokpdthl1qsc8" path="res://GameObjects/save_point.gd" id="1_pjqlm"]
+[ext_resource type="AudioStream" uid="uid://bcq7syf87t8qq" path="res://SoundAssets/Effects/heal.wav" id="2_bd78f"]
 [ext_resource type="Texture2D" uid="uid://qp30ichujgjp" path="res://addons/MetroidvaniaSystem/Themes/MF/Symbols/SaveRoom.png" id="2_vt60m"]
 [ext_resource type="Texture2D" uid="uid://wl7qj0bfirny" path="res://ArtAssets/sprites/bingo.png" id="3_vt60m"]
 [ext_resource type="PackedScene" uid="uid://08l7k0fl6w34" path="res://WraithTests/player_trigger.tscn" id="4_2ipcq"]
@@ -30,6 +31,7 @@ animations = [{
 
 [node name="SavePoint" type="Node2D"]
 script = ExtResource("1_pjqlm")
+saveSoundEffect = ExtResource("2_bd78f")
 
 [node name="EditorOnlySprite" parent="." instance=ExtResource("1_dn0lj")]
 texture_filter = 1

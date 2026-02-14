@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var flinchLaunchSpeed: float = 2000
 @export var flinchDrag: float = 10000
 @export var deathEffect: PackedScene
+@export var aggroSound: AudioStream
 
 @export_category("aggro")
 @export var aggro_range : float = 500
@@ -20,6 +21,7 @@ const UFO_DEBUG: bool = false
 @onready var hitbox = $Hitbox
 @onready var aggro_area : Area2D = $"Aggro Range"
 @onready var aggro_collider : CollisionShape2D = $"Aggro Range/Aggro Collider"
+@onready var engineNoise: AudioStreamPlayer2D = $EngineNoise
 
 enum State {IDLE, MOVE, WAIT, FLINCH }
 
@@ -124,4 +126,7 @@ func aggroed(area : Area2D) -> void:
 	if UFO_DEBUG: print("ufo aggroed")
 	if area.get_parent() is not MittyPlayer:
 		return
+	aggro_area.queue_free()
 	enter_wait()
+	MittyUtils.play_sound_at_2d(aggroSound, global_position)
+	engineNoise.play()

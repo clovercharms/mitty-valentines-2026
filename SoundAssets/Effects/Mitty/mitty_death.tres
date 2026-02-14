@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://b2chwkmlv6rx4"]
+
+[ext_resource type="AudioStream" uid="uid://pl3i577j7x1a" path="res://SoundAssets/Effects/Mitty/mitty_death1.mp3" id="1_d22eu"]
+[ext_resource type="AudioStream" uid="uid://dpmsid7j3n7d1" path="res://SoundAssets/Effects/Mitty/mitty_death2.mp3" id="2_r6v5j"]
+[ext_resource type="AudioStream" uid="uid://dl3r8yg25todg" path="res://SoundAssets/Effects/Mitty/mitty_death3.mp3" id="3_n41ty"]
+[ext_resource type="AudioStream" uid="uid://dyei3bjurvwk3" path="res://SoundAssets/Effects/Mitty/mitty_death4.mp3" id="4_aklov"]
+[ext_resource type="AudioStream" uid="uid://wvq65j21436g" path="res://SoundAssets/Effects/Mitty/mitty_death5.mp3" id="5_4rt6g"]
+[ext_resource type="AudioStream" uid="uid://o37esuwklcal" path="res://SoundAssets/Effects/Mitty/mitty_death6.mp3" id="6_5jn6y"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("1_d22eu")
+stream_1/stream = ExtResource("2_r6v5j")
+stream_2/stream = ExtResource("3_n41ty")
+stream_3/stream = ExtResource("4_aklov")
+stream_4/stream = ExtResource("5_4rt6g")
+stream_5/stream = ExtResource("6_5jn6y")
