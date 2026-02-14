@@ -9,19 +9,19 @@ var triggered : bool = false
 
 
 func _on_area_entered(area: Area2D) -> void:
-    if area.get_parent() is not MittyPlayer:
-        return
-    print("player entered trigger area: ", self.name)
-    if one_shot and not triggered:
-        triggered = true
-        player_entered.emit()
-    elif not one_shot:
-        player_entered.emit()
-        
+	if area.get_parent() is not MittyPlayer:
+		return
+	print("player entered trigger area: ", self.name)
+	if one_shot and not triggered:
+		triggered = true
+		player_entered.emit()
+	elif not one_shot:
+		player_entered.emit()
+		
 
 
 func _on_area_exited(area: Area2D) -> void:
-    if area.get_parent() is not MittyPlayer:
-        return
-    print("player exited trigger area: ", self.name)
-    player_exited.emit()
+	if area.get_parent() is not MittyPlayer:
+		return
+	print("player exited trigger area: ", self.name)
+	player_exited.emit()

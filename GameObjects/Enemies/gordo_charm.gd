@@ -30,7 +30,7 @@ extends CharacterBody2D
 @export_group("Death")
 @export var deathEffect: PackedScene
 
-const GORDO_DEBUG: bool = true
+const GORDO_DEBUG: bool = false
 
 @onready var mainSprite: AnimatedSprite2D = $MainSprite
 @onready var hitbox: Node = $Hitbox

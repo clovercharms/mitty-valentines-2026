@@ -44,3 +44,5 @@ frame_progress = 0.63755316
 
 [node name="Player Trigger" parent="." instance=ExtResource("4_2ipcq")]
 scale = Vector2(8.426575, -9.677405)
+
+[connection signal="player_entered" from="Player Trigger" to="." method="_on_player_trigger_player_entered"]
