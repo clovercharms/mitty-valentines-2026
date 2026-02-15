@@ -18,9 +18,13 @@ func damage(amount: int, cause: Node):
 	
 	if(currentHealth == 0):
 		death.emit(cause)
+		EventBus.request_screen_shake.emit(1, Vector2(1, 1))
+		EventBus.request_edge_flash.emit(2)
 	else:
 		_setHitInvulnerability(hitInvulnerabilityTime)
 		hurt.emit(amount, cause)
+		EventBus.request_screen_shake.emit(0.4, Vector2(1, 1))
+		EventBus.request_edge_flash.emit(0.7)
 
 func heal(amount: int, cause: Node):
 	var startingHealth = currentHealth

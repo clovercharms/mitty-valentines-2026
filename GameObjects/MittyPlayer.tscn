@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://42qbdu4ea80j"]
+[gd_scene load_steps=50 format=3 uid="uid://42qbdu4ea80j"]
 
 [ext_resource type="Script" uid="uid://de2pa5swa62wc" path="res://GameObjects/mitty_player.gd" id="1_kur6k"]
 [ext_resource type="PackedScene" uid="uid://cp0vivnky16dc" path="res://GameObjects/MittySlash.tscn" id="2_8edrj"]
@@ -12,10 +12,13 @@
 [ext_resource type="AudioStream" uid="uid://xyab68e3qiq5" path="res://SoundAssets/Effects/Mitty/mitty_hit.tres" id="5_u46cc"]
 [ext_resource type="AudioStream" uid="uid://b2chwkmlv6rx4" path="res://SoundAssets/Effects/Mitty/mitty_death.tres" id="7_6hi4p"]
 [ext_resource type="AudioStream" uid="uid://ddly4d7okcc86" path="res://SoundAssets/Effects/death_fail.mp3" id="9_t8flt"]
+[ext_resource type="Script" uid="uid://dwnafdm5q0ly8" path="res://GameObjects/extended_camera.gd" id="11_jw6tr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3sii"]
 radius = 30.0
 height = 100.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0nc64"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qe0th"]
 atlas = ExtResource("2_lcurd")
@@ -333,6 +336,8 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.05
 drag_right_margin = 0.05
+script = ExtResource("11_jw6tr")
+noise = SubResource("FastNoiseLite_0nc64")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
 current = true

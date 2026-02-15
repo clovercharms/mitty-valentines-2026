@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf57n046n55b2"]
+
+[ext_resource type="Script" uid="uid://n44frwn7twg" path="res://GameObjects/vignette_overlay.gd" id="1_06oc3"]
+[ext_resource type="Shader" uid="uid://331triobmhf1" path="res://GameObjects/screen_vignette.gdshader" id="1_fn4rc"]
+
+[sub_resource type="Curve" id="Curve_06oc3"]
+_data = [Vector2(0.005102046, 0.97752815), 0.0, 0.0, 0, 0, Vector2(0.38265306, 0.8876405), -0.4719101, -0.4719101, 0, 0, Vector2(0.6785714, 0.46067423), -1.6883897, -1.6883897, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_06oc3"]
+shader = ExtResource("1_fn4rc")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[node name="VignetteOverlay" type="CanvasLayer" node_paths=PackedStringArray("canvas")]
+script = ExtResource("1_06oc3")
+flash_curve = SubResource("Curve_06oc3")
+canvas = NodePath("VingetteCanvas")
+
+[node name="VingetteCanvas" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_06oc3")
+offset_right = 1920.0
+offset_bottom = 1080.0

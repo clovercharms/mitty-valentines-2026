@@ -47,5 +47,4 @@ func _process(_delta: float) -> void:
 	scale = Vector2(uniform_scale, uniform_scale)
 
 func _on_timer_timeout() -> void:
-	print("freeing spin away death")
 	queue_free()

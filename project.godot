@@ -21,6 +21,7 @@ MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 MittyUtils="*res://Scripts/MittyUtils.gd"
 MessageDatabase="*res://UI/Inventory/vmessages/MessageDatabase.gd"
 SessionState="*res://Scripts/SessionState.gd"
+EventBus="*res://Scripts/EventBus.gd"
 
 [display]
 

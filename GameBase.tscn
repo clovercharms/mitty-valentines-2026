@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cg1jh5qvhxcoh"]
+[gd_scene load_steps=10 format=3 uid="uid://cg1jh5qvhxcoh"]
 
 [ext_resource type="Script" uid="uid://c1fi0rwyjbnp4" path="res://Scripts/GameBase.gd" id="1_5ajq4"]
 [ext_resource type="PackedScene" uid="uid://42qbdu4ea80j" path="res://GameObjects/MittyPlayer.tscn" id="2_3re7u"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c7vweyfl2bkm2" path="res://WraithTests/space/space.tscn" id="4_8ou7b"]
 [ext_resource type="PackedScene" uid="uid://b2xug0oi3ys7f" path="res://UI/Inventory/PlayerMenu.tscn" id="5_du5sl"]
 [ext_resource type="Script" uid="uid://cuw5mfuvtm3lr" path="res://GameObjects/game_save_notif.gd" id="6_gol31"]
+[ext_resource type="PackedScene" uid="uid://bf57n046n55b2" path="res://GameObjects/VignetteOverlay.tscn" id="7_gdcoj"]
 [ext_resource type="AudioStream" uid="uid://d14evaexp3834" path="res://SoundAssets/Music/02_mitty valentines 26 bgm.mp3" id="7_vp2vq"]
 [ext_resource type="AudioStream" uid="uid://eemlnm2pwv7a" path="res://SoundAssets/Music/04_mitty valentines BOSS 26 bgm.mp3" id="8_gdcoj"]
 
@@ -60,6 +61,10 @@ offset_bottom = 1004.0
 theme_override_font_sizes/font_size = 36
 text = "Game saved"
 script = ExtResource("6_gol31")
+
+[node name="VignetteOverlay" parent="UI Layer" instance=ExtResource("7_gdcoj")]
+layer = 0
+visible = false
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_vp2vq")
