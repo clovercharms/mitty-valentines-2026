@@ -7,5 +7,5 @@ var message_data : MessageData
 var message_collected : bool = false
 
 func _ready() -> void:
-    pass
-    
+	pass
+	

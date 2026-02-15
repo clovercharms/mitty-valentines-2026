@@ -22,6 +22,7 @@ MittyUtils="*res://Scripts/MittyUtils.gd"
 MessageDatabase="*res://UI/Inventory/vmessages/MessageDatabase.gd"
 SessionState="*res://Scripts/SessionState.gd"
 EventBus="*res://Scripts/EventBus.gd"
+Adobe="*res://Scripts/Adobe.gd"
 
 [display]
 

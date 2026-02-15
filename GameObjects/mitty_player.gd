@@ -71,7 +71,6 @@ var has_control : bool = true
 
 var reset_position : Marker2D
 
-
 func on_enter():
 	var roomInstance = GameBase.get_singleton().map.find_child("RoomInstance")
 	if roomInstance:
@@ -336,5 +335,19 @@ func _on_death(cause: Node) -> void:
 	var ghostTimer = get_tree().create_timer(ghostAnimDelay)
 	await ghostTimer.timeout
 	if deathSoundEffect: MittyUtils.play_sound(deathSoundEffect, 3)
+	
+	if cause and cause.name == "PremiereTrap" and Adobe.hasDiedToAdobe == false:
+		Adobe.hasDiedToAdobe = true
+		playAdobeDeath()
+		await get_tree().create_timer(8).timeout	
 	MittyUtils.spawn_at_location(ghostScene, ghostLocation.global_position)
 	#play ghost sound effect
+
+func playAdobeDeath():
+	Adobe.ShowAdobe1.emit()
+	await get_tree().create_timer(2).timeout
+	Adobe.ShowAdobe2.emit()
+	await get_tree().create_timer(2).timeout
+	Adobe.ShowAdobeFinal.emit()
+	await get_tree().create_timer(4).timeout
+	Adobe.HideAdobe.emit()

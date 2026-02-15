@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://ru7hqfjd2jyp"]
+[gd_scene load_steps=10 format=3 uid="uid://ru7hqfjd2jyp"]
 
 [ext_resource type="Script" uid="uid://dxptcd5mav5pv" path="res://UI/health_hearts.gd" id="1_yixhe"]
 [ext_resource type="PackedScene" uid="uid://dogl7mhxxpnny" path="res://UI/ui_heart.tscn" id="2_ijstf"]
 [ext_resource type="PackedScene" uid="uid://di15ybn4m5gt3" path="res://UI/ui_message_counter.tscn" id="3_4n7mi"]
+[ext_resource type="Texture2D" uid="uid://dldf85100qq58" path="res://assets/AdobeInstall1.png" id="4_gppie"]
+[ext_resource type="Texture2D" uid="uid://d2qxi0u78y76b" path="res://assets/AdobeInstall2.png" id="5_2ptjp"]
+[ext_resource type="Script" uid="uid://0vein6xp4te5" path="res://UI/adobe_install_1.gd" id="6_7i7fj"]
+[ext_resource type="Texture2D" uid="uid://duthe1hu073k6" path="res://assets/Adobeinstallfinished.png" id="6_md4fy"]
+[ext_resource type="Script" uid="uid://bvempksy08por" path="res://UI/adobe_install_2.gd" id="8_rbci0"]
+[ext_resource type="Script" uid="uid://bjkbxg1bncpgm" path="res://UI/adobeinstallfinished.gd" id="10_am7sw"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -30,5 +36,23 @@ anchor_top = 0.88703704
 anchor_right = 0.030729167
 anchor_bottom = 0.88703704
 grow_vertical = 0
+
+[node name="AdobeInstall1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(930, 525)
+texture = ExtResource("4_gppie")
+script = ExtResource("6_7i7fj")
+
+[node name="AdobeInstall2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(930, 525)
+texture = ExtResource("5_2ptjp")
+script = ExtResource("8_rbci0")
+
+[node name="Adobeinstallfinished" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(930, 525)
+texture = ExtResource("6_md4fy")
+script = ExtResource("10_am7sw")
 
 [connection signal="timeout" from="HealthHearts/HeartPulseTimer" to="HealthHearts" method="_on_heart_pulse_timer_timeout"]
