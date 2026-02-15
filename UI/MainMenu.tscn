@@ -44,14 +44,14 @@ text = "Start Game"
 [node name="NewGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../StartButton")
-focus_neighbor_bottom = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../CreditsButton")
 theme_override_fonts/font = ExtResource("3_8aown")
 theme_override_font_sizes/font_size = 48
 text = "New Game"
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_top = NodePath("../NewGameButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
 theme_override_fonts/font = ExtResource("3_8aown")
 theme_override_font_sizes/font_size = 48
@@ -59,7 +59,7 @@ text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-focus_neighbor_top = NodePath("../NewGameButton")
+focus_neighbor_top = NodePath("../CreditsButton")
 focus_neighbor_bottom = NodePath("../StartButton")
 theme_override_fonts/font = ExtResource("3_8aown")
 theme_override_font_sizes/font_size = 48
