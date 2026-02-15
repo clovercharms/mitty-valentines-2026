@@ -16,7 +16,10 @@ var scale_target: float = 1
 func takeGraphicalNode(toTake: Node):
 	if "global_position" in toTake:
 		global_position = toTake.global_position
-	toTake.reparent(self, false)
+	if toTake.get_parent():
+		toTake.reparent(self, false)
+	else:
+		add_child(toTake)
 
 func _ready() -> void:
 	var initial_speed = randf_range(start_speed_min, start_speed_max)

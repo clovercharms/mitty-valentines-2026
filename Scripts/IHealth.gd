@@ -26,3 +26,9 @@ func heal(amount: int, cause: Node):
 @warning_ignore("unused_parameter")
 func instantKill(cause: Node):
 	pass
+
+func getCurrentHealth() -> int:
+	return -1
+
+func getMaxHealth() -> int:
+	return -1

@@ -35,6 +35,12 @@ func heal(amount: int, cause: Node):
 func instantKill(_cause: Node):
 	print("instantKill not implemented for Mitty")
 
+func getCurrentHealth() -> int:
+	return currentHealth
+
+func getMaxHealth() -> int:
+	return computeMaxHealth()
+
 ### Helpers
 func computeMaxHealth() -> int:
 	return baseHealth

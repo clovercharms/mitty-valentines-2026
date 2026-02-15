@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dogl7mhxxpnny"]
+
+[ext_resource type="Script" uid="uid://kdfdrhbf4hxw" path="res://UI/ui_heart.gd" id="1_4hphx"]
+[ext_resource type="PackedScene" uid="uid://dfvt0w2ikh88u" path="res://GameObjects/SpinAwayDeath.tscn" id="2_8uegb"]
+[ext_resource type="Texture2D" uid="uid://byl5txl82lb1l" path="res://ArtAssets/UI/circle_32.png" id="2_yss8b"]
+[ext_resource type="Texture2D" uid="uid://cqafb3t4io30d" path="res://ArtAssets/UI/red_heart_outlined.png" id="3_8uegb"]
+
+[sub_resource type="Curve" id="Curve_xmp1i"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1.25), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.6425757, 0.0, 0, 0]
+point_count = 2
+
+[node name="UiHeart" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_4hphx")
+pulseCurve = SubResource("Curve_xmp1i")
+emptyScene = ExtResource("2_8uegb")
+
+[node name="EmptyPip" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+texture = ExtResource("2_yss8b")
+
+[node name="FullHeart" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_8uegb")
