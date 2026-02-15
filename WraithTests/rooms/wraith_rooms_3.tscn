@@ -59,6 +59,12 @@ position = Vector2(3425, 516)
 [node name="RunnerCharm8" parent="Enemies" instance=ExtResource("5_omsr8")]
 position = Vector2(728, 282)
 
+[node name="RunnerCharm9" parent="Enemies" instance=ExtResource("5_omsr8")]
+position = Vector2(1641, 1935)
+
+[node name="RunnerCharm10" parent="Enemies" instance=ExtResource("5_omsr8")]
+position = Vector2(2344, 1931)
+
 [node name="PremiereTrap" parent="." instance=ExtResource("6_3k60b")]
 position = Vector2(993, 479)
 
