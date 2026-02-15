@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=4 uid="uid://c7cydp5mm37oe"]
+[gd_scene load_steps=10 format=4 uid="uid://c7cydp5mm37oe"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_2uhfu"]
 [ext_resource type="TileSet" uid="uid://drwolgr7keq1k" path="res://WraithTests/testing_tileset.tres" id="2_f82uj"]
 [ext_resource type="PackedScene" uid="uid://dq4n2ebk7k6qv" path="res://GameObjects/RunnerCharm.tscn" id="3_85tmd"]
-[ext_resource type="PackedScene" uid="uid://crojmkjeqwm01" path="res://GameObjects/triggered_door.tscn" id="3_yg3fc"]
+[ext_resource type="PackedScene" path="res://GameObjects/triggered_door.tscn" id="3_yg3fc"]
 [ext_resource type="PackedScene" uid="uid://08l7k0fl6w34" path="res://WraithTests/player_trigger.tscn" id="4_2agl1"]
-[ext_resource type="PackedScene" uid="uid://q5vppl4vapmg" path="res://GameObjects/Enemies/GordoCharm.tscn" id="4_uu2ep"]
+[ext_resource type="PackedScene" path="res://GameObjects/Enemies/GordoCharm.tscn" id="4_uu2ep"]
 [ext_resource type="PackedScene" uid="uid://cj3wggtmybyg2" path="res://GameObjects/Enemies/PremiereTrap.tscn" id="5_eddpl"]
 [ext_resource type="PackedScene" uid="uid://c70t0wy5bxavc" path="res://GameObjects/SavePoint.tscn" id="8_eddpl"]
+[ext_resource type="Theme" uid="uid://dqyfmukeegnp5" path="res://UI/Inventory/MenuTheme.tres" id="9_eddpl"]
 
 [node name="WraithRooms-9" type="Node2D"]
 
@@ -136,6 +137,14 @@ scale = Vector2(29.76, 10.11999)
 
 [node name="SavePoint" parent="Triggers" instance=ExtResource("8_eddpl")]
 position = Vector2(4899, 2022)
+
+[node name="KeyRequired" type="Label" parent="."]
+offset_left = 72.0
+offset_top = 452.0
+offset_right = 226.0
+offset_bottom = 478.0
+theme = ExtResource("9_eddpl")
+text = "Key required!"
 
 [connection signal="player_entered" from="Triggers/PR Door Trigger" to="Doors/Platformer Room Door" method="open"]
 [connection signal="player_exited" from="Triggers/PR Door Trigger" to="Doors/Platformer Room Door" method="close"]
