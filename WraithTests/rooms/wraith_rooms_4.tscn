@@ -120,12 +120,6 @@ position = Vector2(1306, 1044)
 [node name="RunnerCharm2" parent="Enemies" instance=ExtResource("7_f88dt")]
 position = Vector2(3480, 1044)
 
-[node name="RunnerCharm3" parent="Enemies" instance=ExtResource("7_f88dt")]
-position = Vector2(2072, 664)
-
-[node name="RunnerCharm4" parent="Enemies" instance=ExtResource("7_f88dt")]
-position = Vector2(1955, 147)
-
 [node name="GordoCharm" parent="Enemies" instance=ExtResource("10_7iu2v")]
 modulate = Color(0, 1, 0, 1)
 position = Vector2(2446, 387)
