@@ -336,7 +336,7 @@ func _on_death(cause: Node) -> void:
 	await ghostTimer.timeout
 	if deathSoundEffect: MittyUtils.play_sound(deathSoundEffect, 3)
 	
-	if cause and cause.name == "PremiereTrap" and Adobe.hasDiedToAdobe == false:
+	if cause and "PremiereTrap" in cause.name and Adobe.hasDiedToAdobe == false:
 		Adobe.hasDiedToAdobe = true
 		playAdobeDeath()
 		await get_tree().create_timer(8).timeout	
