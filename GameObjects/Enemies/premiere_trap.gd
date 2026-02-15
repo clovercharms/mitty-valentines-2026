@@ -57,7 +57,7 @@ func _on_deactivate_trigger_body_exited(_body: Node2D) -> void:
 		enter_closing()
 
 func _on_health_death(_cause: Node) -> void:
-	MittyUtils.hit_stop(0.05)
+	MittyUtils.hit_stop(0.1)
 	var deathEffectInstance = MittyUtils.spawn_at_location(deathScene, global_position)
 	deathEffectInstance.takeGraphicalNode(mainSprite)
 	queue_free()

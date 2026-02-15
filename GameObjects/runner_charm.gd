@@ -272,7 +272,7 @@ func _on_death(_cause: Node) -> void:
 			gb.collectedMessages.append(message_id)
 			MessageDatabase.discover_message(message_id)
 			print(gb.collectedMessages)
-	MittyUtils.hit_stop(0.05)
+	MittyUtils.hit_stop(0.1)
 	mainSprite.stop()
 	var deathEffectInstance = MittyUtils.spawn_at_location(deathEffect, global_position)
 	deathEffectInstance.takeGraphicalNode(mainSprite)

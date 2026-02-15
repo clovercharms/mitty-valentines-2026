@@ -60,6 +60,7 @@ collision_priority = 2.0
 script = ExtResource("1_08stw")
 hitSound = ExtResource("2_el78n")
 hitSoundVolume = 0.3
+doHitVibrate = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_lott8")

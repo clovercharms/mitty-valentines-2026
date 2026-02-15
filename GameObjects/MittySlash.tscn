@@ -60,6 +60,7 @@ collision_priority = 2.0
 script = ExtResource("1_xykrb")
 hitSound = ExtResource("2_lott8")
 hitSoundVolume = 0.3
+doHitVibrate = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964
