@@ -11,4 +11,5 @@ func _ready():
 func _update_counter():
 	var max = MessageDatabase.vmessage_database.size()
 	var current = MessageDatabase.vmessage_database.values().filter(func(data): return data.discovered).size()
-	counter_label.text = str(current) + " / " + str(max)
+	var current_string = "%02d" % current
+	counter_label.text = str(current_string) + " / " + str(max)

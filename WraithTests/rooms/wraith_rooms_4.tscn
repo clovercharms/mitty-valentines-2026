@@ -5,13 +5,13 @@
 [ext_resource type="TileSet" uid="uid://drwolgr7keq1k" path="res://WraithTests/testing_tileset.tres" id="2_byvv1"]
 [ext_resource type="PackedScene" uid="uid://gqvladfb8ei8" path="res://WraithTests/moving_platform_test.tscn" id="3_p8qia"]
 [ext_resource type="PackedScene" uid="uid://08l7k0fl6w34" path="res://WraithTests/player_trigger.tscn" id="4_r7ofj"]
-[ext_resource type="PackedScene" uid="uid://crojmkjeqwm01" path="res://GameObjects/triggered_door.tscn" id="5_lmorv"]
+[ext_resource type="PackedScene" path="res://GameObjects/triggered_door.tscn" id="5_lmorv"]
 [ext_resource type="PackedScene" uid="uid://c70t0wy5bxavc" path="res://GameObjects/SavePoint.tscn" id="6_f88dt"]
 [ext_resource type="PackedScene" uid="uid://cj3wggtmybyg2" path="res://GameObjects/Enemies/PremiereTrap.tscn" id="6_wao8x"]
 [ext_resource type="PackedScene" uid="uid://dq4n2ebk7k6qv" path="res://GameObjects/RunnerCharm.tscn" id="7_f88dt"]
 [ext_resource type="PackedScene" uid="uid://b3kguadvcytux" path="res://GameObjects/pickup.tscn" id="8_7gc4r"]
 [ext_resource type="Texture2D" uid="uid://c8ys3rfq2mmcd" path="res://assets/key_PNG103635.png" id="9_6ndbm"]
-[ext_resource type="PackedScene" uid="uid://q5vppl4vapmg" path="res://GameObjects/Enemies/GordoCharm.tscn" id="10_7iu2v"]
+[ext_resource type="PackedScene" path="res://GameObjects/Enemies/GordoCharm.tscn" id="10_7iu2v"]
 
 [node name="WraithRooms-4" type="Node2D"]
 script = ExtResource("1_v80r7")
@@ -122,6 +122,9 @@ position = Vector2(3480, 1044)
 
 [node name="RunnerCharm3" parent="Enemies" instance=ExtResource("7_f88dt")]
 position = Vector2(2072, 664)
+
+[node name="RunnerCharm4" parent="Enemies" instance=ExtResource("7_f88dt")]
+position = Vector2(1955, 147)
 
 [node name="GordoCharm" parent="Enemies" instance=ExtResource("10_7iu2v")]
 modulate = Color(0, 1, 0, 1)

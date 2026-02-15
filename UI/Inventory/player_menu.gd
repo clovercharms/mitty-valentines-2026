@@ -12,7 +12,7 @@ extends Control
 @onready var fullsize_image = $Panel/FullScreenOverlay/MarginContainer/FullSizeImage
 @onready var hud = get_parent().get_node("HUD")
 
-var current_focused_item_data = null
+var current_focused_item_data: MessageData = null
 var dirty: bool = true
 var decoded = false
 
@@ -88,7 +88,7 @@ func handle_fullscreen_input():
 			open_fullscreen()
 
 func open_fullscreen():
-	if current_focused_item_data.discovered:
+	if current_focused_item_data.has_drawing:
 		fullsize_image.texture = current_focused_item_data.drawing_texture
 		fullsize_overlay.visible = true
 		# Pause navigation of background menu
@@ -99,7 +99,9 @@ func close_fullscreen():
 	# Re-enable navigation
 	vday_item_list.process_mode = Node.PROCESS_MODE_INHERIT
 	# Important: Return focus to the list so controller doesn't get lost
-	get_viewport().gui_get_focus_owner().grab_focus()
+	var focus = get_viewport().gui_get_focus_owner()
+	if focus != null:
+		focus.grab_focus()
 	
 const CHARACTERS := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !@#$%^&*()"
 
