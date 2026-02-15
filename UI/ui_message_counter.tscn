@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://di15ybn4m5gt3"]
+
+[ext_resource type="Theme" uid="uid://dqyfmukeegnp5" path="res://UI/Inventory/MenuTheme.tres" id="1_uyk7i"]
+[ext_resource type="Script" uid="uid://cvx5w4gk4faxi" path="res://UI/ui_message_counter.gd" id="2_x01ft"]
+[ext_resource type="Texture2D" uid="uid://xfcyi6ob0mba" path="res://ArtAssets/UI/message.png" id="3_i17xn"]
+
+[node name="MessageCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme = ExtResource("1_uyk7i")
+script = ExtResource("2_x01ft")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 105.0
+offset_bottom = 120.0
+scale = Vector2(0.6, 0.6)
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_i17xn")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "XX / XX"

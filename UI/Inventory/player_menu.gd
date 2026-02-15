@@ -75,8 +75,8 @@ func _update_details_panel(data: MessageData):
 		vday_active_image_preview.texture = data.drawing_texture
 		vday_active_text.text = data.message
 	else:
-		# reads: gofinditbrat
-		vday_active_text.text = "█▀█▀░ █▀█▀█ ░▀░▀█▀░ ░▀░ █▀░ █▀░▀░ ░▀░ █ █▀░▀░▀░ ░▀█▀░ ░▀█ █\\n" + scramble_text(data.message)
+		# reads: findthekey
+		vday_active_text.text = "░▀░▀█▀░ ░▀░ █▀░ █▀░▀░ █ ░▀░▀░▀░ ░ █▀░▀█ ░ █▀░▀█▀█\n\n" + scramble_text(data.message)
 		vday_active_image_preview.texture = load("res://ArtAssets/UI/unknown.png")
 		
 func handle_fullscreen_input():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ru7hqfjd2jyp"]
+[gd_scene load_steps=4 format=3 uid="uid://ru7hqfjd2jyp"]
 
 [ext_resource type="Script" uid="uid://dxptcd5mav5pv" path="res://UI/health_hearts.gd" id="1_yixhe"]
 [ext_resource type="PackedScene" uid="uid://dogl7mhxxpnny" path="res://UI/ui_heart.tscn" id="2_ijstf"]
+[ext_resource type="PackedScene" uid="uid://di15ybn4m5gt3" path="res://UI/ui_message_counter.tscn" id="3_4n7mi"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -20,5 +21,14 @@ heartScene = ExtResource("2_ijstf")
 [node name="HeartPulseTimer" type="Timer" parent="HealthHearts"]
 wait_time = 2.0
 autostart = true
+
+[node name="MessageCounter" parent="." instance=ExtResource("3_4n7mi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.030729167
+anchor_top = 0.88703704
+anchor_right = 0.030729167
+anchor_bottom = 0.88703704
+grow_vertical = 0
 
 [connection signal="timeout" from="HealthHearts/HeartPulseTimer" to="HealthHearts" method="_on_heart_pulse_timer_timeout"]
