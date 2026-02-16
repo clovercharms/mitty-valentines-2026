@@ -73,7 +73,7 @@ func _ready() -> void:
 	var gb = GameBase.get_singleton()
 	if gb.currentMessageID >= MessageDatabase.vmessage_database.size():
 		return
-	if gb.impost0rId == gb.currentMessageID: # skip impost0r's message since
+	if Adobe.impost0rId == gb.currentMessageID: # skip impost0r's message since
 		gb.currentMessageID += 1 # a trap will drop it instead
 	if not gb.uniqueEnemies.has(path):
 		gb.uniqueEnemies[path] = gb.currentMessageID

@@ -29,7 +29,6 @@ var playerAbilities: Array[bool]
 var collectedMessages: Array[int]
 var uniqueEnemies: Dictionary
 var pickups: Array[String]
-var impost0rId: float = -1
 
 # Unsaved global game state
 var enemiesKilledSinceSave: Dictionary #To handle non-respawning enemies

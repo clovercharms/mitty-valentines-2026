@@ -40,8 +40,7 @@ func load_items_from_csv(file_path: String):
 		new_item.new = false
 		
 		if new_item.name == "impost0r":
-			var gb = GameBase.get_singleton()
-			gb.impost0rId = id_val
+			Adobe.impost0rId = id_val
 		
 		# zero pad ids to length 2
 		var filename_string = "%02d" % id_val
