@@ -60,4 +60,12 @@ func _on_health_death(_cause: Node) -> void:
 	MittyUtils.hit_stop(0.1)
 	var deathEffectInstance = MittyUtils.spawn_at_location(deathScene, global_position)
 	deathEffectInstance.takeGraphicalNode(mainSprite)
+	
+	# Easteregg message for Imposter
+	var gb = GameBase.get_singleton()
+	if gb.impost0rId != -1 and not gb.collectedMessages.has(gb.impost0rId):
+		gb.collectedMessages.append(gb.impost0rId)
+		MessageDatabase.discover_message(gb.impost0rId)
+		print(gb.collectedMessages)
+	
 	queue_free()

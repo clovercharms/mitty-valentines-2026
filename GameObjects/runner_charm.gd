@@ -71,14 +71,15 @@ func _ready() -> void:
 		return
 	var path = get_path()
 	var gb = GameBase.get_singleton()
-	if gb.currentMessageID >= 46:
+	if gb.currentMessageID >= MessageDatabase.vmessage_database.size():
 		return
+	if gb.impost0rId == gb.currentMessageID: # skip impost0r's message since
+		gb.currentMessageID += 1 # a trap will drop it instead
 	if not gb.uniqueEnemies.has(path):
 		gb.uniqueEnemies[path] = gb.currentMessageID
 		gb.currentMessageID += 1
 	elif gb.collectedMessages.has(gb.uniqueEnemies[path]):
 		message_star.visible = false
-	
 
 func _enter_tree() -> void:
 	# Randomize abilities
