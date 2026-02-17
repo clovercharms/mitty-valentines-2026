@@ -319,6 +319,10 @@ func _on_hurt(_amount: int, cause: Node) -> void:
 	if hurtSoundEffect: MittyUtils.play_sound(hurtSoundEffect)
 
 func _on_death(cause: Node) -> void:
+	var gb = GameBase.get_singleton()
+	gb.doTimer = false
+	gb.saveTimeAndDeaths() # make sure time deaths persists trough deaths
+	
 	setAnimationNoRepeats("dead")
 	if deathSweetener: MittyUtils.play_sound(deathSweetener, 2)
 	currentState = ControlState.DEAD
@@ -336,10 +340,12 @@ func _on_death(cause: Node) -> void:
 	await ghostTimer.timeout
 	if deathSoundEffect: MittyUtils.play_sound(deathSoundEffect, 3)
 	
+	# Easteregg to show the Adobe Installer on first PR death
 	if cause and "PremiereTrap" in cause.name and Adobe.hasDiedToAdobe == false:
 		Adobe.hasDiedToAdobe = true
 		playAdobeDeath()
 		await get_tree().create_timer(8).timeout	
+	
 	MittyUtils.spawn_at_location(ghostScene, ghostLocation.global_position)
 	#play ghost sound effect
 

@@ -272,6 +272,7 @@ func _on_death(_cause: Node) -> void:
 		if not gb.collectedMessages.has(message_id):
 			gb.collectedMessages.append(message_id)
 			MessageDatabase.discover_message(message_id)
+			gb.checkGameFinished()
 			print(gb.collectedMessages)
 	MittyUtils.hit_stop(0.1)
 	mainSprite.stop()

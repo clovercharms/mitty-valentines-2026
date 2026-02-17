@@ -9,6 +9,9 @@ const COLLECTED_MESSGAES = "collected_messages"
 const UNIQUE_ENEMIES = "unique_enemies"
 const PICKUPS = "pickups"
 const CURRENT_ROOM = "current_room"
+const TIME = "time"
+const DOTIMER = "dotimer"
+const DEATHCOUNTER = "deathcounter"
 
 @onready var ui_layer : CanvasLayer = $"UI Layer"
 @onready var BGM: AudioStreamPlayer = $BGMPlayer
@@ -29,6 +32,13 @@ var playerAbilities: Array[bool]
 var collectedMessages: Array[int]
 var uniqueEnemies: Dictionary
 var pickups: Array[String]
+var deathCounter : int = 0 
+var doTimer : bool = true
+var time : float = 0
+
+# To decide whenever deaths and time should still be saved
+# Not needed if the game is finished
+var gameFinished : bool = false
 
 # Unsaved global game state
 var enemiesKilledSinceSave: Dictionary #To handle non-respawning enemies
@@ -59,6 +69,9 @@ func _ready() -> void:
 		collectedMessages.assign(save_manager.get_value(COLLECTED_MESSGAES))
 		uniqueEnemies.assign(save_manager.get_value(UNIQUE_ENEMIES))
 		pickups.assign(save_manager.get_value(PICKUPS))
+		time = save_manager.get_value(TIME)
+		doTimer = save_manager.get_value(DOTIMER)
+		deathCounter = save_manager.get_value(DEATHCOUNTER)
 		
 		var loaded_starting_map: String = save_manager.get_value(CURRENT_ROOM)
 		if not loaded_starting_map.is_empty(): # Some compatibility problem.
@@ -106,9 +119,24 @@ func save_game():
 	save_manager.set_value(UNIQUE_ENEMIES, uniqueEnemies)
 	save_manager.set_value(PICKUPS, pickups)
 	save_manager.set_value(CURRENT_ROOM, MetSys.get_current_room_id())
+	save_manager.set_value(DOTIMER, doTimer)
+	save_manager.set_value(TIME, time)
+	save_manager.set_value(DEATHCOUNTER, deathCounter)
 	save_manager.save_as_text(SAVE_PATH)
 	
 	game_saved.emit()
+
+func saveTimeAndDeaths():
+	if(gameFinished):
+		return;
+	
+	deathCounter += 1
+	
+	var save_manager := SaveManager.new()
+	save_manager.load_from_text(SAVE_PATH)
+	save_manager.set_value(TIME, time)
+	save_manager.set_value(DEATHCOUNTER, deathCounter)
+	save_manager.save_as_text(SAVE_PATH)
 
 func init_room():
 	player.on_enter()
@@ -132,12 +160,17 @@ func on_player_death(_cause: Node):
 	get_tree().reload_current_scene()
 	BGM.play()
 
-
 func _on_bgm_player_finished() -> void:
 	if not BossMusic.playing:
 		BGM.play()
 
-
 func _on_boss_music_player_finished() -> void:
 	if not BGM.playing:
 		BossMusic.play()
+
+func checkGameFinished():
+	gameFinished = pickups.has("decoder") and pickups.has("boss_exit_key") and collectedMessages.size() == MessageDatabase.vmessage_database.size()
+	
+	if gameFinished:
+		doTimer = false
+		print("Game finished!")
