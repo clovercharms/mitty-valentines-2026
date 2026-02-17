@@ -35,7 +35,9 @@ func area_entered(area : Area2D) -> void:
 	tween.tween_property(self, "rotation_degrees", 360 * 10, 0.75)
 	await tween.finished
 	
-	GameBase.get_singleton().pickups.append(pickup_id)
+	var gb = GameBase.get_singleton()
+	gb.pickups.append(pickup_id)
+	gb.checkGameFinished()
 	picked_up.emit()
 	queue_free()
 	

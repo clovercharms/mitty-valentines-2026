@@ -66,6 +66,7 @@ func _on_health_death(_cause: Node) -> void:
 	if Adobe.impost0rId != -1 and not gb.collectedMessages.has(Adobe.impost0rId):
 		gb.collectedMessages.append(Adobe.impost0rId)
 		MessageDatabase.discover_message(Adobe.impost0rId)
+		gb.checkGameFinished()
 		print(gb.collectedMessages)
 	
 	queue_free()

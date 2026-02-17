@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ru7hqfjd2jyp"]
+[gd_scene load_steps=14 format=3 uid="uid://ru7hqfjd2jyp"]
 
 [ext_resource type="Script" uid="uid://dxptcd5mav5pv" path="res://UI/health_hearts.gd" id="1_yixhe"]
 [ext_resource type="PackedScene" uid="uid://dogl7mhxxpnny" path="res://UI/ui_heart.tscn" id="2_ijstf"]
@@ -9,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://duthe1hu073k6" path="res://assets/Adobeinstallfinished.png" id="6_md4fy"]
 [ext_resource type="Script" uid="uid://bvempksy08por" path="res://UI/adobe_install_2.gd" id="8_rbci0"]
 [ext_resource type="Script" uid="uid://bjkbxg1bncpgm" path="res://UI/adobeinstallfinished.gd" id="10_am7sw"]
+[ext_resource type="Script" uid="uid://choj3cf53p3q7" path="res://UI/timer.gd" id="10_rbci0"]
+[ext_resource type="Texture2D" uid="uid://cj2orf44hk1fj" path="res://ArtAssets/sprites/ghost.png" id="11_am7sw"]
+[ext_resource type="Texture2D" uid="uid://b1w31wdpxfpkp" path="res://ArtAssets/sprites/time.png" id="11_ixkb2"]
+
+[sub_resource type="Theme" id="Theme_rbci0"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -54,5 +59,66 @@ visible = false
 position = Vector2(930, 525)
 texture = ExtResource("6_md4fy")
 script = ExtResource("10_am7sw")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 103.0
+offset_right = 80.0
+offset_bottom = 103.0
+theme = SubResource("Theme_rbci0")
+script = ExtResource("10_rbci0")
+
+[node name="TimeIcon" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 37.0
+offset_bottom = 45.0
+texture = ExtResource("11_ixkb2")
+
+[node name="minutes" type="Label" parent="Panel/TimeIcon"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 13.0
+offset_right = 77.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "00:"
+
+[node name="seconds" type="Label" parent="Panel/TimeIcon"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 13.0
+offset_right = 89.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "00:"
+
+[node name="miliseconds" type="Label" parent="Panel/TimeIcon"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 13.0
+offset_right = 117.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "000"
+
+[node name="DeathCounterGhost" type="TextureRect" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = -3.0
+offset_top = 54.0
+offset_right = 37.0
+offset_bottom = 95.0
+texture = ExtResource("11_am7sw")
+
+[node name="DeathCounter" type="Label" parent="Panel/DeathCounterGhost"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 22.0
+offset_right = 75.0
+offset_bottom = 45.0
+text = "00"
 
 [connection signal="timeout" from="HealthHearts/HeartPulseTimer" to="HealthHearts" method="_on_heart_pulse_timer_timeout"]
